@@ -29,14 +29,14 @@
     display: block;
     background-color: inherit;
     color: black;
-    padding: 22px 16px;
+    padding: 4px 4px;
     width: 100%;
     border: none;
     outline: none;
     text-align: left;
     cursor: pointer;
     transition: 0.3s;
-    font-size: 17px;
+    font-size: 12px;
   }
 
   /* Change background color of buttons on hover */
