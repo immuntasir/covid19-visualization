@@ -78,7 +78,7 @@ function csvJSON(csv){
         .x(function(d) { return d.label })    //Specify the data accessors.
         .y(function(d) { return d.value })
         .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
-        ;
+        .color(['#aec7e8']);
 
 
     var country_data = getCountryData('Bangladesh')
