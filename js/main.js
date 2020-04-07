@@ -43,7 +43,7 @@ function csvJSON(csv){
     country_data_keys = Object.keys(country_data);
     data_by_date_keys = country_data_keys.slice(4, );
     is_relevant = false;
-    
+
     data_values = [];
     for (let i=0; i<data_by_date_keys.length; i++) {
         if (country_data[data_by_date_keys[i]] >= min_case_count) {
@@ -153,14 +153,13 @@ function showCountryOptions(){
 function showGraphOptions(){
   var list=['Total cases'," New cases per day","Total cases per capita"];
   let string='',value='';
+  string += '<div class="tab">';
   for(let i=0;i<list.length;i++){
       value = list[i];
-      string = string + '<div class="custom-control custom-checkbox" id="graph-option-div-'+i.toString()+'">';
-      string += '<input type="checkbox" class="custom-control-input" id="graph-option-'+i.toString()+'" name="'+value+'" value="'+value+'">';
-      string += '<label class="custom-control-label" for="graph-option-'+i.toString()+'" ><span>'+value+'</span></label>';
-      string += '</div>';
+      string += '<button class="tablinks" id="graph-option-'+i.toString()+'">'+value+'</button>';
   }
-  console.log(string);
+  string += '</div>';
+  //console.log(string);
   $("#checkBoxContainer2").html(string);
 }
 
