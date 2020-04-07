@@ -1,7 +1,9 @@
 var allCountriesData;
+
 var countries_to_compare = ['Italy', 'France', 'Spain', 'US', 'Malaysia', 'India', 'Saudia Arabia', 'Mexico'];
 var graph_option_actual_name=['cumulative','new_case','cumulative_per_capita'];
 var graph_type='cumulative';
+
 
 function csvJSON(csv){
 
@@ -40,6 +42,8 @@ function csvJSON(csv){
   }
 
   function getCountryData (country_name, min_case_count = 10, init_day = 0, max_day = 20, type='cumulative') {
+    console.log(min_case_count, init_day, max_day, type);
+
     var country_data = allCountriesData.filter(function(x){
         return x['Country/Region'] == country_name;
     })[0];
@@ -71,11 +75,12 @@ function csvJSON(csv){
     return ret_values;
   }
 
-  function showGraph(countries) {
-    bd_data = getCountryData('Bangladesh');
+  function showGraph(countries, min_case_count = 10, init_day = 0, max_day = 20, type='cumulative') {
+    bd_data = getCountryData('Bangladesh', min_case_count, init_day, max_day, type);
+    console.log(bd_data);
     data_columns = [bd_data];
     for (let i=0; i<countries.length; i++)  {
-        data_columns.push(getCountryData(countries[i]))
+        data_columns.push(getCountryData(countries[i], min_case_count, init_day, max_day, type))
     }
     var chart = c3.generate({
         data: {
@@ -86,8 +91,6 @@ function csvJSON(csv){
             }
         }
     });
-    d3.select('#chart svg')
-            .call(chart);
   }
 
 
@@ -133,10 +136,15 @@ function InitTheVariablesAndGenerateGraph(){
   if(countries.indexOf('Bangladesh') == -1){
     countries.push('Bangladesh');
   }
+<<<<<<< HEAD
   //console.log(countries);
   //console.log(graph_type);
   let init_day=0;
   showGraph(countries, min_case_count, init_day, max_day, type=graph_type);
+=======
+  console.log(countries, min_case_count, init_day, max_day);
+  showGraph(countries, min_case_count, init_day, max_day, type='cumulative');
+>>>>>>> d4d52ffeb322cba1df3623ae493f395dc91a42e3
 }
 
 function genericSlider(value_span_id,slider_id){
@@ -196,8 +204,7 @@ $(document).ready(function(){
             data = $.csv.toArrays(response);
             allCountriesData = csvJSON(data);
             var bd_data = getCountryData('Bangladesh');
-            countries = ['India', 'Saudi Arabia', 'Malaysia'];
-            showGraph(countries, min_case_count = 10, init_day = 0, max_day = 20, type='cumulative');
+            showGraph([], min_case_count = 10, init_day = 0, max_day = 20, type='cumulative');
         }
         });
 
