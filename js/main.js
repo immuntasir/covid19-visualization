@@ -112,6 +112,7 @@ function showCountryOptions(){
 
 function graphOptionSelection(type){
   graph_type = type;
+  InitTheVariablesAndGenerateGraph();
 }
 
 function showGraphOptions(){
@@ -136,15 +137,10 @@ function InitTheVariablesAndGenerateGraph(){
   if(countries.indexOf('Bangladesh') == -1){
     countries.push('Bangladesh');
   }
-<<<<<<< HEAD
-  //console.log(countries);
-  //console.log(graph_type);
   let init_day=0;
+  console.log(graph_type);
   showGraph(countries, min_case_count, init_day, max_day, type=graph_type);
-=======
-  console.log(countries, min_case_count, init_day, max_day);
-  showGraph(countries, min_case_count, init_day, max_day, type='cumulative');
->>>>>>> d4d52ffeb322cba1df3623ae493f395dc91a42e3
+
 }
 
 function genericSlider(value_span_id,slider_id){
