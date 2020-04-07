@@ -80,7 +80,7 @@ function csvJSON(csv){
             type: 'line',
             types: {
                 Bangladesh: 'bar',
-            }           
+            }
         }
     });
     d3.select('#chart svg')
@@ -117,18 +117,10 @@ function showGraphOptions(){
   $("#checkBoxContainer2").html(string);
 }
 
-function sliderDayBased(){
-  const $valueSpan = $('.valueSpan');
-  const $value = $('#slider11');
-  $valueSpan.html($value.val());
-  $value.on('input change', () => {
-  $valueSpan.html($value.val());
-  });
-}
 
-function sliderCaseBased(){
-  const $valueSpan = $('.valueSpan2');
-  const $value = $('#slider12');
+function genericSlider(value_span_id,slider_id){
+  const $valueSpan = $('.'+value_span_id);
+  const $value = $('#'+slider_id);
   $valueSpan.html($value.val());
   $value.on('input change', () => {
   $valueSpan.html($value.val());
@@ -136,11 +128,11 @@ function sliderCaseBased(){
 }
 
 $(document).ready(function(){
+    genericSlider('valueSpan','slider11');
+    genericSlider('valueSpan2','slider12');
+    genericSlider('valueSpan3','slider13');
     showCountryOptions();
     showGraphOptions();
-    sliderDayBased();
-    sliderCaseBased();
-
 
     var data;
     $.ajax({
