@@ -100,7 +100,7 @@ function showCountryOptions(){
       string += '<label class="custom-control-label" for="country-name-'+i.toString()+'" ><span>'+value+'</span></label>';
       string += '</div>';
   }
-  console.log(string);
+  //console.log(string);
   $("#checkBoxContainer").html(string);
 }
 
@@ -127,12 +127,27 @@ function genericSlider(value_span_id,slider_id){
   });
 }
 
+
+function countrySelector(){
+  $('input[type="checkbox"]').click(function(){
+    if($(this).prop("checked") == true){
+        console.log("Checkbox is checked.");
+    }
+    else if($(this).prop("checked") == false){
+        console.log("Checkbox is unchecked.");
+    }
+});
+}
+
+
 $(document).ready(function(){
     genericSlider('valueSpan','slider11');
     genericSlider('valueSpan2','slider12');
     genericSlider('valueSpan3','slider13');
     showCountryOptions();
     showGraphOptions();
+    countrySelector();
+
 
     var data;
     $.ajax({
