@@ -77,10 +77,9 @@ function csvJSON(csv){
     var chart = nv.models.discreteBarChart()
         .x(function(d) { return d.label })    //Specify the data accessors.
         .y(function(d) { return d.value })
-        .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
         .color(['#aec7e8']);
 
-
+    chart.xAxis.tickValues(d3.range(0, 1000, 10))
     var country_data = getCountryData('Bangladesh')
     var exampleData1 = exampleData();
     d3.select('#chart svg')
@@ -88,6 +87,8 @@ function csvJSON(csv){
         .call(chart);
 
     nv.utils.windowResize(chart.update);
+
+
 
     return chart;
   });
