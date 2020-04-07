@@ -74,3 +74,20 @@
   .country-checkbox {
       font-size: 12px;
   }
+
+  .footer {
+    justify-content: center;
+    font-size: 12px;
+    position: fixed;
+    bottom: 0;
+    left:0;
+    right: 0;
+    width: 100%;
+    padding:10px;
+    height: auto;
+    background-color: #f8f9fa;
+    }
+
+    .footer-text {
+        text-align: center;
+    }

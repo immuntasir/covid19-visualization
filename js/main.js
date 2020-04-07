@@ -1,6 +1,6 @@
 var allCountriesData;
 
-var countries_to_compare = ['Italy', 'France', 'Spain', 'US', 'Malaysia', 'India', 'Saudia Arabia', 'Mexico'];
+var countries_to_compare = ['Italy', 'France', 'Spain', 'US', 'Malaysia', 'India', 'Saudi Arabia', 'Mexico'];
 var graph_option_actual_name=['cumulative','new_case','cumulative_per_capita'];
 var graph_type='cumulative';
 
@@ -31,18 +31,9 @@ function csvJSON(csv){
   }
 
 
-  function filterByCountry(x) {
-    var countries=['Italy',"France","Germany","USA"];
-    for (let i=0; i<countries.length; i++){
-        if (countries[i] == x) {
-            return true;
-        }
-    }
-    return false;
-  }
 
   function getCountryData (country_name, min_case_count = 10, init_day = 0, max_day = 20, type='cumulative') {
-    console.log(min_case_count, init_day, max_day, type);
+    console.log('getCountryData', country_name, min_case_count, init_day, max_day, type);
 
     var country_data = allCountriesData.filter(function(x){
         return x['Country/Region'] == country_name;
