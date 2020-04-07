@@ -1,4 +1,5 @@
 var allCountriesData;
+var countries_to_compare = ['Italy', 'France', 'Spain', 'US', 'Malaysia', 'India', 'Saudia Arabia', 'Mexico'];
 function csvJSON(csv){
 
     var lines=csv;
@@ -90,7 +91,7 @@ function csvJSON(csv){
 
 
 function showCountryOptions(){
-  var countries=['Italy',"France","Germany","USA"];
+  var countries=countries_to_compare;
   let string='',value='';
   for(let i=0;i<countries.length;i++){
       value = countries[i];
