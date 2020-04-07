@@ -122,6 +122,10 @@ function InitTheVariablesAndGenerateGraph(){
   let min_case_count=parseInt($('#slider12').val());
   let init_day = parseInt($('#slider11').val());
   let max_day=parseInt($('#slider13').val());
+  if(countries.indexOf('Bangladesh') == -1){
+    countries.push('Bangladesh');
+  }
+  console.log(countries);
   showGraph(countries, min_case_count, init_day, max_day, type='cumulative');
 }
 
@@ -131,6 +135,7 @@ function genericSlider(value_span_id,slider_id){
   $valueSpan.html($value.val());
   $value.on('input change', () => {
   $valueSpan.html($value.val());
+  InitTheVariablesAndGenerateGraph();
   });
 }
 
