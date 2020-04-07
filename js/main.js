@@ -35,9 +35,10 @@ function csvJSON(csv){
   }
 
   function getCountryData (allCountries, country_name) {
-    return allCountries.filter(function(x){
+    var bd_data = allCountries.filter(function(x){
         return x['Country/Region'] == country_name;
-    })
+    });
+    console.log(bd_data)
   }
 
   nv.addGraph(function() {
@@ -45,9 +46,7 @@ function csvJSON(csv){
         .x(function(d) { return d.label })    //Specify the data accessors.
         .y(function(d) { return d.value })
         .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
-        .tooltips(false)        //Don't show tooltips
         .showValues(true)       //...instead, show the bar value right on top of each bar.
-        .transitionDuration(350)
         ;
   
     d3.select('#chart svg')

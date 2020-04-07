@@ -19,8 +19,9 @@
     
     <!-- Include d3.js first -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.15.1/d3.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.js"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
     <script src="../js/main.js"></script>
@@ -37,14 +38,10 @@
     <div style="margin-top:50px;">
       <div class="container">
           <div class="row">
-            <div id="chart">
-                <svg></svg>
-            </div>
               <div class="col-md-6" style="boder:1px;">
-                  <div style="border:black;">
-                      <img src="../images/test.png" alt="Smiley face" style="border: 2px solid" height="500" width="800">
-                  </div>
-
+                <div id="chart">
+                    <svg style="height: 300px;"></svg>
+                </div>
               </div>
               <div class="col-md-3">
 
