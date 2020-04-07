@@ -102,27 +102,37 @@ function csvJSON(csv){
 
   }
 
+function showCountryOptions(){
+  var countries=['Italy',"France","Germany","USA"];
+  let string='',value='';
+  for(let i=0;i<countries.length;i++){
+      value = countries[i];
+      string = string + '<div class="custom-control custom-checkbox" id="country-option-div-'+i.toString()+'">';
+      string += '<input type="checkbox" class="custom-control-input" id="country-name-'+i.toString()+'" name="'+value+'" value="'+value+'">';
+      string += '<label class="custom-control-label" for="country-name-'+i.toString()+'" ><span>'+value+'</span></label>';
+      string += '</div>';
+  }
+  console.log(string);
+  $("#checkBoxContainer").html(string);
+}
+
+function showGraphOptions(){
+  var list=['Total cases'," New cases per day","Total cases per capita"];
+  let string='',value='';
+  for(let i=0;i<list.length;i++){
+      value = list[i];
+      string = string + '<div class="custom-control custom-checkbox" id="graph-option-div-'+i.toString()+'">';
+      string += '<input type="checkbox" class="custom-control-input" id="graph-option-'+i.toString()+'" name="'+value+'" value="'+value+'">';
+      string += '<label class="custom-control-label" for="graph-option-'+i.toString()+'" ><span>'+value+'</span></label>';
+      string += '</div>';
+  }
+  console.log(string);
+  $("#checkBoxContainer2").html(string);
+}
+
 $(document).ready(function(){
-    var countries=['Italy',"France","Germany","USA"];
-    let string='',value='';
-    for(let i=0;i<countries.length;i++){
-        value = countries[i];
-        string = string + '<div class="custom-control custom-checkbox" id="country-'+value+'">';
-        string += '<input type="checkbox" class="custom-control-input" id="'+value+'" name="'+value+'" value="'+value+'">';
-        string += '<label class="custom-control-label" for="'+value+'" ><span>'+value+'</span></label>';
-        string += '</div>';
-    }
-    console.log(string);
-    $("#checkBoxContainer").html(string);
-
-    /*$.each(countries,function(index,value){
-        var checkbox='<div class="custom-control custom-checkbox">';
-        var checkbox="<label for="+value+" class='label-containter'>"+value+"<input type='label-checkbox' id="+value+" value="+value+" name="+value+"><span class='label-checkmark'></span></label>"
-        $(".checkBoxContainer").append($(checkbox));
-    })*/
-
-
-
+    showCountryOptions();
+    showGraphOptions();
     var data;
     $.ajax({
         type: "GET",
