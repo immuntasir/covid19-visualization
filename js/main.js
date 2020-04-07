@@ -79,23 +79,23 @@ function csvJSON(csv){
             .x(function(d) { return d.label })    //Specify the data accessors.
             .y(function(d) { return d.value })
             .color(['#aec7e8']);
-    
+
         chart.xAxis.tickValues(d3.range(0, 1000, 10))
         var country_data = getCountryData('Bangladesh')
         d3.select('#chart svg')
             .datum(country_data)
             .call(chart);
-    
+
         nv.utils.windowResize(chart.update);
-    
-    
-    
+
+
+
         return chart;
       });
   }
-  
 
-  
+
+
 
 function showCountryOptions(){
   var countries=['Italy',"France","Germany","USA"];
@@ -124,9 +124,31 @@ function showGraphOptions(){
   $("#checkBoxContainer2").html(string);
 }
 
+function sliderDayBased(){
+  const $valueSpan = $('.valueSpan');
+  const $value = $('#slider11');
+  $valueSpan.html($value.val());
+  $value.on('input change', () => {
+  $valueSpan.html($value.val());
+  });
+}
+
+function sliderCaseBased(){
+  const $valueSpan = $('.valueSpan2');
+  const $value = $('#slider12');
+  $valueSpan.html($value.val());
+  $value.on('input change', () => {
+  $valueSpan.html($value.val());
+  });
+}
+
 $(document).ready(function(){
     showCountryOptions();
     showGraphOptions();
+    sliderDayBased();
+    sliderCaseBased();
+
+
     var data;
     $.ajax({
         type: "GET",
