@@ -34,11 +34,36 @@ function csvJSON(csv){
     return false;
   }
 
-  function getCountryData (allCountries, country_name) {
-    var bd_data = allCountries.filter(function(x){
+  function getCountryData (allCountries, country_name, min_case_count = 0, init_day = 0, type='cumulative') {
+    var country_data = allCountries.filter(function(x){
         return x['Country/Region'] == country_name;
     });
-    console.log(bd_data)
+
+    country_data_keys = Object.keys(country_data[0]);
+    data_by_date_keys = country_data_keys.slice(4, );
+    is_relevant = false;
+    data_values = [];
+    for (let i=0; i<data_by_date_keys.length; i++) {
+        if (country_data[data_by_date_keys[i]] >= min_case_count) {
+            is_relevant = true;
+        }
+        if (i>=init_day) {
+            is_relevant = true;
+        }
+        if (is_relevant == false) {
+            continue;
+        }
+        label = i;
+        value = 0
+        if (type == 'cumulative') {
+            value = country_data[data_by_date_keys[i]];
+        }
+        data_values.append({
+            'label' : label,
+            'value' : value
+        })
+
+    }
   }
 
   nv.addGraph(function() {
