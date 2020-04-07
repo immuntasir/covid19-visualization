@@ -1,5 +1,8 @@
 var allCountriesData;
 var countries_to_compare = ['Italy', 'France', 'Spain', 'US', 'Malaysia', 'India', 'Saudia Arabia', 'Mexico'];
+var graph_option_actual_name=['cumulative','new_case','cumulative_per_capita'];
+var graph_type='cumulative';
+
 function csvJSON(csv){
 
     var lines=csv;
@@ -104,13 +107,18 @@ function showCountryOptions(){
   $("#checkBoxContainer").html(string);
 }
 
+function graphOptionSelection(type){
+  graph_type = type;
+}
+
 function showGraphOptions(){
   var list=['Total cases'," New cases per day","Total cases per capita"];
+
   let string='',value='';
   string += '<div class="tab">';
   for(let i=0;i<list.length;i++){
       value = list[i];
-      string += '<button class="tablinks" id="graph-option-'+i.toString()+'">'+value+'</button>';
+      string += '<button class="tablinks" class="graph-option" id="graph-option-'+i.toString()+'" onClick="graphOptionSelection('+"'"+graph_option_actual_name[i]+"'"+')" >'+value+'</button>';
   }
   string += '</div>';
   //console.log(string);
@@ -120,13 +128,15 @@ function showGraphOptions(){
 function InitTheVariablesAndGenerateGraph(){
   let countries=getTheCheckedCountries();
   let min_case_count=parseInt($('#slider12').val());
-  let init_day = parseInt($('#slider11').val());
+  //let init_day = parseInt($('#slider11').val());
   let max_day=parseInt($('#slider13').val());
   if(countries.indexOf('Bangladesh') == -1){
     countries.push('Bangladesh');
   }
-  console.log(countries);
-  showGraph(countries, min_case_count, init_day, max_day, type='cumulative');
+  //console.log(countries);
+  //console.log(graph_type);
+  let init_day=0;
+  showGraph(countries, min_case_count, init_day, max_day, type=graph_type);
 }
 
 function genericSlider(value_span_id,slider_id){
@@ -167,12 +177,13 @@ function countrySelector(){
 
 
 $(document).ready(function(){
-    genericSlider('valueSpan','slider11');
+    //genericSlider('valueSpan','slider11');
     genericSlider('valueSpan2','slider12');
     genericSlider('valueSpan3','slider13');
     showCountryOptions();
     showGraphOptions();
     countrySelector();
+
 
 
     var data;
