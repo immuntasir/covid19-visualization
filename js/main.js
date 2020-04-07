@@ -117,32 +117,6 @@ function showGraphOptions(){
   $("#checkBoxContainer2").html(string);
 }
 
-function sliderDayBased(){
-  const $valueSpan = $('.valueSpan');
-  const $value = $('#slider11');
-  $valueSpan.html($value.val());
-  $value.on('input change', () => {
-  $valueSpan.html($value.val());
-  });
-}
-
-function sliderCaseBased(){
-  const $valueSpan = $('.valueSpan2');
-  const $value = $('#slider12');
-  $valueSpan.html($value.val());
-  $value.on('input change', () => {
-  $valueSpan.html($value.val());
-  });
-}
-
-function maxNumberDaysSlider(){
-  const $valueSpan = $('.valueSpan3');
-  const $value = $('#slider13');
-  $valueSpan.html($value.val());
-  $value.on('input change', () => {
-  $valueSpan.html($value.val());
-  });
-}
 
 function genericSlider(value_span_id,slider_id){
   const $valueSpan = $('.'+value_span_id);
@@ -159,8 +133,6 @@ $(document).ready(function(){
     genericSlider('valueSpan3','slider13');
     showCountryOptions();
     showGraphOptions();
-  
-
 
     var data;
     $.ajax({
