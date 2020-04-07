@@ -117,6 +117,13 @@ function showGraphOptions(){
   $("#checkBoxContainer2").html(string);
 }
 
+function InitTheVariablesAndGenerateGraph(){
+  let countries=getTheCheckedCountries();
+  let min_case_count=parseInt($('#slider12').val());
+  let init_day = parseInt($('#slider11').val());
+  let max_day=parseInt($('#slider13').val());
+  showGraph(countries, min_case_count, init_day, max_day, type='cumulative');
+}
 
 function genericSlider(value_span_id,slider_id){
   const $valueSpan = $('.'+value_span_id);
@@ -127,17 +134,31 @@ function genericSlider(value_span_id,slider_id){
   });
 }
 
+function getTheCheckedCountries(){
+  let list=[],id="";
+  for(let i=0;i<countries_to_compare.length;i++){
+    id='country-name-'+i.toString();
+    if($('#'+id).prop('checked') == true){
+      list.push(countries_to_compare[i]);
+    }
+  }
+  return list;
+}
 
 function countrySelector(){
+  let list=[];
   $('input[type="checkbox"]').click(function(){
     if($(this).prop("checked") == true){
         console.log("Checkbox is checked.");
+
     }
     else if($(this).prop("checked") == false){
         console.log("Checkbox is unchecked.");
     }
+    InitTheVariablesAndGenerateGraph();
 });
 }
+
 
 
 $(document).ready(function(){
