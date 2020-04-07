@@ -101,8 +101,20 @@ function showCountryOptions(){
   $("#checkBoxContainer").html(string);
 }
 
-function graphOptionSelection(type){
+function colorChanger(idx){
+  for(let i=0;i<graph_option_actual_name.length;i++){
+    if(i==parseInt(idx)){
+        document.getElementById("graph-option-"+i).style.color="blue";
+    }
+    else{
+      document.getElementById("graph-option-"+i).style.color="black";
+    }
+  }
+}
+
+function graphOptionSelection(type,idx){
   graph_type = type;
+  colorChanger(idx);
   InitTheVariablesAndGenerateGraph();
 }
 
@@ -113,7 +125,7 @@ function showGraphOptions(){
   string += '<div class="tab">';
   for(let i=0;i<list.length;i++){
       value = list[i];
-      string += '<button class="tablinks" class="graph-option" id="graph-option-'+i.toString()+'" onClick="graphOptionSelection('+"'"+graph_option_actual_name[i]+"'"+')" >'+value+'</button>';
+      string += '<button class="tablinks" class="graph-option" id="graph-option-'+i.toString()+'" onClick="graphOptionSelection('+"'"+graph_option_actual_name[i]+"'"+','+i+')" >'+value+'</button>';
   }
   string += '</div>';
   //console.log(string);
