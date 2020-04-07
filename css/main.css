@@ -62,3 +62,11 @@
   .navbar  {
       justify-content: center;
   }
+
+  .option-title{
+    font-size: 12px;
+  }
+
+  .country-checkbox {
+      font-size: 12px;
+  }
