@@ -1,3 +1,4 @@
+var allCountriesData;
 function csvJSON(csv){
 
     var lines=csv;
@@ -34,14 +35,15 @@ function csvJSON(csv){
     return false;
   }
 
-  function getCountryData (allCountries, country_name, min_case_count = 0, init_day = 0, type='cumulative') {
-    var country_data = allCountries.filter(function(x){
+  function getCountryData (country_name, min_case_count = 0, init_day = 0, type='cumulative') {
+    var country_data = allCountriesData.filter(function(x){
         return x['Country/Region'] == country_name;
-    });
+    })[0];
 
-    country_data_keys = Object.keys(country_data[0]);
+    country_data_keys = Object.keys(country_data);
     data_by_date_keys = country_data_keys.slice(4, );
     is_relevant = false;
+    
     data_values = [];
     for (let i=0; i<data_by_date_keys.length; i++) {
         if (country_data[data_by_date_keys[i]] >= min_case_count) {
@@ -53,17 +55,22 @@ function csvJSON(csv){
         if (is_relevant == false) {
             continue;
         }
-        label = i;
+        label = String(i);
         value = 0
         if (type == 'cumulative') {
-            value = country_data[data_by_date_keys[i]];
+            value = parseInt(country_data[data_by_date_keys[i]]);
         }
-        data_values.append({
+        data_values.push({
             'label' : label,
             'value' : value
         })
 
     }
+
+    var ret_object = Object();
+    ret_object.key = 'Cumulative Return';
+    ret_object.values = data_values;
+    return [ret_object];
   }
 
   nv.addGraph(function() {
@@ -71,11 +78,13 @@ function csvJSON(csv){
         .x(function(d) { return d.label })    //Specify the data accessors.
         .y(function(d) { return d.value })
         .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
-        .showValues(true)       //...instead, show the bar value right on top of each bar.
         ;
 
+
+    var country_data = getCountryData('Bangladesh')
+    var exampleData1 = exampleData();
     d3.select('#chart svg')
-        .datum(exampleData())
+        .datum(country_data)
         .call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -156,8 +165,8 @@ $(document).ready(function(){
         success: function(response)
         {
             data = $.csv.toArrays(response);
-            var jsonData = csvJSON(data);
-            var bd_data = getCountryData(jsonData, 'Bangladesh');
+            allCountriesData = csvJSON(data);
+            var bd_data = getCountryData('Bangladesh');
             console.log(bd_data);
         }
         });
