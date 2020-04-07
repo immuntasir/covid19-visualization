@@ -35,7 +35,7 @@ function csvJSON(csv){
     return false;
   }
 
-  function getCountryData (country_name, min_case_count = 0, init_day = 0, type='cumulative') {
+  function getCountryData (country_name, min_case_count = 10, init_day = 0, max_day = 20, type='cumulative') {
     var country_data = allCountriesData.filter(function(x){
         return x['Country/Region'] == country_name;
     })[0];
@@ -44,36 +44,48 @@ function csvJSON(csv){
     data_by_date_keys = country_data_keys.slice(4, );
     is_relevant = false;
 
-    data_values = [];
+    var ret_values = [];
+    var init_day = 0;
     for (let i=0; i<data_by_date_keys.length; i++) {
-        if (country_data[data_by_date_keys[i]] >= min_case_count) {
-            is_relevant = true;
+        if (is_relevant == true && i > init_day + max_day) {
+            break;
         }
-        if (i>=init_day) {
+        if (is_relevant == false && country_data[data_by_date_keys[i]] >= min_case_count && i>=init_day) {
             is_relevant = true;
+            init_day = i;
         }
         if (is_relevant == false) {
             continue;
         }
-        label = String(i);
         value = 0
         if (type == 'cumulative') {
             value = parseInt(country_data[data_by_date_keys[i]]);
         }
-        data_values.push({
-            'label' : label,
-            'value' : value
-        })
-
+        ret_values.push(value);
     }
-
-    var ret_object = Object();
-    ret_object.key = 'Cumulative Return';
-    ret_object.values = data_values;
-    return [ret_object];
+    ret_values = [country_name].concat(ret_values);
+    return ret_values;
   }
 
   function showBangladeshGraph() {
+    bd_data = getCountryData('Bangladesh');
+    var chart = c3.generate({
+        data: {
+            columns: [
+                bd_data,
+                getCountryData('India'),
+                getCountryData('France')
+            ],
+            type: 'line',
+            types: {
+                Bangladesh: 'bar',
+            }           
+        }
+    });
+    d3.select('#chart svg')
+            .call(chart);
+  }
+  /*function showBangladeshGraph() {
     nv.addGraph(function() {
         var chart = nv.models.discreteBarChart()
             .x(function(d) { return d.label })    //Specify the data accessors.
@@ -93,7 +105,7 @@ function csvJSON(csv){
         return chart;
       });
   }
-  
+  */
 
   
 
