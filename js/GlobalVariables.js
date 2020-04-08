@@ -4,6 +4,8 @@ var countries_to_compare = ['Italy', 'France', 'Spain', 'US', 'Malaysia', 'India
 
 var content_list=['Cases',"Death","Recovered"];
 var content_actual_name=['cases','death','recovered'];
+var content_actual_name_ids=['content-cases','content-death','content-recovery'];
+
 var graph_content='cases';
 var chart_aggregation = 'cumulative';
 
