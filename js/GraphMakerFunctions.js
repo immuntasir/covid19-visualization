@@ -42,30 +42,34 @@ function csvJSON(csv){
   }
 
   function getCountryData (country_name, min_case_count = 10, init_day = 0, max_day = 20, content='cases', aggregation='cumulative') {
-    var country_data = getCountryRow(country_name, content);
+    
+    var country_data = getCountryRow(country_name, 'cases');
+    var country_data_keys = Object.keys(country_data);
+    var data_by_date_keys = country_data_keys.slice(4, );
+    
+    for (let i=init_day; i<data_by_date_keys.length; i++) {
+        if (country_data[data_by_date_keys[i]] >= min_case_count && i>=init_day) {
+            init_day = i;
+            break;
+        }
+    }
 
+    country_data = getCountryRow(country_name, content);
     country_data_keys = Object.keys(country_data);
     data_by_date_keys = country_data_keys.slice(4, );
     is_relevant = false;
 
     var ret_values = [];
-    var init_day = 0;
-
+    
     var three_days_moving_sum = 0;
     var seven_days_moving_sum = 0;
     var three_days_moving_n = 0;
     var seven_days_moving_n = 0;
     
-    for (let i=0; i<data_by_date_keys.length; i++) {
-        if (is_relevant == true && i > init_day + max_day) {
+    
+    for (let i=init_day; i<data_by_date_keys.length; i++) {
+        if (i > init_day + max_day) {
             break;
-        }
-        if (is_relevant == false && country_data[data_by_date_keys[i]] >= min_case_count && i>=init_day) {
-            is_relevant = true;
-            init_day = i;
-        }
-        if (is_relevant == false) {
-            continue;
         }
         value = 0
         if (aggregation == 'cumulative') {
@@ -99,7 +103,7 @@ function csvJSON(csv){
 
             value = Math.round(seven_days_moving_sum / seven_days_moving_n);
         }
-        console.log(country_name, i, parseInt(country_data[data_by_date_keys[i]]), value);
+        //console.log(country_name, i, parseInt(country_data[data_by_date_keys[i]]), value);
         ret_values.push(value);
     }
     ret_values = [country_name].concat(ret_values);
@@ -108,7 +112,7 @@ function csvJSON(csv){
 
   function showGraph(countries, min_case_count = 10, init_day = 0, max_day = 20, content='cases', aggregation='cumulative', normalization='none', scale='linear') {
     bd_data = getCountryData('Bangladesh', min_case_count, init_day, max_day, content, aggregation);
-    console.log(bd_data);
+    //console.log(bd_data);
     data_columns = [bd_data];
     for (let i=0; i<countries.length; i++)  {
         data_columns.push(getCountryData(countries[i], min_case_count, init_day, max_day, content, aggregation))
@@ -117,7 +121,9 @@ function csvJSON(csv){
     if (scale == 'logarithmic') {
         for (let i=0; i<data_columns.length; i++) {
             for (let j=1; j<data_columns[i].length; j++) {
-                data_columns[i][j] = Math.log10(data_columns[i][j]);
+                if (data_columns[i][j] != 0) {
+                    data_columns[i][j] = Math.log10(data_columns[i][j]);
+                }
             }
         }
     }
@@ -130,13 +136,21 @@ function csvJSON(csv){
                 Bangladesh: 'bar',
             }
         },
+        size: {
+            height: 500,
+        },
         axis : {
             y : {
                 show:true,
                 tick: {
                    format: function (d) {
                         if (scale == 'logarithmic') {
-                            return Math.pow(10,d).toFixed(0);
+                            if (d!=0) {
+                                return Math.pow(10,d).toFixed(0)
+                            }
+                            else {
+                                return d
+                            }
                         }
                         else {
                             return d;
