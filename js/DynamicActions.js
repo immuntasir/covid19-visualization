@@ -78,6 +78,31 @@ function showGraphOptions(){
   $("#checkBoxContainer2").html(string);
 }
 
+function MakeFirstLetterCapital(value){
+  let result="";
+  for(let i=0;i<value.length;i++){
+    if(i==0) {
+      result=result+value.charAt(i).toUpperCase();
+    }
+    else{
+      result=result+value.charAt(i);
+    }
+  }
+  return result;
+}
+
+function ReturnTheMainChartAggregation(key_value){
+  let keys=Object.keys(chart_aggregation_types);
+  console.log(keys,key_value);
+  for(let i=0;i<keys.length;i++){
+    let key=keys[i];
+    console.log(key,chart_aggregation_types[key],key_value);
+    if(chart_aggregation_types[key] == key_value){
+      return key;
+    }
+  }
+}
+
 function InitTheVariablesAndGenerateGraph(){
   let countries=getTheCheckedCountries();
   let min_case_count=parseInt($('#slider12').val());
@@ -89,7 +114,7 @@ function InitTheVariablesAndGenerateGraph(){
   let init_day=0;
   console.log(graph_content);
   showGraph(countries, min_case_count, init_day, max_day, content=graph_content, aggregation=chart_aggregation, normalization='none', scale=chart_type);
-  let list=['Deaths',chart_aggregation,min_case_count,max_day,chart_type];
+  let list=[MakeFirstLetterCapital(graph_content),ReturnTheMainChartAggregation(chart_aggregation),min_case_count,max_day,MakeFirstLetterCapital(chart_type)];
   console.log(list);
   MakeDescription(list);
 }
