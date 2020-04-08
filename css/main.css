@@ -1,15 +1,3 @@
-.main-body {
-    display: flex;
-    
-}
-.chart-container-div {
-    flex: 70%;
-    align-items: center;
-}
-.option-control-div{
-    flex: 30%;
-}
-
 
 
 * {box-sizing: border-box}
