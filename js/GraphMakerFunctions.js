@@ -51,10 +51,11 @@ function csvJSON(csv){
     var ret_values = [];
     var init_day = 0;
 
-    var three_days_moving_average = 0;
-    var seven_days_moving_average = 0;
-    var beta3 = 0;
-    var beta7 = 0
+    var three_days_moving_sum = 0;
+    var seven_days_moving_sum = 0;
+    var three_days_moving_n = 0;
+    var seven_days_moving_n = 0;
+    
     for (let i=0; i<data_by_date_keys.length; i++) {
         if (is_relevant == true && i > init_day + max_day) {
             break;
@@ -70,11 +71,35 @@ function csvJSON(csv){
         if (aggregation == 'cumulative') {
             value = parseInt(country_data[data_by_date_keys[i]]);
         }
-        if (aggregation == 'new_cases') {
-            if (i!=0){
+        else if (aggregation == 'new_cases') {
+            if (i != init_day){
                 value = parseInt(country_data[data_by_date_keys[i]]) - parseInt(country_data[data_by_date_keys[i-1]]);
             }
+            else {
+                value = parseInt(country_data[data_by_date_keys[i]]);
+            }
         }
+        else if (aggregation == '3_day_moving_average') {
+            three_days_moving_n += 1;
+            three_days_moving_sum += parseInt(country_data[data_by_date_keys[i]]);
+            if (three_days_moving_n > 3) {
+                three_days_moving_n = 3; 
+                three_days_moving_sum -= parseInt(country_data[data_by_date_keys[i-3]])
+            }
+        
+            value = Math.round(three_days_moving_sum / three_days_moving_n);
+        }
+        else if (aggregation == '7_day_moving_average') {
+            seven_days_moving_n += 1;
+            seven_days_moving_sum += parseInt(country_data[data_by_date_keys[i]]);
+            if (seven_days_moving_n > 7) {
+                seven_days_moving_n = 7; 
+                seven_days_moving_sum -= parseInt(country_data[data_by_date_keys[i-7]])
+            }
+
+            value = Math.round(seven_days_moving_sum / seven_days_moving_n);
+        }
+        console.log(country_name, i, parseInt(country_data[data_by_date_keys[i]]), value);
         ret_values.push(value);
     }
     ret_values = [country_name].concat(ret_values);
