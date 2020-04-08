@@ -114,9 +114,11 @@ function csvJSON(csv){
         data_columns.push(getCountryData(countries[i], min_case_count, init_day, max_day, content, aggregation))
     }
 
-    for (let i=0; i<data_columns.length; i++) {
-        for (let j=1; j<data_columns[i].length; j++) {
-            //data_columns[i][j] = Math.log10(data_columns[i][j]);
+    if (scale == 'logarithmic') {
+        for (let i=0; i<data_columns.length; i++) {
+            for (let j=1; j<data_columns[i].length; j++) {
+                data_columns[i][j] = Math.log10(data_columns[i][j]);
+            }
         }
     }
 
@@ -133,8 +135,12 @@ function csvJSON(csv){
                 show:true,
                 tick: {
                    format: function (d) {
-                    return d;
-                    //   return Math.pow(10,d).toFixed(0);
+                        if (scale == 'logarithmic') {
+                            return Math.pow(10,d).toFixed(0);
+                        }
+                        else {
+                            return d;
+                        }
                     }
                 }
             },
