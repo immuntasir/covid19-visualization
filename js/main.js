@@ -5,6 +5,13 @@ var countries_to_compare = ['Italy', 'France', 'Spain', 'US', 'Malaysia', 'India
 var content_list=['Cases',"Death","Recovered"];
 var content_actual_name=['cases','death','recovered'];
 var graph_content='cases';
+var chart_aggregation = 'cumulative';
+
+chart_aggregation_types = Object()
+chart_aggregation_types['Total Cases'] = 'cumulative';
+chart_aggregation_types['New Cases'] = 'new_cases';
+chart_aggregation_types['3-day Rolling Average'] = '3_day_rolling_average';
+chart_aggregation_types['7-day Rolling Average'] = '7_day_rolling_average';
 
 
 function csvJSON(csv){
@@ -59,6 +66,11 @@ function csvJSON(csv){
 
     var ret_values = [];
     var init_day = 0;
+
+    var three_days_moving_average = 0;
+    var seven_days_moving_average = 0;
+    var beta3 = 0;
+    var beta7 = 0
     for (let i=0; i<data_by_date_keys.length; i++) {
         if (is_relevant == true && i > init_day + max_day) {
             break;
@@ -73,6 +85,11 @@ function csvJSON(csv){
         value = 0
         if (aggregation == 'cumulative') {
             value = parseInt(country_data[data_by_date_keys[i]]);
+        }
+        if (aggregation == 'new_cases') {
+            if (i!=0){
+                value = parseInt(country_data[data_by_date_keys[i]]) - parseInt(country_data[data_by_date_keys[i-1]]);
+            }
         }
         ret_values.push(value);
     }
@@ -178,8 +195,7 @@ function InitTheVariablesAndGenerateGraph(){
   }
   let init_day=0;
   console.log(graph_content);
-  showGraph(countries, min_case_count, init_day, max_day, content=graph_content, aggregation='cumulative', normalization='none', scale='linear');
-
+  showGraph(countries, min_case_count, init_day, max_day, content=graph_content, chart_aggregation, normalization='none', scale='linear');
 }
 
 function genericSlider(value_span_id,slider_id){
@@ -218,6 +234,7 @@ function countrySelector(){
 }
 
 $('#dropdown-menu-aggregation a').click(function(){
+    chart_aggregation = chart_aggregation_types[$(this).text()];
     $('#selected-aggregation').text($(this).text());
   });
 
