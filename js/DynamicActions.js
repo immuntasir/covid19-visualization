@@ -20,11 +20,13 @@ function colorChanger(idx){
     let element = document.getElementById(content_actual_name_ids[i]);
     if(i==idx){
         if($('#'+content_actual_name_ids[i]).hasClass('btn-secondary') ==false){
+            $('#'+content_actual_name_ids[i]).toggleClass('btn-light');
             $('#'+content_actual_name_ids[i]).toggleClass('btn-secondary');
         }
     }
     else{
       if($('#'+content_actual_name_ids[i]).hasClass('btn-secondary') ==true){
+          $('#'+content_actual_name_ids[i]).toggleClass('btn-light');
           $('#'+content_actual_name_ids[i]).toggleClass('btn-secondary');
       }
     }
