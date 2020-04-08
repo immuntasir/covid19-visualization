@@ -63,6 +63,7 @@ function selectChartType(idx,value){
   let id=chart_type_ids[idx];
   changeColorChartTypeButton(id);
   InitTheVariablesAndGenerateGraph();
+
 }
 
 function showGraphOptions(){
@@ -88,6 +89,9 @@ function InitTheVariablesAndGenerateGraph(){
   let init_day=0;
   console.log(graph_content);
   showGraph(countries, min_case_count, init_day, max_day, content=graph_content, aggregation=chart_aggregation, normalization='none', scale=chart_type);
+  let list=['Deaths',chart_aggregation,min_case_count,max_day,chart_type];
+  console.log(list);
+  MakeDescription(list);
 }
 
 function genericSlider(value_span_id,slider_id){
@@ -130,3 +134,12 @@ $('#dropdown-menu-aggregation a').click(function(){
     $('#selected-aggregation').text($(this).text());
     InitTheVariablesAndGenerateGraph();
   });
+
+
+function MakeDescription(list){
+  $('#content-list-span').text(list[0]);
+  $('#chart-aggregation-span').text(list[1]);
+  $('#minimum-case-span').text(list[2]);
+  $('#minimum-days-span').text(list[3]);
+  $('#chart-type-span').text(list[4])
+}
