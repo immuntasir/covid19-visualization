@@ -1,6 +1,6 @@
 var allCountriesData = Object();
 
-var countries_to_compare = ['Italy', 'France', 'Spain', 'US', 'Malaysia', 'India', 'Saudi Arabia', 'Mexico', 'Germany', 'Greece', 'Pakistan', 'Singapore'];
+var countries_to_compare = ["France", "Germany", "Greece", "India", "Italy", "Malaysia", "Mexico", "Pakistan", "Saudi Arabia", "Singapore", "Spain", "US"];
 
 var content_list=['Cases',"Death","Recovered"];
 var content_actual_name=['cases','death','recovered'];

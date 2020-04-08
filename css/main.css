@@ -86,3 +86,8 @@
     .option-control-row {
         padding-left: 20px;
     }
+
+    .chart-description {
+        font-size: 14px;
+        padding-left: 20px;
+    }
