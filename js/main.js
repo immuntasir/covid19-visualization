@@ -11,7 +11,7 @@ chart_aggregation_types = Object()
 chart_aggregation_types['Total Cases'] = 'cumulative';
 chart_aggregation_types['New Cases'] = 'new_cases';
 chart_aggregation_types['3-day Rolling Average'] = '3_day_rolling_average';
-chart_aggregation_types['7-day Rolling Average'] = '7_day_rolling_average';
+chart_aggregation_types['7-day Rolling Average'] = '7_day_rolling_average';*
 
 
 function csvJSON(csv){
