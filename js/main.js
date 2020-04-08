@@ -4,9 +4,9 @@ $(document).ready(function(){
     genericSlider('valueSpan2','slider12');
     genericSlider('valueSpan3','slider13');
     showCountryOptions();
-    showGraphOptions();
+    //showGraphOptions();
     countrySelector();
-    colorChanger("0");
+    //colorChanger("0");
 
 
 
