@@ -92,17 +92,32 @@ function showCountryOptions(){
   let string='',value='';
   for(let i=0;i<countries.length;i++){
       value = countries[i];
-      string = string + '<div class="custom-control custom-checkbox" id="country-option-div-'+i.toString()+'">';
-      string += '<input type="checkbox" class="custom-control-input" id="country-name-'+i.toString()+'" name="'+value+'" value="'+value+'">';
-      string += '<label class="custom-control-label" for="country-name-'+i.toString()+'" ><span>'+value+'</span></label>';
+      string = string + '<div class="custom-control custom-checkbox form-check" id="country-option-div-'+i.toString()+'">';
+      string += '<input type="checkbox" class="custom-control-input form-check-input" id="country-name-'+i.toString()+'" name="'+value+'" value="'+value+'" style="vertical-align:middle;">';
+      string += '<label class="custom-control-label form-check-label" for="country-name-'+i.toString()+'" ><span>'+value+'</span></label>';
+      /*string += '<div class="form-check" id="country-option-div-'+i.toString()+'">';
+      string += '<input type="checkbox" class="form-check-input" id="country-name-'+i.toString()+'" name="'+value+'" value="'+value+'">';
+      string += '<label class="form-check-label" for="country-name-'+i.toString()+'" ><span>'+value+'</span></label>';*/
       string += '</div>';
   }
   //console.log(string);
   $("#checkBoxContainer").html(string);
 }
 
-function graphOptionSelection(type){
+function colorChanger(idx){
+  for(let i=0;i<graph_option_actual_name.length;i++){
+    if(i==parseInt(idx)){
+        document.getElementById("graph-option-"+i).style.color="blue";
+    }
+    else{
+      document.getElementById("graph-option-"+i).style.color="black";
+    }
+  }
+}
+
+function graphOptionSelection(type,idx){
   graph_type = type;
+  colorChanger(idx);
   InitTheVariablesAndGenerateGraph();
 }
 
@@ -113,7 +128,7 @@ function showGraphOptions(){
   string += '<div class="tab">';
   for(let i=0;i<list.length;i++){
       value = list[i];
-      string += '<button class="tablinks" class="graph-option" id="graph-option-'+i.toString()+'" onClick="graphOptionSelection('+"'"+graph_option_actual_name[i]+"'"+')" >'+value+'</button>';
+      string += '<button class="tablinks" class="graph-option" id="graph-option-'+i.toString()+'" onClick="graphOptionSelection('+"'"+graph_option_actual_name[i]+"'"+','+i+')" >'+value+'</button>';
   }
   string += '</div>';
   //console.log(string);
@@ -178,6 +193,7 @@ $(document).ready(function(){
     showCountryOptions();
     showGraphOptions();
     countrySelector();
+    colorChanger("0");
 
 
 
