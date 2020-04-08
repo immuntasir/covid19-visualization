@@ -26,9 +26,10 @@ function colorChanger(idx){
   }
 }
 
-function graphContentOptionSelection(type,idx){
-  graph_content = type;
-  colorChanger(idx);
+function graphContentOptionSelection(idx){
+  idx=parseInt(idx);
+  graph_content =  content_actual_name[idx];
+  //colorChanger(idx);
   InitTheVariablesAndGenerateGraph();
 }
 
