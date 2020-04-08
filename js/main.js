@@ -107,7 +107,7 @@ function csvJSON(csv){
 
     for (let i=0; i<data_columns.length; i++) {
         for (let j=1; j<data_columns[i].length; j++) {
-            data_columns[i][j] = Math.log10(data_columns[i][j]);
+            //data_columns[i][j] = Math.log10(data_columns[i][j]);
         }
     }
 
@@ -123,7 +123,10 @@ function csvJSON(csv){
             y : {
                 show:true,
                 tick: {
-                   format: function (d) { return Math.pow(10,d).toFixed(0); }
+                   format: function (d) { 
+                    return d;
+                    //   return Math.pow(10,d).toFixed(0); 
+                    }
                 }
             },
             x : {
@@ -195,7 +198,7 @@ function InitTheVariablesAndGenerateGraph(){
   }
   let init_day=0;
   console.log(graph_content);
-  showGraph(countries, min_case_count, init_day, max_day, content=graph_content, chart_aggregation, normalization='none', scale='linear');
+  showGraph(countries, min_case_count, init_day, max_day, content=graph_content, aggregation=chart_aggregation, normalization='none', scale='linear');
 }
 
 function genericSlider(value_span_id,slider_id){
@@ -236,6 +239,7 @@ function countrySelector(){
 $('#dropdown-menu-aggregation a').click(function(){
     chart_aggregation = chart_aggregation_types[$(this).text()];
     $('#selected-aggregation').text($(this).text());
+    InitTheVariablesAndGenerateGraph();
   });
 
   
