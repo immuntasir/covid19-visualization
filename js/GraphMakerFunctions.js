@@ -137,7 +137,7 @@ function csvJSON(csv){
             }
         },
         size: {
-            height: 500,
+            height: 300,
         },
         axis : {
             y : {
