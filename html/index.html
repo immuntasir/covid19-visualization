@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <head>
+    <title>COVID-19 Data Visualization</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
@@ -34,17 +35,12 @@
 <body>
   <div>
     <nav class="navbar navbar-light bg-light" style="color:white;  background-color: lightblue;">
-        <a class="navbar-brand" href="#">Covid19 Data Visualization-Bangladesh</a>
+        <a class="navbar-brand" href="#">COVID-19 Data Visualization</a>
     </nav>
     <div style="margin-top:20px;">
       <div class="container">
           <div class="row">
-              <div class="col-md-2" >
-                <div class="option-title">Chart Content</div>
-                <div class="option-control-div"  id="checkBoxContainer2">
-
-                </div>
-                <!--
+              <!--
                 <div class=" justify-content-center my-4">
                     <span class="option-title-sm">Days since first case</span>
                     <form class="range-field w-75">
@@ -53,32 +49,72 @@
                     <span class="font-weight-bold text-primary ml-2 mt-1 valueSpan"></span>
                   </div>
                 -->
+              <div class="col-md-9" style="border:1px;">
+                <div class="row option-control-row">
+                    <div >
+                        <div class="option-control">
+                            <div id="content-button" class="btn-group btn-group-sm " role="group" aria-label="Basic example">
+                                <button type="button" id="content-cases" class="btn btn-secondary">Cases</button>
+                                <button type="button" id="content-death" class="btn btn-light">Death</button>
+                                <button type="button" id="content-recovery" class="btn btn-light">Recovered</button>
+                              </div>
+                        </div>    
+                    </div>
+                    <div >
+                        <div class="option-control"> 
+                            <div class="dropdown">
+                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span id="selected-aggregation">Total Cases</span><span class="caret"></span></a>
+                                </button>
+                                <div class="dropdown-menu" id="dropdown-menu-aggregation" aria-labelledby="dropdownMenuButton">
+                                  <a class="dropdown-item option-control-text" href="#">Total Cases</a>
+                                  <a class="dropdown-item option-control-text" href="#">New Cases</a>
+                                  <a class="dropdown-item option-control-text" href="#">3-day Rolling Average</a>
+                                  <a class="dropdown-item option-control-text" href="#">7-day Rolling Average</a>
+                                </div>
+                              </div>
+                        </div>    
+                    </div>
 
+                    <div>
+                        <div class="option-control">
+                            <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                                <button type="button" id="scale-linear" class="btn btn-secondary">Linear</button>
+                                <button type="button" id="scale-logarithmic" class="btn btn-light">Logarithmic</button>
+                              </div>
+                        </div>    
+                    </div>
 
-                  <div class=" justify-content-center my">
-                    <span class="option-title-sm">Minimum cases:</span><span class="font-weight-bold text-primary ml-2 mt-1 valueSpan2" style="font-size:10px;"></span>
-                    <form class="range-field w-75">
-                        <input id="slider12" class="border-0" type="range" min="0" max="100" value="10" />
-                    </form>
-
-                  </div>
-
-                  <div class=" justify-content-center my">
-                    <span class="option-title-sm">Maximum days to show:</span><span class="font-weight-bold text-primary ml-2 mt-1 valueSpan3" style="font-size:10px;"></span>
-                    <form class="range-field w-75">
-                        <input id="slider13" class="border-0" type="range" min="10" max="100" value="10" />
-                    </form>
-                  </div>
                 </div>
-
-
-              <div class="col-md-8" style="border:1px;">
-
-                <div id="chart">
-                    <svg style="height: 300px;" style="border: 2px solid"  height="100%" width="100%"></svg>
+                <div class="row option-control-row">
+                    
+                    <div class="option-control justify-content-center my">
+                        <span class="option-title-sm">Minimum cases:</span><span class="font-weight-bold text-primary ml-2 mt-1 valueSpan2" style="font-size:10px;"></span>
+                        <form class="range-field w-75">
+                            <input id="slider12" class="border-0" type="range" min="0" max="100" value="10" step="5" />
+                        </form>
+        
+                    </div>    
+                    <div class="option-control justify-content-center my">
+                        <span class="option-title-sm">Maximum days to show:</span><span class="font-weight-bold text-primary ml-2 mt-1 valueSpan3" style="font-size:10px;"></span>
+                        <form class="range-field w-75">
+                            <input id="slider13" class="border-0" type="range" min="10" max="100" value="10" step="5" />
+                        </form>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div id="chart">
+                        <svg style="border: 2px solid"  height="100%" width="100%"></svg>
+                    </div>
                 </div>
               </div>
-              <div class="col-md-2">
+              <div class="col-md-3">
+                <div class="option-title">Chart Content</div>
+                <div class="option-control-div"  id="checkBoxContainer2">
+
+                </div>
+                
                 <div class="option-title">Countries to Compare</div>
                 <div class="option-control-div">
                     <form >
@@ -93,9 +129,9 @@
     </div>
     <div class = "footer">
       <p class="footer-text col-md-12" >
-          <span>Disclaimer: We do not verify the data. We collect it from the <a href="https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data">CSSE COVID-19 Dataset</a> provided by Johns Hopkins University.</span>
+          <span>Disclaimer: We do not verify or modify the data in any form. We collect it from the <a href="https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data">CSSE COVID-19 Dataset</a> provided by Johns Hopkins University.</span>
           <br>
-          <span>Developed by <a href="https://www.facebook.com/wahedmuntasir">Muntasir Wahed</a> and <a href="https://github.com/rizveeerprojects">Redwan Ahmed Rizvee.</a></span><br>
+          <span>Developed by <a href="https://www.facebook.com/wahedmuntasir">Muntasir Wahed</a> and <a href="https://github.com/rizveeerprojects">Redwan Ahmed Rizvee.</a></span>
           <span>To report any bug or request any feature, please email <a href = "mailto: immuntasir@gmail.com">immuntasir@gmail.com</a></span>
       </p>
     </div>
