@@ -40,6 +40,29 @@ function graphContentOptionSelection(idx,id){
   InitTheVariablesAndGenerateGraph();
 }
 
+function changeColorChartTypeButton(id){
+  for(let i=0;i<chart_type_ids.length;i++){
+    if(chart_type_ids[i] == id){
+      if($('#'+chart_type_ids[i]).hasClass('btn-secondary') ==false){
+          $('#'+chart_type_ids[i]).toggleClass('btn-light');
+          $('#'+chart_type_ids[i]).toggleClass('btn-secondary');
+      }
+    }
+    else{
+      if($('#'+chart_type_ids[i]).hasClass('btn-secondary') ==true){
+          $('#'+chart_type_ids[i]).toggleClass('btn-light');
+          $('#'+chart_type_ids[i]).toggleClass('btn-secondary');
+      }
+    }
+  }
+}
+
+function selectChartType(id,value){
+  chart_type = value;
+  changeColorChartTypeButton(id);
+  InitTheVariablesAndGenerateGraph();
+}
+
 function showGraphOptions(){
   let string='',value='';
   string += '<div class="tab">';
@@ -62,7 +85,7 @@ function InitTheVariablesAndGenerateGraph(){
   }
   let init_day=0;
   console.log(graph_content);
-  showGraph(countries, min_case_count, init_day, max_day, content=graph_content, aggregation=chart_aggregation, normalization='none', scale='linear');
+  showGraph(countries, min_case_count, init_day, max_day, content=graph_content, aggregation=chart_aggregation, normalization='none', scale=chart_type);
 }
 
 function genericSlider(value_span_id,slider_id){
