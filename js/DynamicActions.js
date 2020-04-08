@@ -57,8 +57,10 @@ function changeColorChartTypeButton(id){
   }
 }
 
-function selectChartType(id,value){
+function selectChartType(idx,value){
+  idx=parseInt(idx);
   chart_type = value;
+  let id=chart_type_ids[idx];
   changeColorChartTypeButton(id);
   InitTheVariablesAndGenerateGraph();
 }
