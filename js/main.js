@@ -1,8 +1,10 @@
-var allCountriesData;
+var allCountriesData = Object();
 
-var countries_to_compare = ['Italy', 'France', 'Spain', 'US', 'Malaysia', 'India', 'Saudi Arabia', 'Mexico'];
-var graph_option_actual_name=['cumulative','new_case','cumulative_per_capita'];
-var graph_type='cumulative';
+var countries_to_compare = ['Italy', 'France', 'Spain', 'US', 'Malaysia', 'India', 'Saudi Arabia', 'Mexico', 'Germany', 'Greece', 'Pakistan', 'Singapore'];
+
+var content_list=['Cases',"Death","Recovered"];
+var content_actual_name=['cases','death','recovered'];
+var graph_content='cases';
 
 
 function csvJSON(csv){
@@ -30,14 +32,26 @@ function csvJSON(csv){
     //return JSON.stringify(result); //JSON
   }
 
+  function getCountryRow(country_name, content='cases') {
+      var country_rows;  
+      country_rows = allCountriesData[content]; 
+      
+      var country_data
+      if (country_name == 'France') {
+        country_data = country_rows.filter(function(x) {
+            return x['Country/Region'] == 'France' && x['Province/State'] == '';
+        })[0];
+      }
+      else {
+        country_data = country_rows.filter(function(x){
+            return x['Country/Region'] == country_name;
+        })[0];
+      }
+      return country_data;
+  }
 
-
-  function getCountryData (country_name, min_case_count = 10, init_day = 0, max_day = 20, type='cumulative') {
-    console.log('getCountryData', country_name, min_case_count, init_day, max_day, type);
-
-    var country_data = allCountriesData.filter(function(x){
-        return x['Country/Region'] == country_name;
-    })[0];
+  function getCountryData (country_name, min_case_count = 10, init_day = 0, max_day = 20, content='cases', aggregation='cumulative') {
+    var country_data = getCountryRow(country_name, content);
 
     country_data_keys = Object.keys(country_data);
     data_by_date_keys = country_data_keys.slice(4, );
@@ -57,7 +71,7 @@ function csvJSON(csv){
             continue;
         }
         value = 0
-        if (type == 'cumulative') {
+        if (aggregation == 'cumulative') {
             value = parseInt(country_data[data_by_date_keys[i]]);
         }
         ret_values.push(value);
@@ -66,13 +80,20 @@ function csvJSON(csv){
     return ret_values;
   }
 
-  function showGraph(countries, min_case_count = 10, init_day = 0, max_day = 20, type='cumulative') {
-    bd_data = getCountryData('Bangladesh', min_case_count, init_day, max_day, type);
+  function showGraph(countries, min_case_count = 10, init_day = 0, max_day = 20, content='cases', aggregation='cumulative', normalization='none', scale='linear') {
+    bd_data = getCountryData('Bangladesh', min_case_count, init_day, max_day, content, aggregation);
     console.log(bd_data);
     data_columns = [bd_data];
     for (let i=0; i<countries.length; i++)  {
-        data_columns.push(getCountryData(countries[i], min_case_count, init_day, max_day, type))
+        data_columns.push(getCountryData(countries[i], min_case_count, init_day, max_day, content, aggregation))
     }
+
+    for (let i=0; i<data_columns.length; i++) {
+        for (let j=1; j<data_columns[i].length; j++) {
+            data_columns[i][j] = Math.log10(data_columns[i][j]);
+        }
+    }
+
     var chart = c3.generate({
         data: {
             columns: data_columns,
@@ -80,7 +101,21 @@ function csvJSON(csv){
             types: {
                 Bangladesh: 'bar',
             }
-        }
+        },
+        axis : {
+            y : {
+                show:true,
+                tick: {
+                   format: function (d) { return Math.pow(10,d).toFixed(0); }
+                }
+            },
+            x : {
+                show:true,
+                tick: {
+                   format: function (d) { return 'Day ' + d; }
+                }
+            }
+        },
     });
   }
 
@@ -105,7 +140,7 @@ function showCountryOptions(){
 }
 
 function colorChanger(idx){
-  for(let i=0;i<graph_option_actual_name.length;i++){
+  for(let i=0;i<content_actual_name.length;i++){
     if(i==parseInt(idx)){
         document.getElementById("graph-option-"+i).style.color="blue";
     }
@@ -115,20 +150,18 @@ function colorChanger(idx){
   }
 }
 
-function graphOptionSelection(type,idx){
-  graph_type = type;
+function graphContentOptionSelection(type,idx){
+  graph_content = type;
   colorChanger(idx);
   InitTheVariablesAndGenerateGraph();
 }
 
 function showGraphOptions(){
-  var list=['Total cases'," New cases per day","Total cases per capita"];
-
   let string='',value='';
   string += '<div class="tab">';
-  for(let i=0;i<list.length;i++){
-      value = list[i];
-      string += '<button class="tablinks" class="graph-option" id="graph-option-'+i.toString()+'" onClick="graphOptionSelection('+"'"+graph_option_actual_name[i]+"'"+','+i+')" >'+value+'</button>';
+  for(let i=0;i<content_list.length;i++){
+      value = content_list[i];
+      string += '<button class="tablinks" class="graph-option" id="graph-option-'+i.toString()+'" onClick="graphContentOptionSelection('+"'"+content_actual_name[i]+"'"+','+i+')" >'+value+'</button>';
   }
   string += '</div>';
   //console.log(string);
@@ -144,8 +177,8 @@ function InitTheVariablesAndGenerateGraph(){
     countries.push('Bangladesh');
   }
   let init_day=0;
-  console.log(graph_type);
-  showGraph(countries, min_case_count, init_day, max_day, type=graph_type);
+  console.log(graph_content);
+  showGraph(countries, min_case_count, init_day, max_day, content=graph_content, aggregation='cumulative', normalization='none', scale='linear');
 
 }
 
@@ -184,8 +217,11 @@ function countrySelector(){
 });
 }
 
+$('#dropdown-menu-aggregation a').click(function(){
+    $('#selected-aggregation').text($(this).text());
+  });
 
-
+  
 $(document).ready(function(){
     //genericSlider('valueSpan','slider11');
     genericSlider('valueSpan2','slider12');
@@ -198,17 +234,25 @@ $(document).ready(function(){
 
 
     var data;
-    $.ajax({
-        type: "GET",
-        url: "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
-        dataType: "text",
-        success: function(response)
-        {
-            data = $.csv.toArrays(response);
-            allCountriesData = csvJSON(data);
-            var bd_data = getCountryData('Bangladesh');
-            showGraph([], min_case_count = 10, init_day = 0, max_day = 20, type='cumulative');
-        }
-        });
-
+    urls = ["https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
+            "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",
+            "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv"]
+    
+    for (let i=0; i<urls.length; i++) {
+        data_url = urls[i];
+        $.ajax({
+            type: "GET",
+            url: data_url,
+            dataType: "text",
+            success: function(response)
+            {
+                data = $.csv.toArrays(response);
+                allCountriesData[content_actual_name[i]] = csvJSON(data);
+                var bd_data = getCountryData('Bangladesh');
+                if (i==0) {
+                    showGraph([], min_case_count = 10, init_day = 0, max_day = 20, content='cases', aggregation='cumulative', normalization='none', scale='linear');
+                }
+                }
+            });    
+    }
     });
