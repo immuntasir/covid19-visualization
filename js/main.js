@@ -33,9 +33,9 @@ function csvJSON(csv){
   }
 
   function getCountryRow(country_name, content='cases') {
-      var country_rows;  
-      country_rows = allCountriesData[content]; 
-      
+      var country_rows;
+      country_rows = allCountriesData[content];
+
       var country_data
       if (country_name == 'France') {
         country_data = country_rows.filter(function(x) {
@@ -221,7 +221,7 @@ $('#dropdown-menu-aggregation a').click(function(){
     $('#selected-aggregation').text($(this).text());
   });
 
-  
+
 $(document).ready(function(){
     //genericSlider('valueSpan','slider11');
     genericSlider('valueSpan2','slider12');
@@ -237,7 +237,7 @@ $(document).ready(function(){
     urls = ["https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
             "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv",
             "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv"]
-    
+
     for (let i=0; i<urls.length; i++) {
         data_url = urls[i];
         $.ajax({
@@ -253,6 +253,6 @@ $(document).ready(function(){
                     showGraph([], min_case_count = 10, init_day = 0, max_day = 20, content='cases', aggregation='cumulative', normalization='none', scale='linear');
                 }
                 }
-            });    
+            });
     }
     });
