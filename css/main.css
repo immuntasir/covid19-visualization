@@ -101,3 +101,13 @@
       /* Margin bottom by footer height */
       margin-bottom: 60px;
     }
+
+    #selected-aggregation-over {
+      width: 70px;
+    }
+
+    option-control-slider {
+      width: 180px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
