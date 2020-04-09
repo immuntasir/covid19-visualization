@@ -27,7 +27,7 @@ function csvJSON(csv){
       var country_rows;
       country_rows = allCountriesData[content];
 
-      var country_data
+      var country_data;
       if (country_name == 'France') {
         country_data = country_rows.filter(function(x) {
             return x['Country/Region'] == 'France' && x['Province/State'] == '';
@@ -110,10 +110,10 @@ function csvJSON(csv){
     return ret_values;
   }
 
-  function showGraph(countries, min_case_count = 10, init_day = 0, max_day = 20, content='cases', aggregation='cumulative', normalization='none', scale='linear') {
-    bd_data = getCountryData('Bangladesh', min_case_count, init_day, max_day, content, aggregation);
+  function showGraph(pr_country_name='Bangladesh', countries=[], min_case_count = 10, init_day = 0, max_day = 30, content='cases', aggregation='cumulative', normalization='none', scale='linear') {
+    pr_data = getCountryData(pr_country_name, min_case_count, init_day, max_day, content, aggregation);
     //console.log(bd_data);
-    data_columns = [bd_data];
+    data_columns = [pr_data];
     for (let i=0; i<countries.length; i++)  {
         data_columns.push(getCountryData(countries[i], min_case_count, init_day, max_day, content, aggregation))
     }
@@ -131,13 +131,13 @@ function csvJSON(csv){
     var chart = c3.generate({
         data: {
             columns: data_columns,
-            type: 'line',
+            type: chart_type_comparing_countries,
             types: {
-                Bangladesh: 'bar',
+                [pr_country_name]: chart_type_primary_country,
             }
         },
         size: {
-            height: 300,
+            height: 500,
         },
         axis : {
             y : {
