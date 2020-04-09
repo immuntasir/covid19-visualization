@@ -179,6 +179,12 @@ function addOnClickFunctions() {
 function enablingToolip(){
    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
    $('.my-tooltip').tooltip();
+
+   $("slider-hover").hover(function(){
+     $(this).tooltip('show');
+  }, function(){
+    $(this).tooltip('hide');
+  });
 }
 
 
