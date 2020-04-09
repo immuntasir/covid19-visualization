@@ -1,4 +1,8 @@
 
+function CheckCurrentTime(){
+
+}
+
 $(document).ready(function(){
     //genericSlider('valueSpan','slider11');
     countries_to_compare.sort();
@@ -9,7 +13,7 @@ $(document).ready(function(){
     countrySelector();
     //colorChanger("0");
 
-    
+
 
     var data;
     urls = ["https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
@@ -32,4 +36,14 @@ $(document).ready(function(){
                 }
             });
     }
+
+    var now = new Date();
+    var millisTill10 = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 13, 0, 0, 0) - now;
+    console.log(millisTill10);
+    if (millisTill10 < 0) {
+      millisTill10 += 86400000; // it's after 10am, try 10am tomorrow.
+    }
+    //setTimeout(function(){alert("It's 10am!")}, millisTill10);
+
+
     });
