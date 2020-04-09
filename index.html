@@ -182,15 +182,16 @@
       </p>
     </div>
   </div>
-    <script src="./js/GlobalVariables.js"></script>
-    <script src="./js/GraphMakerFunctions.js"></script>
-    <script src="./js/DynamicActions.js"></script>
-    <script src="./js/main.js"></script>
-    <script>
-      //slider code
-      $(document).ready(function() {
-
-
-    });
+    <script type="text/javascript">
+        var random_number = 0;
+        function randomNumberGenerator(){
+            random_number = Math.floor(Math.random() * 10000);
+            console.log(random_number);
+        }
+        randomNumberGenerator();
     </script>
+    <script src="./js/GlobalVariables.js?version="+random_number></script>
+    <script src="./js/GraphMakerFunctions.js?version="+random_number></script>
+    <script src="./js/DynamicActions.js?version="+random_number></script>
+    <script src="./js/main.js?version="+random_number></script>
 </body>
