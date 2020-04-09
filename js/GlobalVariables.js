@@ -23,3 +23,7 @@ var chart_type_ids=['scale-linear','scale-logarithmic'];
 var chart_primary_country = 'Bangladesh';
 var chart_type_primary_country = 'bar';
 var chart_type_comparing_countries = 'line';
+
+var country_current_init_dates = Object();
+
+var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
