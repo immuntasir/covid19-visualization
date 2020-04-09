@@ -111,7 +111,7 @@ function InitTheVariablesAndGenerateGraph(){
   let min_case_count=parseInt($('#slider12').val());
   //let init_day = parseInt($('#slider11').val());
   let max_day=parseInt($('#slider13').val());
-  
+
   let init_day=0;
   console.log(graph_content);
   showGraph(chart_primary_country, countries, min_case_count, init_day, max_day, content=graph_content, aggregation=chart_aggregation, normalization='none', scale=chart_type);
@@ -175,6 +175,17 @@ function addOnClickFunctions() {
   });
 }
 
+
+function enablingToolip(){
+   $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+   $('.my-tooltip').tooltip();
+
+   $("slider-hover").hover(function(){
+     $(this).tooltip('show');
+  }, function(){
+    $(this).tooltip('hide');
+  });
+}
 
 
 function MakeDescription(list){
