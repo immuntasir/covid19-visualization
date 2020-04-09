@@ -22,9 +22,30 @@ function showInitialGraph(){
     }
 }
 
+function bringBangladeshLatestData(){
+  var data;
+  data_url ='https://raw.githubusercontent.com/rizveeerprojects/Corona-History/master/bangladesh-data/time_series.csv';
+  $.ajax({
+          type: "GET",
+          url: data_url,
+          dataType: "text",
+          success: function(response)
+          {
+
+              data = $.csv.toArrays(response);
+              bd_press_briefing_data['Date'] = data[0][0]
+              bd_press_briefing_data['Total'] = parseInt(data[0][1]);
+              bd_press_briefing_data['Death'] =  parseInt(data[0][2]);
+              bd_press_briefing_data['Recovered'] =  parseInt(data[0][3]);
+              
+          }
+      });
+}
+
 function initialize(){
   console.log("data fetched");
   showInitialGraph();
+  bringBangladeshLatestData();
 }
 
 $(document).ready(function(){

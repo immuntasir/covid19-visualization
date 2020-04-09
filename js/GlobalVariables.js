@@ -1,6 +1,6 @@
 var allCountriesData = Object();
 
-var countries_to_compare = ["Bangladesh", "France", "Germany", "Greece", "India", "Italy", "Malaysia", "Mexico", "Pakistan", "Saudi Arabia", "Singapore", "Spain", "US", 
+var countries_to_compare = ["Bangladesh", "France", "Germany", "Greece", "India", "Italy", "Malaysia", "Mexico", "Pakistan", "Saudi Arabia", "Singapore", "Spain", "US",
                             "Iran", "Turkey"];
 
 var content_list=['Cases',"Death","Recovered"];
@@ -23,3 +23,10 @@ var chart_type_ids=['scale-linear','scale-logarithmic'];
 var chart_primary_country = 'Bangladesh';
 var chart_type_primary_country = 'bar';
 var chart_type_comparing_countries = 'line';
+
+
+var bd_press_briefing_data = Object()
+bd_press_briefing_data['Date'] = ""
+bd_press_briefing_data['Total'] = ""
+bd_press_briefing_data['Death'] = ""
+bd_press_briefing_data['Recovered'] = ""
