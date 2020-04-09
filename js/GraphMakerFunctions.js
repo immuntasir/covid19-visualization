@@ -41,11 +41,10 @@ function csvJSON(csv){
       return country_data;
   }
 
-  function getCountryData (country_name, min_case_count = 10, init_day = 0, max_day = 20, content='cases', aggregation='cumulative') {
-    
-    var country_data = getCountryRow(country_name, 'cases');
-    var country_data_keys = Object.keys(country_data);
-    var data_by_date_keys = country_data_keys.slice(4, );
+  function getStartDate(country_name, min_case_count = 10, init_day = 0, max_day = 20, content='cases') {
+    let country_data = getCountryRow(country_name, 'cases');
+    let country_data_keys = Object.keys(country_data);
+    let data_by_date_keys = country_data_keys.slice(4, );
     
     for (let i=init_day; i<data_by_date_keys.length; i++) {
         if (country_data[data_by_date_keys[i]] >= min_case_count && i>=init_day) {
@@ -53,10 +52,22 @@ function csvJSON(csv){
             break;
         }
     }
+    return init_day;
+  }
 
-    country_data = getCountryRow(country_name, content);
-    country_data_keys = Object.keys(country_data);
-    data_by_date_keys = country_data_keys.slice(4, );
+  function dateConverter(date_string) {
+      date_object = date_string.split('/');
+      return date_object[1].toString() + ' ' + months[date_object[0] - 1] + ', 20' + date_object[2];
+  }
+
+  function getCountryData (country_name, min_case_count = 10, init_day = 0, max_day = 20, content='cases', aggregation='cumulative') {
+    
+    init_day = getStartDate(country_name, min_case_count, init_day, max_day, content='cases');
+    
+
+    let country_data = getCountryRow(country_name, content);
+    let country_data_keys = Object.keys(country_data);
+    let data_by_date_keys = country_data_keys.slice(4, );
     is_relevant = false;
 
     var ret_values = [];
@@ -66,12 +77,15 @@ function csvJSON(csv){
     var three_days_moving_n = 0;
     var seven_days_moving_n = 0;
     
+    country_current_init_dates[country_name] = [];
     
     for (let i=init_day; i<data_by_date_keys.length; i++) {
         if (i > init_day + max_day) {
             break;
         }
         value = 0
+        country_current_init_dates[country_name].push(dateConverter(data_by_date_keys[i]));
+        
         if (aggregation == 'cumulative') {
             value = parseInt(country_data[data_by_date_keys[i]]);
         }
@@ -103,7 +117,6 @@ function csvJSON(csv){
 
             value = Math.round(seven_days_moving_sum / seven_days_moving_n);
         }
-        //console.log(country_name, i, parseInt(country_data[data_by_date_keys[i]]), value);
         ret_values.push(value);
     }
     ret_values = [country_name].concat(ret_values);
@@ -112,7 +125,6 @@ function csvJSON(csv){
 
   function showGraph(pr_country_name='Bangladesh', countries=[], min_case_count = 10, init_day = 0, max_day = 30, content='cases', aggregation='cumulative', normalization='none', scale='linear') {
     pr_data = getCountryData(pr_country_name, min_case_count, init_day, max_day, content, aggregation);
-    //console.log(bd_data);
     data_columns = [pr_data];
     for (let i=0; i<countries.length; i++)  {
         data_columns.push(getCountryData(countries[i], min_case_count, init_day, max_day, content, aggregation))
@@ -138,6 +150,16 @@ function csvJSON(csv){
         },
         size: {
             height: 500,
+        },
+        tooltip: {
+            format: {
+                name: function (name, ratio, id, index) {
+                    return name + ' (' + country_current_init_dates[name][index] + ')';
+                },
+                value: function (value) {
+                    return value;
+                }
+            }
         },
         axis : {
             y : {
