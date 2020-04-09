@@ -1,6 +1,7 @@
 function showCountryOptions(){
   var countries=countries_to_compare;
   let string='',value='';
+  let string_pr_country = '';
   for(let i=0;i<countries.length;i++){
       value = countries[i];
       string = string + '<div class="custom-control custom-checkbox form-check" id="country-option-div-'+i.toString()+'">';
@@ -10,8 +11,10 @@ function showCountryOptions(){
       string += '<input type="checkbox" class="form-check-input" id="country-name-'+i.toString()+'" name="'+value+'" value="'+value+'">';
       string += '<label class="form-check-label" for="country-name-'+i.toString()+'" ><span>'+value+'</span></label>';*/
       string += '</div>';
+      string_pr_country += ('<a class="dropdown-item option-control-text" href="#">' +  countries[i] + '</a> ')
   }
   //console.log(string);
+  $("#dropdown_menu_pr_country").html(string_pr_country);
   $("#checkBoxContainer").html(string);
 }
 
@@ -108,12 +111,10 @@ function InitTheVariablesAndGenerateGraph(){
   let min_case_count=parseInt($('#slider12').val());
   //let init_day = parseInt($('#slider11').val());
   let max_day=parseInt($('#slider13').val());
-  if(countries.indexOf('Bangladesh') == -1){
-    countries.push('Bangladesh');
-  }
+  
   let init_day=0;
   console.log(graph_content);
-  showGraph(countries, min_case_count, init_day, max_day, content=graph_content, aggregation=chart_aggregation, normalization='none', scale=chart_type);
+  showGraph(chart_primary_country, countries, min_case_count, init_day, max_day, content=graph_content, aggregation=chart_aggregation, normalization='none', scale=chart_type);
   let list=[MakeFirstLetterCapital(graph_content),ReturnTheMainChartAggregation(chart_aggregation),min_case_count,max_day,MakeFirstLetterCapital(chart_type)];
   console.log(list);
   MakeDescription(list);
@@ -159,6 +160,21 @@ $('#dropdown-menu-aggregation a').click(function(){
     $('#selected-aggregation').text($(this).text());
     InitTheVariablesAndGenerateGraph();
   });
+
+function addOnClickFunctions() {
+  $('#dropdown_menu_pr_country a').click(function(){
+    chart_primary_country = $(this).text();
+    $('#selected_pr_country').text($(this).text());
+    InitTheVariablesAndGenerateGraph();
+  });
+
+  $('#dropdown_menu_pr_country_chart_type a').click(function(){
+    chart_type_primary_country = $(this).text().toLowerCase();
+    $('#selected_pr_country_chart_type').text($(this).text());
+    InitTheVariablesAndGenerateGraph();
+  });
+}
+
 
 
 function MakeDescription(list){
