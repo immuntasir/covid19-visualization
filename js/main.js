@@ -15,7 +15,7 @@ function showInitialGraph(){
                 data = $.csv.toArrays(response);
                 allCountriesData[content_actual_name[i]] = csvJSON(data);
                 if (i==0) {
-                    showGraph([], min_case_count = 10, init_day = 0, max_day = 20, content='cases', aggregation='cumulative', normalization='none', scale='linear');
+                    showGraph(pr_country_name=chart_primary_country, countries=[], min_case_count = 10, init_day = 0, max_day = 30, content='cases', aggregation='cumulative', normalization='none', scale='linear');
                 }
                 }
             });
@@ -33,4 +33,5 @@ $(document).ready(function(){
     genericSlider('valueSpan3','slider13');
     showCountryOptions();
     countrySelector();
+    addOnClickFunctions();
     });
