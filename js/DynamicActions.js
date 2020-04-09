@@ -7,13 +7,9 @@ function showCountryOptions(){
       string = string + '<div class="custom-control custom-checkbox form-check" id="country-option-div-'+i.toString()+'">';
       string += '<input type="checkbox" class="custom-control-input form-check-input" id="country-name-'+i.toString()+'" name="'+value+'" value="'+value+'" style="vertical-align:middle;">';
       string += '<label class="custom-control-label form-check-label" for="country-name-'+i.toString()+'" ><span>'+value+'</span></label>';
-      /*string += '<div class="form-check" id="country-option-div-'+i.toString()+'">';
-      string += '<input type="checkbox" class="form-check-input" id="country-name-'+i.toString()+'" name="'+value+'" value="'+value+'">';
-      string += '<label class="form-check-label" for="country-name-'+i.toString()+'" ><span>'+value+'</span></label>';*/
       string += '</div>';
       string_pr_country += ('<a class="dropdown-item option-control-text" href="#">' +  countries[i] + '</a> ')
   }
-  //console.log(string);
   $("#dropdown_menu_pr_country").html(string_pr_country);
   $("#checkBoxContainer").html(string);
 }
@@ -77,7 +73,6 @@ function showGraphOptions(){
       string += '<button class="tablinks" class="graph-option" id="graph-option-'+i.toString()+'" onClick="graphContentOptionSelection('+"'"+content_actual_name[i]+"'"+','+i+')" >'+value+'</button>';
   }
   string += '</div>';
-  //console.log(string);
   $("#checkBoxContainer2").html(string);
 }
 
@@ -94,17 +89,6 @@ function MakeFirstLetterCapital(value){
   return result;
 }
 
-function ReturnTheMainChartAggregation(key_value){
-  let keys=Object.keys(chart_aggregation_types);
-  console.log(keys,key_value);
-  for(let i=0;i<keys.length;i++){
-    let key=keys[i];
-    console.log(key,chart_aggregation_types[key],key_value);
-    if(chart_aggregation_types[key] == key_value){
-      return key;
-    }
-  }
-}
 
 function InitTheVariablesAndGenerateGraph(){
   let countries=getTheCheckedCountries();
@@ -113,10 +97,9 @@ function InitTheVariablesAndGenerateGraph(){
   let max_day=parseInt($('#slider13').val());
 
   let init_day=0;
-  console.log(graph_content);
-  showGraph(chart_primary_country, countries, min_case_count, init_day, max_day, content=graph_content, aggregation=chart_aggregation, normalization='none', scale=chart_type);
-  let list=[MakeFirstLetterCapital(graph_content),ReturnTheMainChartAggregation(chart_aggregation),min_case_count,max_day,MakeFirstLetterCapital(chart_type)];
-  console.log(list);
+  showGraph(chart_primary_country, countries, min_case_count, init_day, max_day, content=graph_content, 
+    aggregation_over = chart_aggregation_over, aggregation_type=chart_aggregation_type, normalization='none', scale=chart_type);
+  let list=[MakeFirstLetterCapital(graph_content),chart_aggregation_over,min_case_count,max_day,MakeFirstLetterCapital(chart_type)];
   MakeDescription(list);
 }
 
@@ -144,20 +127,19 @@ function getTheCheckedCountries(){
 function countrySelector(){
   let list=[];
   $('input[type="checkbox"]').click(function(){
-    if($(this).prop("checked") == true){
-        console.log("Checkbox is checked.");
-
-    }
-    else if($(this).prop("checked") == false){
-        console.log("Checkbox is unchecked.");
-    }
     InitTheVariablesAndGenerateGraph();
 });
 }
 
-$('#dropdown-menu-aggregation a').click(function(){
-    chart_aggregation = chart_aggregation_types[$(this).text()];
-    $('#selected-aggregation').text($(this).text());
+$('#dropdown-menu-aggregation-over a').click(function(){
+    chart_aggregation_over = chart_aggregation_over_variables[$(this).text()];
+    $('#selected-aggregation-over').text($(this).text());
+    InitTheVariablesAndGenerateGraph();
+  });
+
+$('#dropdown-menu-aggregation-type a').click(function(){
+    chart_aggregation_type = chart_aggregation_type_variables[$(this).text()];
+    $('#selected-aggregation-type').text($(this).text());
     InitTheVariablesAndGenerateGraph();
   });
 
