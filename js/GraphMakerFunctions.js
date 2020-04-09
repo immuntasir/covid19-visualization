@@ -122,7 +122,7 @@ function csvJSON(csv){
         for (let i=0; i<data_columns.length; i++) {
             for (let j=1; j<data_columns[i].length; j++) {
                 if (data_columns[i][j] != 0) {
-                    data_columns[i][j] = Math.log10(data_columns[i][j]);
+                    data_columns[i][j] = Math.log10(data_columns[i][j]) / Math.LN10;;
                 }
             }
         }
@@ -146,7 +146,7 @@ function csvJSON(csv){
                    format: function (d) {
                         if (scale == 'logarithmic') {
                             if (d!=0) {
-                                return Math.pow(10,d).toFixed(0)
+                                return Math.pow(10,d * Math.LN10).toFixed(0)
                             }
                             else {
                                 return d
