@@ -34,4 +34,5 @@ $(document).ready(function(){
     showCountryOptions();
     countrySelector();
     addOnClickFunctions();
+    enablingToolip();
     });
