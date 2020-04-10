@@ -197,6 +197,10 @@ function addOnClickFunctions() {
 }
 
 
+function changeCountryColor (country_name, color_code) {
+  country_objects[country_name]['color'] = color_code;
+}
+
 function enablingToolip(){
    $("body").tooltip({
     trigger : 'hover',

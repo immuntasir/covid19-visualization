@@ -45,7 +45,18 @@ function fetchBangladeshLatestData(){
               bd_press_briefing_data['cases'] = parseInt(data[length-1][1]);
               bd_press_briefing_data['death'] =  parseInt(data[length-1][2]);
               bd_press_briefing_data['recovered'] =  parseInt(data[length-1][3]);
-              
+                
+              for (let i=0; i<countries_to_compare.length; i++) {
+                country_objects[countries_to_compare[i]] = Object();
+                country_objects[countries_to_compare[i]]['start_date'] = getStartDate(countries_to_compare[i], 1, 0, 30);
+                if (countries_to_compare[i] == 'Bangladesh') {
+                    country_objects[countries_to_compare[i]]['color'] = '#006a4e';
+                }
+                else {
+                    country_objects[countries_to_compare[i]]['color'] = country_colors[i];
+                }
+              }
+            
               loadChart();
           }
       });
