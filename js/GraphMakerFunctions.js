@@ -42,10 +42,10 @@ function csvJSON(csv){
             return x['Country/Region'] == country_name;
         })[0];
       }
-
+      
       if (country_name == 'Bangladesh') {
-          if (isPressBriefingDataUpdated(country_data) {
-              country_data.push(bd_press_briefing_data[content]);
+          if (isPressBriefingDataUpdated(country_data)) {
+              country_data[bd_press_briefing_data['Date']] = bd_press_briefing_data[content];
           }
       }
       return country_data;
