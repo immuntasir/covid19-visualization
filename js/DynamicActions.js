@@ -10,14 +10,14 @@ function rerenderCountryOptions(){
     let idx = selected_countries.indexOf(countries[i]);
     value = countries[i];
     value = value.split(' ').join("_");
-    string = string + '<div class="custom-control custom-checkbox" id="country-option-div-'+value+'">';
+    string = string + '<div class="custom-control custom-checkbox" id="country-option-div-'+i.toString()+'">';
     if(idx == -1) {
-        string += '<input type="checkbox" class="custom-control-input" id="country-name-'+value+'" name="'+value+'" value="'+value+'" style="vertical-align:middle;">';
+        string += '<input type="checkbox" class="custom-control-input" id="country-name-'+i.toString()+'" name="'+i.toString()+'" value="'+i.toString()+'" style="vertical-align:middle;">';
     }
     else {
-      string += '<input type="checkbox" class="custom-control-input"  id="country-name-'+value+'" name="'+value+'" value="'+value+'" style="vertical-align:middle;" checked>';
+      string += '<input type="checkbox" class="custom-control-input"  id="country-name-'+i.toString()+'" name="'+i.toString()+'" value="'+i.toString()+'" style="vertical-align:middle;" checked>';
     }
-    string += '<label class="custom-control-label country-name-text"  for="country-name-'+value+'" ><span>'+countries[i]+'</span></label>';
+    string += '<label class="custom-control-label country-name-text"  for="country-name-'+i.toString()+'" ><span>'+countries[i]+'</span></label>';
     string += '</div>';
     string_pr_country += ('<a class="dropdown-item option-control-text" href="#">' +  countries[i] + '</a> ');
   }
@@ -39,9 +39,10 @@ function showCountryOptions(){
       if(value == chart_primary_country){
          continue;
       }
-      string = string + '<div class="custom-control custom-checkbox" id="country-option-div-'+value+'">'; //form-check
-      string += '<input type="checkbox" class="custom-control-input" id="country-name-'+value+'" name="'+value+'" value="'+value+'" style="vertical-align:middle;">'; //form-check-input
-      string += '<label class="custom-control-label country-name-text"  for="country-name-'+value+'" ><span>'+countries[i]+'</span></label>'; //form-check-label
+      console.log(value);
+      string = string + '<div class="custom-control custom-checkbox" id="country-option-div-'+i.toString()+'">'; //form-check
+      string += '<input type="checkbox" class="custom-control-input" id="country-name-'+i.toString()+'" name="'+i.toString()+'" value="'+i.toString()+'" style="vertical-align:middle;">'; //form-check-input
+      string += '<label class="custom-control-label country-name-text"  for="country-name-'+i.toString()+'" ><span>'+countries[i]+'</span></label>'; //form-check-label
 
       string += '</div>';
       string_pr_country += ('<a class="dropdown-item option-control-text" href="#">' +  countries[i] + '</a> ')
@@ -156,17 +157,19 @@ function getTheCheckedCountries(){
   let list=[],id="";
   for(let i=0;i<countries_to_compare.length;i++){
     let value = countries_to_compare[i].split(' ').join("_");
-    id='country-name-'+value;
+    id='country-name-'+i.toString();
     if($('#'+id).prop('checked') == true){
       list.push(countries_to_compare[i]);
     }
   }
+  console.log(list);
   return list;
 }
 
 function countrySelector(){
   let list=[];
   $('input[type="checkbox"]').click(function(){
+    console.log($(this).attr('id'));
     initTheVariablesAndGenerateGraph();
   });
 }
