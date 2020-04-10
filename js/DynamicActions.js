@@ -1,3 +1,16 @@
+function updateColorPickerBackground(){
+  for(let i=0;i<countries_to_compare.length;i++){
+      if(countries_to_compare[i] == chart_primary_country) continue;
+      try{
+        $('#colorPicker-'+i.toString()).css('background-color',country_objects[countries_to_compare[i]]['color']);
+      }
+      catch(error){
+        //console.log(error);
+        $('#colorPicker-'+i.toString()).css('background-color','black');
+      }
+  }
+}
+
 function rerenderCountryOptions(){
   var countries=countries_to_compare;
   let string='',value='';
@@ -27,6 +40,7 @@ function rerenderCountryOptions(){
   $("#checkBoxContainer").html(string);
   addOnClickFunctions();
   countrySelector();
+  updateColorPickerBackground();
 }
 
 
@@ -50,6 +64,7 @@ function showCountryOptions(){
   }
   $("#dropdown_menu_pr_country").html(string_pr_country);
   $("#checkBoxContainer").html(string);
+  updateColorPickerBackground();
 }
 
 function colorChanger(idx){
