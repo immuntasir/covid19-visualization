@@ -1,7 +1,7 @@
 var allCountriesData = Object();
 
 var countries_to_compare = ["Bangladesh", "France", "Germany", "Greece", "India", "Italy", "Malaysia", "Mexico", "Pakistan", "Saudi Arabia", "Singapore", "Spain", "US",
-                            "Iran", "Turkey", "United Kingdom", "United Arab Emirates", "Sri Lanka", "Maldives", "Kuwait", "Japan", "Iraq", "Indonesia",
+                            "Iran", "Turkey", "United Kingdom", "United Arab Emirates", "Sri Lanka", "Maldives", "Japan", "Iraq", "Indonesia",
                         "Finland", "Sweden", "Norway", "Denmark", "Thailand", "Nepal", "Bhutan", "Afghanistan", "Korea, South", "Kuwait", "Oman", "Qatar",
                     "South Africa", "Egypt"];
 

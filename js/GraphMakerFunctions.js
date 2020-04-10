@@ -57,7 +57,7 @@ function csvJSON(csv){
       var country_data;
       if (country_name == 'France' || country_name == "United Kingdom" || country_name == "Denmark") {
         country_data = country_rows.filter(function(x) {
-            return x['Country/Region'] == 'France' && x['Province/State'] == '';
+            return x['Country/Region'] == country_name && x['Province/State'] == '';
         })[0];
       }
       else {
@@ -74,7 +74,7 @@ function csvJSON(csv){
       return country_data;
   }
 
-  function getStartDate(country_name, min_case_count = 10, init_day = 0, max_day = 20, content='cases') {
+  function getStartDate(country_name, min_case_count = 10, init_day = 0, max_day = 20) {
     let country_data = getCountryRow(country_name, 'cases');
     let country_data_keys = Object.keys(country_data);
     let data_by_date_keys = country_data_keys.slice(4, );
@@ -90,7 +90,7 @@ function csvJSON(csv){
 
   function dateConverter(date_string) {
       date_object = date_string.split('/');
-      return date_object[1].toString() + ' ' + months[date_object[0] - 1] + ', 20' + date_object[2];
+      return date_object[1].toString() + ' ' + months[date_object[0] - 1] + ', 2020';
   }
 
   function getCountryData (country_name, min_case_count = 10, init_day = 0, max_day = 20, content='cases', aggregation_over='cumulative', aggregation_type='none') {
