@@ -33,10 +33,11 @@ function bringBangladeshLatestData(){
           {
 
               data = $.csv.toArrays(response);
-              bd_press_briefing_data['Date'] = data[0][0]
-              bd_press_briefing_data['Total'] = parseInt(data[0][1]);
-              bd_press_briefing_data['Death'] =  parseInt(data[0][2]);
-              bd_press_briefing_data['Recovered'] =  parseInt(data[0][3]);
+              let length = data.length;
+              bd_press_briefing_data['Date'] = data[length-1][0]
+              bd_press_briefing_data['Total'] = parseInt(data[length-1][1]);
+              bd_press_briefing_data['Death'] =  parseInt(data[length-1][2]);
+              bd_press_briefing_data['Recovered'] =  parseInt(data[length-1][3]);
 
           }
       });
