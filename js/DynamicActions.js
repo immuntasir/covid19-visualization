@@ -1,12 +1,19 @@
+function initiateColorPickerPortion(){
+  for(let i=0;i<countries_to_compare.length;i++){
+    if(countries_to_compare[i] == chart_primary_country) continue;
+      customColorPicker('colorPicker-'+i.toString(),'colorPalette-'+i.toString());
+  }
+}
+
 function updateColorPickerBackground(){
   for(let i=0;i<countries_to_compare.length;i++){
       if(countries_to_compare[i] == chart_primary_country) continue;
       try{
-        $('#colorPicker-'+i.toString()).css('background-color',country_objects[countries_to_compare[i]]['color']);
+        $('#colorPicker-'+i.toString()).css('color',country_objects[countries_to_compare[i]]['color']);
       }
       catch(error){
         //console.log(error);
-        $('#colorPicker-'+i.toString()).css('background-color','black');
+        $('#colorPicker-'+i.toString()).css('color','black');
       }
   }
 }
@@ -41,6 +48,7 @@ function rerenderCountryOptions(){
   addOnClickFunctions();
   countrySelector();
   updateColorPickerBackground();
+  initiateColorPickerPortion();
 }
 
 
@@ -65,6 +73,7 @@ function showCountryOptions(){
   $("#dropdown_menu_pr_country").html(string_pr_country);
   $("#checkBoxContainer").html(string);
   updateColorPickerBackground();
+  initiateColorPickerPortion();
 }
 
 function colorChanger(idx){
@@ -130,7 +139,7 @@ function changeColorAggregationOver(aggregation_over) {
         $('#aggregation_over_'+aggregation_over_options[i]).removeClass('btn-secondary');
         $('#aggregation_over_'+aggregation_over_options[i]).addClass('btn-light');
     }
-  } 
+  }
   if ($('#aggregation_over_'+aggregation_over).hasClass('btn-light') == true) {
     $('#aggregation_over_'+aggregation_over).removeClass('btn-light');
     $('#aggregation_over_'+aggregation_over).addClass('btn-secondary');

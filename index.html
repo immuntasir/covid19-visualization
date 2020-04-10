@@ -58,7 +58,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
-    <script src="./la-color-picker-master/custom_color_picker.js"></script>
+    <script type="text/javascript">
+        var random_number = 0;
+        function randomNumberGenerator(){
+            random_number = Math.floor(Math.random() * 10000);
+            console.log(random_number);
+        }
+        randomNumberGenerator();
+    </script>
+    <script src="./js/GlobalVariables.js?version="+random_number></script>
+    <script src="./js/GraphMakerFunctions.js?version="+random_number></script>
+    <script src="./la-color-picker-master/custom_color_picker.js?version="+random_number></script>
 
 </head>
 
@@ -232,16 +242,6 @@
       </p>
     </div>
   </div>
-    <script type="text/javascript">
-        var random_number = 0;
-        function randomNumberGenerator(){
-            random_number = Math.floor(Math.random() * 10000);
-            console.log(random_number);
-        }
-        randomNumberGenerator();
-    </script>
-    <script src="./js/GlobalVariables.js?version="+random_number></script>
-    <script src="./js/GraphMakerFunctions.js?version="+random_number></script>
     <script src="./js/DynamicActions.js?version="+random_number></script>
     <script src="./js/main.js?version="+random_number></script>
     <script>
