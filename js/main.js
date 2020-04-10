@@ -40,10 +40,12 @@ function fetchBangladeshLatestData(){
 
               data = $.csv.toArrays(response);
               let length = data.length;
+
               bd_press_briefing_data['Date'] = data[length-1][0]
               bd_press_briefing_data['cases'] = parseInt(data[length-1][1]);
               bd_press_briefing_data['death'] =  parseInt(data[length-1][2]);
               bd_press_briefing_data['recovered'] =  parseInt(data[length-1][3]);
+              
               loadChart();
           }
       });
