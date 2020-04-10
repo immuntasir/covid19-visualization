@@ -115,7 +115,7 @@ function showGraphOptions(){
 
 function initTheVariablesAndGenerateGraph(){
   let countries=getTheCheckedCountries();
-  let min_case_count=parseInt($('#valueSpan2').val());
+  let min_case_count=parseInt($('#min_case_count_value').text());
   //let init_day = parseInt($('#slider11').val());
   let max_day=parseInt($('#valueSpan3').val());
   let init_day=0;
