@@ -13,9 +13,9 @@ var chart_aggregation_type = 'none';
 
 chart_aggregation_over_variables = Object()
 chart_aggregation_type_variables = Object()
-chart_aggregation_over_variables['None'] = 'none'
 chart_aggregation_over_variables['Total Cases'] = 'cumulative';
 chart_aggregation_over_variables['New Cases'] = 'new_cases';
+chart_aggregation_type_variables['None'] = 'none'
 chart_aggregation_type_variables['3-day Moving Average'] = '3_day_moving_average';
 chart_aggregation_type_variables['7-day Moving Average'] = '7_day_moving_average';
 
@@ -35,3 +35,9 @@ bd_press_briefing_data['Recovered'] = ""
 
 var country_current_init_dates = Object();
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+var content_name_map = {
+    'cases': 'Confirmed Cases',
+    'death': 'Reported Deaths',
+    'recovered': 'Total Recovered'
+}

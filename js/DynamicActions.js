@@ -112,19 +112,6 @@ function showGraphOptions(){
   $("#checkBoxContainer2").html(string);
 }
 
-function makeFirstLetterCapital(value){
-  let result="";
-  for(let i=0;i<value.length;i++){
-    if(i==0) {
-      result=result+value.charAt(i).toUpperCase();
-    }
-    else{
-      result=result+value.charAt(i);
-    }
-  }
-  return result;
-}
-
 
 function initTheVariablesAndGenerateGraph(){
   let countries=getTheCheckedCountries();
@@ -140,9 +127,7 @@ function initTheVariablesAndGenerateGraph(){
 
   showGraph(chart_primary_country, countries, min_case_count, init_day, max_day, content=graph_content,
     aggregation_over = chart_aggregation_over, aggregation_type=chart_aggregation_type, normalization='none', scale=chart_type);
-  let list=[MakeFirstLetterCapital(graph_content),chart_aggregation_over,min_case_count,max_day,MakeFirstLetterCapital(chart_type)];
   MakeDescription(list);
-
 }
 
 function makeFiveMultipleOrOne(value){
@@ -151,6 +136,7 @@ function makeFiveMultipleOrOne(value){
     value=value-1;
     return value;
   }
+  MakeDescription();
 }
 
 function genericSlider(value_span_id,slider_id){
@@ -229,10 +215,44 @@ function enablingToolip(){
 }
 
 
-function MakeDescription(list){
-  $('#content-list-span').text(list[0]);
-  $('#chart-aggregation-span').text(list[1]);
-  $('#minimum-case-span').text(list[2]);
-  $('#minimum-days-span').text(list[3]);
-  $('#chart-type-span').text(list[4])
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function MakeDescription(){
+  $('#content-list-span').text(content_name_map[graph_content]);
+  $('#chart-type-span').text(capitalizeFirstLetter(chart_type));
+  
+  let min_case_count=parseInt($('#slider12').val());
+  let minimum_cases_text = '';
+  if (min_case_count == 1) {
+    minimum_cases_text = min_case_count + ' case was';
+  }
+  else {
+    minimum_cases_text = min_case_count + ' cases were';
+  }
+  $('#minimum-case-span').text(minimum_cases_text);
+  let chart_aggregation_over_text = '';
+  if (chart_aggregation_over == 'cumulative') {
+    chart_aggregation_over_text = 'total number of ' + content_name_map[graph_content] + ' up to that day ';
+  }
+  else if (chart_aggregation_over == 'new_cases') {
+    chart_aggregation_over_text = 'new ' + content_name_map[graph_content] + ' in that particular day ';
+  }
+  $('#aggregation-over-span').text(chart_aggregation_over_text);
+
+  
+  let chart_aggregation_type_text = '';
+  if (chart_aggregation_type == '3_day_moving_average') {
+    chart_aggregation_type_text = '3-day moving average';
+    $('#aggregation-type-div').show();
+  }
+  else if (chart_aggregation_type == '7_day_moving_average') {
+    chart_aggregation_type_text = '7-day moving average';
+    $('#aggregation-type-div').show();
+  }
+  else {
+    $('#aggregation-type-div').hide();
+  }
+  $('#aggregation-type-span').text(chart_aggregation_type_text);
 }
