@@ -6,7 +6,7 @@ var countries_to_compare = ["Bangladesh", "France", "Germany", "Greece", "India"
                     "South Africa", "Egypt"];
 
 var country_colors = ["#000000", "#FFFF00", "#1CE6FF", "#FF34FF", "#FF4A46", "#008941", "#006FA6", "#A30059",
-                        "#FFDBE5", "#7A4900", "#0000A6", "#63FFAC", "#B79762", "#8FB0FF", "#997D87",
+                        "#7A4900", "#0000A6", "#63FFAC", "#B79762", "#8FB0FF", "#997D87",
                         "#5A0007", "#809693", "#1B4400", "#4FC601", "#3B5DFF", "#4A3B53", "#FF2F80",
                         "#61615A", "#BA0900", "#6B7900", "#00C2A0", "#FFAA92", "#FF90C9", "#B903AA", "#D16100",
                         "#000035", "#7B4F4B", "#A1C299", "#300018", "#0AA6D8", "#013349", "#00846F",
@@ -43,7 +43,7 @@ var country_colors = ["#000000", "#FFFF00", "#1CE6FF", "#FF34FF", "#FF4A46", "#0
 
                         "#2F5D9B", "#6C5E46", "#D25B88", "#5B656C", "#00B57F", "#545C46", "#866097", "#365D25",
                         "#252F99", "#00CCFF", "#674E60", "#FC009C", "#92896B", "#FEFFE6", "#DDEFFF", "#004D43",
-                        "#006a4e"]
+                        "#FFDBE5", "#006a4e"]
 
 var country_objects = Object(); 
 
