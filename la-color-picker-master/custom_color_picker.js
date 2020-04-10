@@ -7,23 +7,12 @@ function chooseColor(e, colorInput, colorPalette) {
 }
 
 function colorOptionHook(){
-  $('.color-option').on('click',function()){
+    $('.color-option').on('click',function(){
     let id = $(this).attr('id');
-    console.log(id);
-  }
+    console.log(id,$(this).css('backgroundColor'));
+    
+  });
 }
-
-
-function componentToHex(c) {
-    var hex = c.toString(16);
-    return hex.length == 1 ? "0" + hex : hex
-}
-
-function rgbToHex(color) {
-    arr = color.replace('rgb', '').replace('(', '').replace(')', '').split(',');
-    return "#" + componentToHex(Number(arr[0])) + componentToHex(Number(arr[1])) + componentToHex(Number(arr[2]))
-}
-
 
 function customColorPicker(colorPicker_id, colorPalette_id){
       var colorInput = document.getElementById(colorPicker_id);
@@ -48,7 +37,7 @@ function customColorPicker(colorPicker_id, colorPalette_id){
 
       function showColorPalette() {
           colorPalette.style.display = 'block';
-          var newDiv = '<div class="color-option" style="background-color:#000000" onclick="chooseColor(event,'+colorInput+')"></div>';
+          var newDiv = '<div class="color-option" style="background-color:#000000" id="yes"></div>';
           /*newDiv += '<div class="color-option" style="background-color:#191919"  onclick="chooseColor(event,'+colorInput+','+colorPalette+')"></div>';
           newDiv += '<div class="color-option" style="background-color:#323232"  onclick="chooseColor(event,'+colorInput+','+colorPalette+')"></div>';
           newDiv += '<div class="color-option" style="background-color:#4b4b4b"  onclick="chooseColor(event,'+colorInput+','+colorPalette+')"></div>';
