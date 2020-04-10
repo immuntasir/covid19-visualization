@@ -95,7 +95,7 @@ function csvJSON(csv){
 
   function getCountryData (country_name, min_case_count = 10, init_day = 0, max_day = 20, content='cases', aggregation_over='cumulative', aggregation_type='none') {
 
-    init_day = getStartDate(country_name, min_case_count, init_day, max_day, content='cases');
+    init_day = getStartDate(country_name, min_case_count, init_day, max_day);
     if (init_day == -1) {
         return [];
     }
