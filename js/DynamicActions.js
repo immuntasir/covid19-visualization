@@ -118,13 +118,8 @@ function initTheVariablesAndGenerateGraph(){
   let min_case_count=parseInt($('#slider12').val());
   //let init_day = parseInt($('#slider11').val());
   let max_day=parseInt($('#slider13').val());
-
   let init_day=0;
-
-  showGraph(chart_primary_country, countries, min_case_count, init_day, max_day, content=graph_content, aggregation=chart_aggregation, normalization='none', scale=chart_type);
   rerenderCountryOptions();
-
-
   showGraph(chart_primary_country, countries, min_case_count, init_day, max_day, content=graph_content,
     aggregation_over = chart_aggregation_over, aggregation_type=chart_aggregation_type, normalization='none', scale=chart_type);
   MakeDescription(list);
@@ -136,7 +131,6 @@ function makeFiveMultipleOrOne(value){
     value=value-1;
     return value;
   }
-  MakeDescription();
 }
 
 function genericSlider(value_span_id,slider_id){
