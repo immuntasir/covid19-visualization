@@ -191,8 +191,10 @@ function csvJSON(csv){
             }
         }
     }
-
-    var chart = c3.generate({
+    if (chart != undefined) {
+        chart = chart.destroy();
+    }
+    chart = c3.generate({
         data: {
             columns: data_columns,
             type: chart_type_comparing_countries,
