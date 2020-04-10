@@ -54,9 +54,10 @@ var content_actual_name_ids=['content-cases','content-death','content-recovery']
 var graph_content='cases';
 var chart_aggregation_over = 'cumulative';
 var chart_aggregation_type = 'none';
+var aggregation_over_options = ['cumulative', 'new_cases']; 
 
-chart_aggregation_over_variables = Object()
-chart_aggregation_type_variables = Object()
+var chart_aggregation_over_variables = Object()
+var chart_aggregation_type_variables = Object()
 chart_aggregation_over_variables['Total Cases'] = 'cumulative';
 chart_aggregation_over_variables['New Cases'] = 'new_cases';
 chart_aggregation_type_variables['None'] = 'none'
