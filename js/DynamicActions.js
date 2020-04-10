@@ -224,13 +224,11 @@ function countrySelector(){
     initTheVariablesAndGenerateGraph();
   });
 }
-$('#dropdown-menu-aggregation-over a').click(function(){
-    chart_aggregation_over = chart_aggregation_over_variables[$(this).text()];
-    $('#selected-aggregation-over').text($(this).text());
-    initTheVariablesAndGenerateGraph();
-  });
 
 $('#dropdown-menu-aggregation-type a').click(function(){
+    if (chart_aggregation_type == chart_aggregation_type_variables[$(this).text()]) {
+      return;
+    }
     chart_aggregation_type = chart_aggregation_type_variables[$(this).text()];
     $('#selected-aggregation-type').text($(this).text());
     initTheVariablesAndGenerateGraph();
@@ -238,12 +236,18 @@ $('#dropdown-menu-aggregation-type a').click(function(){
 
 function addOnClickFunctions() {
   $('#dropdown_menu_pr_country a').click(function(){
+    if (chart_primary_country == $(this).text()) {
+      return;
+    }
     chart_primary_country = $(this).text();
     $('#selected_pr_country').text($(this).text());
     initTheVariablesAndGenerateGraph();
   });
 
   $('#dropdown_menu_pr_country_chart_type a').click(function(){
+    if (chart_type_primary_country == $(this).text().toLowerCase()) {
+      return;
+    }
     chart_type_primary_country = $(this).text().toLowerCase();
     $('#selected_pr_country_chart_type').text($(this).text());
     initTheVariablesAndGenerateGraph();
