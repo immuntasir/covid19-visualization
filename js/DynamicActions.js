@@ -1,3 +1,7 @@
+function enableColorPallete(){
+
+}
+
 function rerenderCountryOptions(){
   var countries=countries_to_compare;
   let string='',value='';
@@ -18,6 +22,9 @@ function rerenderCountryOptions(){
       string += '<input type="checkbox" class="custom-control-input"  id="country-name-'+i.toString()+'" name="'+i.toString()+'" value="'+i.toString()+'" style="vertical-align:middle;" checked>';
     }
     string += '<label class="custom-control-label country-name-text"  for="country-name-'+i.toString()+'" ><span>'+countries[i]+'</span></label>';
+    string += '<div><i class="fa fa-square color-pallete" aria-hidden="true" id="color-picker-box-'+i.toString()+'"></i></div>';
+    string += '<input type="text" class="inp" id="colorPicker">';
+    string += '<div class="palette" id="colorPalette"></div>';
     string += '</div>';
     string_pr_country += ('<a class="dropdown-item option-control-text" href="#">' +  countries[i] + '</a> ');
   }
@@ -26,7 +33,9 @@ function rerenderCountryOptions(){
   $("#checkBoxContainer").html(string);
   addOnClickFunctions();
   countrySelector();
+  enableColorPallete();
 }
+
 
 function showCountryOptions(){
   var countries=countries_to_compare;
@@ -42,12 +51,13 @@ function showCountryOptions(){
       string = string + '<div class="custom-control custom-checkbox" id="country-option-div-'+i.toString()+'">'; //form-check
       string += '<input type="checkbox" class="custom-control-input" id="country-name-'+i.toString()+'" name="'+i.toString()+'" value="'+i.toString()+'" style="vertical-align:middle;">'; //form-check-input
       string += '<label class="custom-control-label country-name-text"  for="country-name-'+i.toString()+'" ><span>'+countries[i]+'</span></label>'; //form-check-label
-
+      string += '<div><i class="fa fa-square color-pallete" aria-hidden="true" id="color-picker-box-'+i.toString()+'"></i></div>';
       string += '</div>';
       string_pr_country += ('<a class="dropdown-item option-control-text" href="#">' +  countries[i] + '</a> ')
   }
   $("#dropdown_menu_pr_country").html(string_pr_country);
   $("#checkBoxContainer").html(string);
+  enableColorPallete();
 }
 
 function colorChanger(idx){

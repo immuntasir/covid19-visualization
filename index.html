@@ -29,6 +29,7 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <link  href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
+    <link rel="stylesheet" href="./la-color-picker-master/la_color_picker.css">
 
 
     <!-- jQuery library -->
@@ -46,6 +47,7 @@
 
 
 
+
     <!-- Include d3.js first -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css" rel="stylesheet" />
@@ -56,6 +58,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+    <script src="./la-color-picker-master/custom_color_picker.js"></script>
 
 </head>
 
@@ -213,6 +216,17 @@
           </div>
         </div>
     </div>
+
+
+    <div>
+        <p>Test</p>
+         <div>
+           <i class="fa fa-square colorpalettediv" aria-hidden="true" id="colorPicker"></i>
+           <div class="palette" id="colorPalette"></div>
+         </div><br>
+    </div>
+
+
     <div class = "footer" >
       <p class="footer-text col-md-12" >
           <span><strong>Disclaimer</strong>: We collect the data from the <a href="https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data">CSSE COVID-19 Dataset</a> provided by Johns Hopkins University. We do not verify or modify the data in any form. </span>
@@ -234,4 +248,8 @@
     <script src="./js/GraphMakerFunctions.js?version="+random_number></script>
     <script src="./js/DynamicActions.js?version="+random_number></script>
     <script src="./js/main.js?version="+random_number></script>
+    <script>
+        customColorPicker('colorPicker','colorPalette');
+    </script>
+
 </body>
