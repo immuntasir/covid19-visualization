@@ -45,8 +45,8 @@ function csvJSON(csv){
     let country_data = getCountryRow(country_name, 'cases');
     let country_data_keys = Object.keys(country_data);
     let data_by_date_keys = country_data_keys.slice(4, );
-    
-    for (let i=init_day; i<data_by_date_keys.length; i++) {
+    init_day = -1;
+    for (let i=Math.max(init_day, 0); i<data_by_date_keys.length; i++) {
         if (country_data[data_by_date_keys[i]] >= min_case_count && i>=init_day) {
             init_day = i;
             break;
@@ -63,7 +63,9 @@ function csvJSON(csv){
   function getCountryData (country_name, min_case_count = 10, init_day = 0, max_day = 20, content='cases', aggregation_over='cumulative', aggregation_type='none') {
     
     init_day = getStartDate(country_name, min_case_count, init_day, max_day, content='cases');
-    
+    if (init_day == -1) {
+        return [];
+    }
 
     let country_data = getCountryRow(country_name, content);
     let country_data_keys = Object.keys(country_data);
@@ -136,7 +138,10 @@ function csvJSON(csv){
     pr_data = getCountryData(pr_country_name, min_case_count, init_day, max_day, content, aggregation_over, aggregation_type);
     data_columns = [pr_data];
     for (let i=0; i<countries.length; i++)  {
-        data_columns.push(getCountryData(countries[i], min_case_count, init_day, max_day, content, aggregation_over, aggregation_type))
+        cur_data = getCountryData(countries[i], min_case_count, init_day, max_day, content, aggregation_over, aggregation_type);
+        if (cur_data.length > 1) {
+            data_columns.push(cur_data);
+        }
     }
 
     if (scale == 'logarithmic') {
