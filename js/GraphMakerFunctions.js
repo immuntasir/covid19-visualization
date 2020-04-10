@@ -23,7 +23,26 @@ function csvJSON(csv){
     //return JSON.stringify(result); //JSON
   }
 
+  function returnDateObject(string){
+    string = string.toString();
+    let str = string.split('/');
+    return new Date(parseInt(str[2]),parseInt(str[0])-1,parseInt(str[1]));
+  }
+
   function isPressBriefingDataUpdated(country_data) {
+    let last_date = Object.keys(country_data).slice(-1,);
+    last_date = returnDateObject(last_date);
+    let current_date = returnDateObject(bd_press_briefing_data['Date']);
+    try{
+      let d1 = current_date-last_date;
+      if(d1 == 86400000) {
+        return true;
+      }
+      return false;
+    }
+    catch(error){
+      return false;
+    }
     return false;
   }
 
@@ -42,7 +61,7 @@ function csvJSON(csv){
             return x['Country/Region'] == country_name;
         })[0];
       }
-      
+
       if (country_name == 'Bangladesh') {
           if (isPressBriefingDataUpdated(country_data)) {
               country_data[bd_press_briefing_data['Date']] = bd_press_briefing_data[content];
@@ -71,7 +90,7 @@ function csvJSON(csv){
   }
 
   function getCountryData (country_name, min_case_count = 10, init_day = 0, max_day = 20, content='cases', aggregation_over='cumulative', aggregation_type='none') {
-    
+
     init_day = getStartDate(country_name, min_case_count, init_day, max_day, content='cases');
     if (init_day == -1) {
         return [];
@@ -83,17 +102,17 @@ function csvJSON(csv){
     is_relevant = false;
 
     var ret_values = [];
-    
-    
+
+
     country_current_init_dates[country_name] = [];
-    
+
     for (let i=init_day; i<data_by_date_keys.length; i++) {
         if (i > init_day + max_day) {
             break;
         }
         value = 0
         country_current_init_dates[country_name].push(dateConverter(data_by_date_keys[i]));
-        
+
         if (aggregation_over == 'cumulative') {
             value = parseInt(country_data[data_by_date_keys[i]]);
         }
@@ -113,7 +132,7 @@ function csvJSON(csv){
         let seven_days_moving_sum = 0;
         let three_days_moving_n = 0;
         let seven_days_moving_n = 0;
-        
+
         ret_values_new = []
         for (let i=0; i<ret_values.length; i++) {
             value = 0;
@@ -121,7 +140,7 @@ function csvJSON(csv){
                 three_days_moving_n += 1;
                 three_days_moving_sum += ret_values[i];
                 if (three_days_moving_n > 3) {
-                    three_days_moving_n = 3; 
+                    three_days_moving_n = 3;
                     three_days_moving_sum -= ret_values[i-3];
                 }
                 value = Math.round(three_days_moving_sum / three_days_moving_n);
@@ -130,7 +149,7 @@ function csvJSON(csv){
                 seven_days_moving_n += 1;
                 seven_days_moving_sum += ret_values[i];
                 if (seven_days_moving_n > 7) {
-                    seven_days_moving_n = 7; 
+                    seven_days_moving_n = 7;
                     seven_days_moving_sum -= ret_values[i-7];
                 }
                 value = Math.round(seven_days_moving_sum / seven_days_moving_n);
