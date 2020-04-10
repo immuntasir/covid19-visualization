@@ -198,8 +198,12 @@ function addOnClickFunctions() {
 
 
 function enablingToolip(){
-   $("body").tooltip({ selector: '[data-toggle=tooltip]' });
-   $('.my-tooltip').tooltip();
+   $("body").tooltip({ 
+    trigger : 'hover',
+    selector: '[data-toggle=tooltip]' });
+   $('.my-tooltip').tooltip({
+    trigger : 'hover'
+   });
 
    $("slider-hover").hover(function(){
      $(this).tooltip('show');
@@ -217,7 +221,7 @@ function MakeDescription(){
   $('#content-list-span').text(content_name_map[graph_content]);
   $('#chart-type-span').text(capitalizeFirstLetter(chart_type));
   
-  let min_case_count=parseInt($('#slider12').val());
+  let min_case_count=parseInt($('#min_case_count_value').text());
   let minimum_cases_text = '';
   if (min_case_count == 1) {
     minimum_cases_text = min_case_count + ' case was';
