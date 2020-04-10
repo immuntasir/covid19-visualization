@@ -86,6 +86,9 @@ function colorChanger(idx){
 }
 
 function graphContentOptionSelection(idx,id){
+  if (content_actual_name[idx] == graph_content) {
+    return;
+  }
   idx=parseInt(idx);
   graph_content =  content_actual_name[idx];
   colorChanger(idx);
@@ -110,12 +113,37 @@ function changeColorChartTypeButton(id){
 }
 
 function selectChartType(idx,value){
+  if (value==chart_type) {
+    return;
+  }
   idx=parseInt(idx);
   chart_type = value;
   let id=chart_type_ids[idx];
   changeColorChartTypeButton(id);
   initTheVariablesAndGenerateGraph();
 
+}
+
+function changeColorAggregationOver(aggregation_over) {
+  for (let i=0; i<aggregation_over_options.length; i++) {
+    if($('#aggregation_over_'+aggregation_over_options[i]).hasClass('btn-secondary') ==true){
+        $('#aggregation_over_'+aggregation_over_options[i]).removeClass('btn-secondary');
+        $('#aggregation_over_'+aggregation_over_options[i]).addClass('btn-light');
+    }
+  } 
+  if ($('#aggregation_over_'+aggregation_over).hasClass('btn-light') == true) {
+    $('#aggregation_over_'+aggregation_over).removeClass('btn-light');
+    $('#aggregation_over_'+aggregation_over).addClass('btn-secondary');
+  }
+};
+
+function selectAggregationOver(aggregation_over){
+  if (aggregation_over == chart_aggregation_over) {
+    return;
+  }
+  chart_aggregation_over = aggregation_over;
+  changeColorAggregationOver(aggregation_over);
+  initTheVariablesAndGenerateGraph();
 }
 
 function showGraphOptions(){

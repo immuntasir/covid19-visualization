@@ -98,20 +98,14 @@
                             </div>
                       </div>
                     </div>
-                    <div >
-                        <div class="option-control">
-                            <div class="dropdown">
-                                <button class="btn btn-secondary btn-sm dropdown-toggle my-tooltip" type="button" id="dropdownMenuButton" data-toggle="dropdown" rel="tooltip" data-placement="top" title="" aria-haspopup="true" aria-expanded="false">
-                                    <span id="selected-aggregation-over">Total Cases</span><span class="caret"></span></a>
-                                </button>
-                                <div class="dropdown-menu" id="dropdown-menu-aggregation-over" aria-labelledby="dropdownMenuButton">
-                                  <a class="dropdown-item option-control-text" href="#">Total Cases</a>
-                                  <a class="dropdown-item option-control-text" href="#">New Cases</a>
-                                </div>
+                    <div>
+                      <div class="option-control">
+                          <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                              <button type="button" id="aggregation_over_cumulative" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Visualize Total Number" onclick="selectAggregationOver('cumulative')">Total</button>
+                              <button type="button" id="aggregation_over_new_cases" class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Visualize Daily Increase" onclick="selectAggregationOver('new_cases')">Daily</button>
                             </div>
-                        </div>
+                      </div>
                     </div>
-
                     <div >
                       <div class="option-control">
                           <div class="dropdown">
