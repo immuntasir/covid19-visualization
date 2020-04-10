@@ -115,9 +115,9 @@ function showGraphOptions(){
 
 function initTheVariablesAndGenerateGraph(){
   let countries=getTheCheckedCountries();
-  let min_case_count=parseInt($('#slider12').val());
+  let min_case_count=parseInt($('#valueSpan2').val());
   //let init_day = parseInt($('#slider11').val());
-  let max_day=parseInt($('#slider13').val());
+  let max_day=parseInt($('#valueSpan3').val());
   let init_day=0;
   rerenderCountryOptions();
   showGraph(chart_primary_country, countries, min_case_count, init_day, max_day, content=graph_content,
@@ -198,7 +198,7 @@ function addOnClickFunctions() {
 
 
 function enablingToolip(){
-   $("body").tooltip({ 
+   $("body").tooltip({
     trigger : 'hover',
     selector: '[data-toggle=tooltip]' });
    $('.my-tooltip').tooltip({
@@ -220,7 +220,7 @@ function capitalizeFirstLetter(string) {
 function MakeDescription(){
   $('#content-list-span').text(content_name_map[graph_content]);
   $('#chart-type-span').text(capitalizeFirstLetter(chart_type));
-  
+
   let min_case_count=parseInt($('#min_case_count_value').text());
   let minimum_cases_text = '';
   if (min_case_count == 1) {
@@ -239,7 +239,7 @@ function MakeDescription(){
   }
   $('#aggregation-over-span').text(chart_aggregation_over_text);
 
-  
+
   let chart_aggregation_type_text = '';
   if (chart_aggregation_type == '3_day_moving_average') {
     chart_aggregation_type_text = '3-day moving average';
