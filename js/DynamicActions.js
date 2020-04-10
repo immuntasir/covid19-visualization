@@ -173,13 +173,13 @@ function countrySelector(){
 $('#dropdown-menu-aggregation-over a').click(function(){
     chart_aggregation_over = chart_aggregation_over_variables[$(this).text()];
     $('#selected-aggregation-over').text($(this).text());
-    InitTheVariablesAndGenerateGraph();
+    initTheVariablesAndGenerateGraph();
   });
 
 $('#dropdown-menu-aggregation-type a').click(function(){
     chart_aggregation_type = chart_aggregation_type_variables[$(this).text()];
     $('#selected-aggregation-type').text($(this).text());
-    InitTheVariablesAndGenerateGraph();
+    initTheVariablesAndGenerateGraph();
   });
 
 function addOnClickFunctions() {
