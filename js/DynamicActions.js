@@ -17,7 +17,7 @@ function rerenderCountryOptions(){
     else {
       string += '<input type="checkbox" class="custom-control-input"  id="country-name-'+value+'" name="'+value+'" value="'+value+'" style="vertical-align:middle;" checked>';
     }
-    string += '<label class="custom-control-label" style="font-size:1.1vw;" for="country-name-'+value+'" ><span>'+countries[i]+'</span></label>';
+    string += '<label class="custom-control-label country-name-text"  for="country-name-'+value+'" ><span>'+countries[i]+'</span></label>';
     string += '</div>';
     string_pr_country += ('<a class="dropdown-item option-control-text" href="#">' +  countries[i] + '</a> ');
   }
@@ -41,7 +41,7 @@ function showCountryOptions(){
       }
       string = string + '<div class="custom-control custom-checkbox" id="country-option-div-'+value+'">'; //form-check
       string += '<input type="checkbox" class="custom-control-input" id="country-name-'+value+'" name="'+value+'" value="'+value+'" style="vertical-align:middle;">'; //form-check-input
-      string += '<label class="custom-control-label" style="font-size:1.1vw;" for="country-name-'+value+'" ><span>'+countries[i]+'</span></label>'; //form-check-label
+      string += '<label class="custom-control-label country-name-text"  for="country-name-'+value+'" ><span>'+countries[i]+'</span></label>'; //form-check-label
 
       string += '</div>';
       string_pr_country += ('<a class="dropdown-item option-control-text" href="#">' +  countries[i] + '</a> ')
