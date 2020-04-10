@@ -34,6 +34,7 @@ function showCountryOptions(){
   let string_pr_country = '';
   for(let i=0;i<countries.length;i++){
       value = countries[i];
+
       value = value.split(' ').join("_");
       if(value == chart_primary_country){
          continue;
@@ -41,6 +42,7 @@ function showCountryOptions(){
       string = string + '<div class="custom-control custom-checkbox" id="country-option-div-'+value+'">'; //form-check
       string += '<input type="checkbox" class="custom-control-input" id="country-name-'+value+'" name="'+value+'" value="'+value+'" style="vertical-align:middle;">'; //form-check-input
       string += '<label class="custom-control-label" style="font-size:1.1vw;" for="country-name-'+value+'" ><span>'+countries[i]+'</span></label>'; //form-check-label
+
       string += '</div>';
       string_pr_country += ('<a class="dropdown-item option-control-text" href="#">' +  countries[i] + '</a> ')
   }
@@ -123,15 +125,6 @@ function makeFirstLetterCapital(value){
   return result;
 }
 
-function returnTheMainChartAggregation(key_value){
-  let keys=Object.keys(chart_aggregation_types);
-  for(let i=0;i<keys.length;i++){
-    let key=keys[i];
-    if(chart_aggregation_types[key] == key_value){
-      return key;
-    }
-  }
-}
 
 function initTheVariablesAndGenerateGraph(){
   let countries=getTheCheckedCountries();
@@ -140,9 +133,14 @@ function initTheVariablesAndGenerateGraph(){
   let max_day=parseInt($('#slider13').val());
 
   let init_day=0;
+
   showGraph(chart_primary_country, countries, min_case_count, init_day, max_day, content=graph_content, aggregation=chart_aggregation, normalization='none', scale=chart_type);
   rerenderCountryOptions();
-  let list=[makeFirstLetterCapital(graph_content),returnTheMainChartAggregation(chart_aggregation),min_case_count,max_day,makeFirstLetterCapital(chart_type)];
+
+
+  showGraph(chart_primary_country, countries, min_case_count, init_day, max_day, content=graph_content,
+    aggregation_over = chart_aggregation_over, aggregation_type=chart_aggregation_type, normalization='none', scale=chart_type);
+  let list=[MakeFirstLetterCapital(graph_content),chart_aggregation_over,min_case_count,max_day,MakeFirstLetterCapital(chart_type)];
   MakeDescription(list);
 
 }
@@ -192,11 +190,16 @@ function countrySelector(){
     initTheVariablesAndGenerateGraph();
   });
 }
+$('#dropdown-menu-aggregation-over a').click(function(){
+    chart_aggregation_over = chart_aggregation_over_variables[$(this).text()];
+    $('#selected-aggregation-over').text($(this).text());
+    InitTheVariablesAndGenerateGraph();
+  });
 
-$('#dropdown-menu-aggregation a').click(function(){
-    chart_aggregation = chart_aggregation_types[$(this).text()];
-    $('#selected-aggregation').text($(this).text());
-    initTheVariablesAndGenerateGraph();
+$('#dropdown-menu-aggregation-type a').click(function(){
+    chart_aggregation_type = chart_aggregation_type_variables[$(this).text()];
+    $('#selected-aggregation-type').text($(this).text());
+    InitTheVariablesAndGenerateGraph();
   });
 
 function addOnClickFunctions() {

@@ -102,7 +102,6 @@
       margin-bottom: 60px;
     }
 
-
     .checkbox-lg .custom-control-label::before,
     .checkbox-lg .custom-control-label::after {
       top: .8rem;
@@ -126,4 +125,13 @@
     .checkbox-xl .custom-control-label {
       padding-top: 23px;
       padding-left: 10px;
+    }
+    #selected-aggregation-over {
+      width: 70px;
+    }
+
+    option-control-slider {
+      width: 180px;
+      padding-left: 10px;
+      padding-right: 10px;
     }
