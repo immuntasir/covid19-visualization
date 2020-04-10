@@ -37,13 +37,12 @@ function bringBangladeshLatestData(){
               bd_press_briefing_data['Total'] = parseInt(data[0][1]);
               bd_press_briefing_data['Death'] =  parseInt(data[0][2]);
               bd_press_briefing_data['Recovered'] =  parseInt(data[0][3]);
-              
+
           }
       });
 }
 
 function initialize(){
-  console.log("data fetched");
   showInitialGraph();
   bringBangladeshLatestData();
 }
@@ -51,6 +50,7 @@ function initialize(){
 $(document).ready(function(){
     countries_to_compare.sort();
     genericSlider('valueSpan2','slider12');
+    initMinimumCaseSlider('valueSpan2');
     genericSlider('valueSpan3','slider13');
     showCountryOptions();
     countrySelector();
