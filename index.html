@@ -21,7 +21,6 @@
 
 
     <!-- Latest compiled JavaScript -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js" integrity="sha384-3ziFidFTgxJXHMDttyPJKDuTlmxJlwbSkojudK/CkRqKDOmeSbN6KLrGdrBQnT2n" crossorigin="anonymous"></script>
     <link rel="stylesheet" type="text/css" href="./css/main.css">
@@ -63,24 +62,24 @@
                     <div >
                         <div class="option-control">
                             <div id="content-button" class="btn-group btn-group-sm " role="group" aria-label="Basic example">
-                                <button type="button" id="content-cases" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top" onClick="graphContentOptionSelection('0','content-cases')" >Cases</button>
-                                <button type="button" id="content-death" class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Tooltip on top" onClick="graphContentOptionSelection('1','content-death')"  >Death</button>
-                                <button type="button" id="content-recovery" class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Tooltip on top" onClick="graphContentOptionSelection('2','content-recovery')" >Recovered</button>
+                                <button type="button" id="content-cases" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Visualize Confirmed Cases" onClick="graphContentOptionSelection('0','content-cases')" >Cases</button>
+                                <button type="button" id="content-death" class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Visualize Reported Deaths" onClick="graphContentOptionSelection('1','content-death')"  >Death</button>
+                                <button type="button" id="content-recovery" class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Visualize Recovered Cases" onClick="graphContentOptionSelection('2','content-recovery')" >Recovered</button>
                               </div>
                         </div>
                     </div>
                     <div>
                       <div class="option-control">
                           <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                              <button type="button" id="scale-linear" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Tooltip on top" onclick="selectChartType('0','linear')">Linear</button>
-                              <button type="button" id="scale-logarithmic" class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Tooltip on top" onclick="selectChartType('1','logarithmic')">Logarithmic</button>
+                              <button type="button" id="scale-linear" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Select Linear Scale on Y-Axis" onclick="selectChartType('0','linear')">Linear</button>
+                              <button type="button" id="scale-logarithmic" class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Select Log Scale on Y-Axis" onclick="selectChartType('1','logarithmic')">Logarithmic</button>
                             </div>
                       </div>
                     </div>
                     <div >
                         <div class="option-control">
                             <div class="dropdown">
-                                <button class="btn btn-secondary btn-sm dropdown-toggle my-tooltip" type="button" id="dropdownMenuButton" data-toggle="dropdown" rel="tooltip" data-placement="top" title="Tooltip on top" aria-haspopup="true" aria-expanded="false">
+                                <button class="btn btn-secondary btn-sm dropdown-toggle my-tooltip" type="button" id="dropdownMenuButton" data-toggle="dropdown" rel="tooltip" data-placement="top" title="" aria-haspopup="true" aria-expanded="false">
                                     <span id="selected-aggregation-over">Total Cases</span><span class="caret"></span></a>
                                 </button>
                                 <div class="dropdown-menu" id="dropdown-menu-aggregation-over" aria-labelledby="dropdownMenuButton">
@@ -94,7 +93,7 @@
                     <div >
                       <div class="option-control">
                           <div class="dropdown">
-                              <button class="btn btn-secondary btn-sm dropdown-toggle my-tooltip" type="button" id="dropdownMenuButton" data-toggle="dropdown" rel="tooltip" data-placement="top" title="Tooltip on top" aria-haspopup="true" aria-expanded="false">
+                              <button class="btn btn-secondary btn-sm dropdown-toggle my-tooltip" type="button" id="dropdownMenuButton" data-toggle="dropdown" rel="tooltip" data-placement="top" title="Select a method of smoothing the data points" aria-haspopup="true" aria-expanded="false">
                                   <span id="selected-aggregation-type">None</span><span class="caret"></span></a>
                               </button>
                               <div class="dropdown-menu" id="dropdown-menu-aggregation-type" aria-labelledby="dropdownMenuButton">
@@ -110,15 +109,15 @@
                 <div class="row option-control-row">
                     <div class="option-control">
                       <div class="option-control justify-content-center my slider-hover" >
-                        <span class="option-title-sm" style="font-size:14px;">Minimum cases:</span><span class="font-weight-bold text-primary ml-2 mt-1 valueSpan2" style="font-size:14px;"></span><i data-toggle="tooltip" data-placement="top" title="Tooltip on top" style="margin-left:10px;" class="fa fa-question-circle"></i>
+                        <span class="option-title-sm" style="font-size:14px;">Minimum cases:</span><span class="font-weight-bold text-primary ml-2 mt-1 valueSpan2" style="font-size:14px;" id="min_case_count_value"></span><i data-toggle="tooltip" data-placement="top" title="Select the number of minimum total cases, from which day the visualization begins" style="margin-left:10px;" class="fa fa-question-circle"></i>
 
                         <form class="range-field w-75">
-                            <input id="slider12" class="border-0"  type="range" min="1" max="100"  step="5" value="10"/>
+                            <input id="slider12" class="border-0"  type="range" min="1" max="101"  step="5" value="10"/>
                         </form>
-                      </div>  
+                      </div>
                     </div><div class="option-control">
                       <div class="option-control justify-content-center my slider-hover"  >
-                        <span class="option-title-sm" style="font-size:14px;">Maximum days:</span><span class="font-weight-bold text-primary ml-2 mt-1 valueSpan3" style="font-size:14px;"></span><i  data-toggle="tooltip" data-placement="top" title="Tooltip on top" style="margin-left:10px;" class="fa fa-question-circle"></i>
+                        <span class="option-title-sm" style="font-size:14px;">Maximum days:</span><span class="font-weight-bold text-primary ml-2 mt-1 valueSpan3" style="font-size:14px;"></span><i  data-toggle="tooltip" data-placement="top" title="Select the maximum number of days to show on the X-Axis" style="margin-left:10px;" class="fa fa-question-circle"></i>
                         <form class="range-field w-75">
                             <input id="slider13" class="border-0" type="range" min="10" max="100" value="30" step="5" />
                         </form>
@@ -131,6 +130,16 @@
                     </div>
                 </div>
 
+
+                <div class = "row">
+                  <p class="chart-description">
+                    This chart visualizes the <span id="content-list-span"></span> using the <span id="chart-type-span"></span> scale.
+                    Each day refers to the day in since at least <span id="minimum-case-span"></span> detected in each country. The corresponding date in each country can be seen by hovering over the data points in the chart.
+                    The data points in each day refer to <span id="aggregation-over-span"></span>in each country.
+                    <span id="aggregation-type-div" style="font-weight:normal;">This chart uses a <span id="aggregation-type-span" style="font-weight:bold;"></span> to smooth the data points.</span>
+                  </p>
+
+                </div>
                 <!--  Here To Make State -->
                 <!----
                 <div class="row">
@@ -149,10 +158,10 @@
                 <div class="option-title">Primary Country</div>
                 <div class="option-control">
                   <div class="dropdown">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle my-tooltip" type="button" id="dropdownMenuButton" data-toggle="dropdown" data-placement="right" title="Tooltip on top" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle my-tooltip" type="button" id="dropdownMenuButton" data-toggle="dropdown" data-placement="right" title="Select Primary Country" aria-haspopup="true" aria-expanded="false">
                         <span id="selected_pr_country">Bangladesh</span><span class="caret"></span></a>
                     </button>
-                    <div class="dropdown-menu" id="dropdown_menu_pr_country" aria-labelledby="dropdownMenuButton">
+                    <div class="dropdown-menu" id="dropdown_menu_pr_country" aria-labelledby="dropdownMenuButton" style="overflow-y: auto; height:400px;">
 
                     </div>
                   </div>
@@ -160,7 +169,7 @@
 
                 <div class="option-control">
                   <div class="dropdown">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle my-tooltip" type="button" id="dropdownMenuButton" data-toggle="dropdown"  data-placement="right" title="Tooltip on bottom" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle my-tooltip" type="button" id="dropdownMenuButton" data-toggle="dropdown"  data-placement="right" title="Select Chart Type for Primary Country" aria-haspopup="true" aria-expanded="false">
                         <span id="selected_pr_country_chart_type">Bar</span><span class="caret"></span></a>
                     </button>
                     <div class="dropdown-menu" id="dropdown_menu_pr_country_chart_type" aria-labelledby="dropdownMenuButton">
@@ -176,7 +185,7 @@
                 <div class="option-title">Countries to Compare</div>
                 <div class="option-control-div">
                     <form >
-                      <div id="checkBoxContainer" class="country-checkbox">
+                      <div id="checkBoxContainer" class="country-checkbox" style="overflow-y: auto; height:400px;">
                       </div>
                       </form>
                 </div>
