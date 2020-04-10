@@ -122,7 +122,7 @@ function initTheVariablesAndGenerateGraph(){
   rerenderCountryOptions();
   showGraph(chart_primary_country, countries, min_case_count, init_day, max_day, content=graph_content,
     aggregation_over = chart_aggregation_over, aggregation_type=chart_aggregation_type, normalization='none', scale=chart_type);
-  MakeDescription(list);
+  MakeDescription();
 }
 
 function makeFiveMultipleOrOne(value){
