@@ -50,7 +50,7 @@
   }
 
   .option-title{
-    font-size: 12px;
+    font-size: 20px;
   }
 
   .option-title-sm{
@@ -100,4 +100,42 @@
     body {
       /* Margin bottom by footer height */
       margin-bottom: 60px;
+    }
+
+    .checkbox-lg .custom-control-label::before,
+    .checkbox-lg .custom-control-label::after {
+      top: .8rem;
+      width: 1.55rem;
+      height: 1.55rem;
+    }
+
+    .checkbox-lg .custom-control-label {
+      padding-top: 13px;
+      padding-left: 6px;
+    }
+
+
+    .checkbox-xl .custom-control-label::before,
+    .checkbox-xl .custom-control-label::after {
+      top: 1.2rem;
+      width: 1.85rem;
+      height: 1.85rem;
+    }
+
+    .checkbox-xl .custom-control-label {
+      padding-top: 23px;
+      padding-left: 10px;
+    }
+    #selected-aggregation-over {
+      width: 70px;
+    }
+
+    option-control-slider {
+      width: 180px;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+
+    .chart-description span {
+      font-weight: bold;
     }
