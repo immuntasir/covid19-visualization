@@ -30,3 +30,9 @@ var chart_type_comparing_countries = 'line';
 var country_current_init_dates = Object();
 
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+var content_name_map = {
+    'cases': 'Confirmed Cases',
+    'death': 'Reported Deaths',
+    'recovered': 'Total Recovered'
+}
