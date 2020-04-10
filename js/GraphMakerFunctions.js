@@ -26,7 +26,11 @@ function csvJSON(csv){
   function returnDateObject(string){
     string = string.toString();
     let str = string.split('/');
-    return new Date(parseInt(str[2]),parseInt(str[0])-1,parseInt(str[1]));
+    let year = parseInt(str[2]);
+    if(year<2020){
+      year = 2020;
+    }
+    return new Date(year,parseInt(str[0])-1,parseInt(str[1]));
   }
 
   function isPressBriefingDataUpdated(country_data) {
