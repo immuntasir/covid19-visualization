@@ -31,9 +31,9 @@ var chart_type_comparing_countries = 'line';
 
 var bd_press_briefing_data = Object()
 bd_press_briefing_data['Date'] = ""
-bd_press_briefing_data['Total'] = ""
-bd_press_briefing_data['Death'] = ""
-bd_press_briefing_data['Recovered'] = ""
+bd_press_briefing_data['cases'] = ""
+bd_press_briefing_data['death'] = ""
+bd_press_briefing_data['recovered'] = ""
 
 var country_current_init_dates = Object();
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
