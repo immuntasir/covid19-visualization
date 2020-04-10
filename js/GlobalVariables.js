@@ -41,5 +41,5 @@ var months = ["January", "February", "March", "April", "May", "June", "July", "A
 var content_name_map = {
     'cases': 'Confirmed Cases',
     'death': 'Reported Deaths',
-    'recovered': 'Total Recovered'
+    'recovered': 'Recovered Cases'
 }
