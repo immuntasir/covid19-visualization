@@ -23,6 +23,10 @@ function csvJSON(csv){
     //return JSON.stringify(result); //JSON
   }
 
+  function isPressBriefingDataUpdated(country_data) {
+    return false;
+  }
+
   function getCountryRow(country_name, content='cases') {
       var country_rows;
       country_rows = allCountriesData[content];
@@ -37,6 +41,12 @@ function csvJSON(csv){
         country_data = country_rows.filter(function(x){
             return x['Country/Region'] == country_name;
         })[0];
+      }
+
+      if (country_name == 'Bangladesh') {
+          if (isPressBriefingDataUpdated(country_data) {
+              country_data.push(bd_press_briefing_data[content]);
+          }
       }
       return country_data;
   }
