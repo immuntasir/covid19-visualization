@@ -177,6 +177,11 @@ function csvJSON(csv){
         }
     }
 
+    color_list = Object();
+    for (let i=0; i<data_columns.length; i++) {
+        color_list[data_columns[i][0]] = country_objects[data_columns[i][0]]['color'];
+    }
+
     if (scale == 'logarithmic') {
         for (let i=0; i<data_columns.length; i++) {
             for (let j=1; j<data_columns[i].length; j++) {
@@ -186,14 +191,17 @@ function csvJSON(csv){
             }
         }
     }
-
-    var chart = c3.generate({
+    if (chart != undefined) {
+        chart = chart.destroy();
+    }
+    chart = c3.generate({
         data: {
             columns: data_columns,
             type: chart_type_comparing_countries,
             types: {
                 [pr_country_name]: chart_type_primary_country,
-            }
+            },
+            colors: color_list
         },
         size: {
             height: 500,
