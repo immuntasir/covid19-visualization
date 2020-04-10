@@ -28,7 +28,7 @@ function csvJSON(csv){
       country_rows = allCountriesData[content];
 
       var country_data;
-      if (country_name == 'France') {
+      if (country_name == 'France' || country_name == "United Kingdom" || country_name == "Denmark") {
         country_data = country_rows.filter(function(x) {
             return x['Country/Region'] == 'France' && x['Province/State'] == '';
         })[0];

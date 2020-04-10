@@ -1,7 +1,9 @@
 var allCountriesData = Object();
 
 var countries_to_compare = ["Bangladesh", "France", "Germany", "Greece", "India", "Italy", "Malaysia", "Mexico", "Pakistan", "Saudi Arabia", "Singapore", "Spain", "US",
-                            "Iran", "Turkey"];
+                            "Iran", "Turkey", "United Kingdom", "United Arab Emirates", "Sri Lanka", "Maldives", "Kuwait", "Japan", "Iraq", "Indonesia",
+                        "Finland", "Sweden", "Norway", "Denmark", "Thailand", "Nepal", "Bhutan", "Afghanistan", "Korea, South", "Kuwait", "Oman", "Qatar",
+                    "South Africa", "Egypt"];
 
 var content_list=['Cases',"Death","Recovered"];
 var content_actual_name=['cases','death','recovered'];
