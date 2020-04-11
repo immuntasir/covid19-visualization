@@ -95,3 +95,4 @@ var content_name_map = {
 
 
 var chart;
+var y_tick_scales = [1, 2, 5, 10];

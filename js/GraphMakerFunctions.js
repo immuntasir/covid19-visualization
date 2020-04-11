@@ -76,7 +76,7 @@ function csvJSON(csv){
             country_data[bd_press_briefing_data['Date']] = bd_press_briefing_data[content];
         }
     }
-    if (country_data == undefined) {
+    if (!country_data) {
         console.log(country_name);
     }
     return country_data;
@@ -175,6 +175,54 @@ function csvJSON(csv){
     return ret_values;
   }
 
+  function getYTickValues (min_y_val, max_y_val) {
+    let y_tick_values = [];
+    loop_break = false;
+    for (let i=0; ; i++) {
+        if (loop_break){
+            break;
+        }
+        for (let j=0; j<y_tick_scales.length; j++) {
+            if (Math.pow(10, i)*y_tick_scales[j] < min_y_val && Math.pow(10, i)*y_tick_scales[j] < max_y_val) {
+                continue;
+            } 
+            y_tick_values.push(Math.log10(Math.pow(10, i)*y_tick_scales[j]) / Math.LN10);
+            if (Math.pow(10, i)*y_tick_scales[j] > max_y_val) {
+                loop_break = true;
+                break;
+            } 
+        }
+    }
+    return y_tick_values;
+  }
+
+  function yAxisNumToLog (in_number) {
+    return Math.log10(in_number) / Math.LN10;
+  }
+
+  function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+  }
+
+  function getDoublesEveryNDays (n, num_points, min_value, max_value) {
+    let cur_value = min_value;
+    ret_values = ['Doubles every ' + n + ' days'];
+    ret_values.push(yAxisNumToLog(cur_value));
+    for (let i=n-1; i<num_points; i+=n) {
+        cur_value *= 2;
+        if (cur_value <= max_value) {
+            for (let j=1; j<n; j++) {
+                ret_values.push(null);
+            }
+            ret_values.push(yAxisNumToLog(cur_value));
+        }
+        else {
+            break;
+        }
+    }    
+    return ret_values;
+  }
+
   function showGraph(pr_country_name='Bangladesh', countries=[], min_case_count = 10, init_day = 0, max_day = 30, content='cases', aggregation_over='cumulative', aggregation_type='none', normalization='none', scale='linear') {
     pr_data = getCountryData(pr_country_name, min_case_count, init_day, max_day, content, aggregation_over, aggregation_type);
     data_columns = [pr_data];
@@ -185,19 +233,45 @@ function csvJSON(csv){
         }
     }
 
-    color_list = Object();
+    let color_list = Object();
+    let y_tick_values;
+    let y_axis_min_value;
+    
     for (let i=0; i<data_columns.length; i++) {
         color_list[data_columns[i][0]] = country_objects[data_columns[i][0]]['color'];
-    }
+    } 
+
+    let max_y_val = 0;
+    let min_y_val=min_case_count;
+    let hidden_list;
 
     if (scale == 'logarithmic') {
+        y_axis_min_value = 0;
         for (let i=0; i<data_columns.length; i++) {
             for (let j=1; j<data_columns[i].length; j++) {
+                if (data_columns[i][j] > max_y_val) {
+                    max_y_val = data_columns[i][j];
+                }
+                if (data_columns[i][j] < min_y_val) {
+                    min_y_val = data_columns[i][j];
+                }
                 if (data_columns[i][j] != 0) {
-                    data_columns[i][j] = Math.log10(data_columns[i][j]) / Math.LN10;;
+                    data_columns[i][j] = yAxisNumToLog (data_columns[i][j]);
                 }
             }
         }
+        hidden_list = []
+        data_columns.push(getDoublesEveryNDays(2, max_day, min_y_val, max_y_val));
+        color_list[data_columns.slice(-1)[0][0]] = '#000000';
+        hidden_list.push(data_columns.slice(-1)[0][0])
+        data_columns.push(getDoublesEveryNDays(3, max_day, min_y_val, max_y_val));
+        color_list[data_columns.slice(-1)[0][0]] = '#000000';
+        hidden_list.push(data_columns.slice(-1)[0][0])
+        data_columns.push(getDoublesEveryNDays(7, max_day, min_y_val, max_y_val));
+        color_list[data_columns.slice(-1)[0][0]] = '#000000';
+        hidden_list.push(data_columns.slice(-1)[0][0])
+        y_tick_values = getYTickValues(min_y_val, max_y_val);
+        y_axis_min_value = y_tick_values[0];       
     }
     if (chart != undefined) {
         chart = chart.destroy();
@@ -209,7 +283,8 @@ function csvJSON(csv){
             types: {
                 [pr_country_name]: chart_type_primary_country,
             },
-            colors: color_list
+            colors: color_list,
+            hide: hidden_list,
         },
         size: {
             height: 500,
@@ -217,25 +292,33 @@ function csvJSON(csv){
         tooltip: {
             format: {
                 name: function (name, ratio, id, index) {
+                    if (name.startsWith('Doubles')) {
+                        return name;
+                    }
                     return name + ' (' + country_current_init_dates[name][index] + ')';
                 }
             }
         },
+        line: {
+            connectNull: true
+        },
         axis : {
             y : {
                 show:true,
+                min: y_axis_min_value,
                 tick: {
-                   format: function (d) {
+                    values: y_tick_values,
+                    format: function (d) {
                         if (scale == 'logarithmic') {
                             if (d!=0) {
-                                return Math.pow(10,d * Math.LN10).toFixed(0)
+                                return formatNumber(Math.pow(10,d * Math.LN10).toFixed(0));
                             }
                             else {
-                                return d
+                                return d;
                             }
                         }
                         else {
-                            return d;
+                            return formatNumber(d);
                         }
                     }
                 }
