@@ -51,27 +51,35 @@ function csvJSON(csv){
   }
 
   function getCountryRow(country_name, content='cases') {
-      var country_rows;
-      country_rows = allCountriesData[content];
+    var country_rows;
+    country_rows = allCountriesData[content];
 
-      var country_data;
-      if (country_name == 'France' || country_name == "United Kingdom" || country_name == "Denmark") {
+    var country_data;
+    if (country_name == 'South Korea') {
+        country_data = country_rows.filter(function(x){
+            if (country_name == 'South Korea') {
+                console.log(x['Country/Region'], country_name_map[country_name])
+            }
+            return x['Country/Region'] == country_name_map[country_name];
+        })[0];  
+    }
+    else if (country_name == 'France' || country_name == "United Kingdom" || country_name == "Denmark") {
         country_data = country_rows.filter(function(x) {
             return x['Country/Region'] == country_name && x['Province/State'] == '';
         })[0];
-      }
-      else {
-        country_data = country_rows.filter(function(x){
-            return x['Country/Region'] == country_name;
-        })[0];
-      }
+    }
+    else {
+    country_data = country_rows.filter(function(x){
+        return x['Country/Region'] == country_name;
+    })[0];
+    }
 
-      if (country_name == 'Bangladesh') {
-          if (isPressBriefingDataUpdated(country_data)) {
-              country_data[bd_press_briefing_data['Date']] = bd_press_briefing_data[content];
-          }
-      }
-      return country_data;
+    if (country_name == 'Bangladesh') {
+        if (isPressBriefingDataUpdated(country_data)) {
+            country_data[bd_press_briefing_data['Date']] = bd_press_briefing_data[content];
+        }
+    }
+    return country_data;
   }
 
   function getStartDate(country_name, min_case_count = 10, init_day = 0, max_day = 20) {
