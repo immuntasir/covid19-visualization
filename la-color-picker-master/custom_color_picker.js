@@ -44,6 +44,7 @@ function customColorPicker(colorPicker_id, colorPalette_id){
       }
 
       function showColorPalette() {
+        if(colorPalette.style.display == 'none') {
           colorPalette.style.display = 'block';
           var newDiv = '<div style="overflow-y: auto; height:300px;">';
           for(let i=0;i<country_colors.length;i++){
@@ -52,5 +53,9 @@ function customColorPicker(colorPicker_id, colorPalette_id){
           newDiv += '</div>';
           colorPalette.innerHTML = newDiv;
           colorOptionHook();
+        }
+        else if(colorPalette.style.display == 'block'){
+          colorPalette.style.display = 'none';
+        }
       }
 }
