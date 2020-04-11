@@ -28,6 +28,27 @@ function loadChart() {
     MakeDescription();
 }
 
+function initializeVariables() {
+    countries_to_compare.sort();
+    for (let i=0; i<countries_to_compare.length; i++) {
+        country_objects[countries_to_compare[i]] = Object();
+        country_objects[countries_to_compare[i]]['start_date'] = getStartDate(countries_to_compare[i], 1, 0, 30);
+        if (countries_to_compare[i] == 'Bangladesh') {
+            country_objects[countries_to_compare[i]]['color'] = "#006a4e";
+        }
+        else {
+            country_objects[countries_to_compare[i]]['color'] = country_colors[i];
+        }
+    }
+    genericSlider('valueSpan2','slider12');
+    initMinimumCaseSlider('valueSpan2');
+    genericSlider('valueSpan3','slider13');
+    showCountryOptions();
+    countrySelector();
+    addOnClickFunctions();
+    enablingToolip();
+}
+
 function fetchBangladeshLatestData(){
   var data;
   data_url ='https://raw.githubusercontent.com/rizveeerprojects/Corona-History/master/bangladesh-data/time_series.csv';
@@ -46,16 +67,7 @@ function fetchBangladeshLatestData(){
               bd_press_briefing_data['death'] =  parseInt(data[length-1][2]);
               bd_press_briefing_data['recovered'] =  parseInt(data[length-1][3]);
                 
-              for (let i=0; i<countries_to_compare.length; i++) {
-                country_objects[countries_to_compare[i]] = Object();
-                country_objects[countries_to_compare[i]]['start_date'] = getStartDate(countries_to_compare[i], 1, 0, 30);
-                if (countries_to_compare[i] == 'Bangladesh') {
-                    country_objects[countries_to_compare[i]]['color'] = '#006a4e';
-                }
-                else {
-                    country_objects[countries_to_compare[i]]['color'] = country_colors[i];
-                }
-              }
+              initializeVariables();
             
               loadChart();
           }
@@ -63,16 +75,6 @@ function fetchBangladeshLatestData(){
 }
 
 function initialize(){
-  fetchDataAndLoadChart();
+    fetchDataAndLoadChart();
 }
 
-$(document).ready(function(){
-    countries_to_compare.sort();
-    genericSlider('valueSpan2','slider12');
-    initMinimumCaseSlider('valueSpan2');
-    genericSlider('valueSpan3','slider13');
-    showCountryOptions();
-    countrySelector();
-    addOnClickFunctions();
-    enablingToolip();
-    });
