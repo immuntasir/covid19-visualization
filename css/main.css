@@ -146,7 +146,8 @@
     font-size: 1.1vw;
   }
   .font-awesome-square{
-    padding: 6px;
+    float: right;
+    padding-right:20px;
   }
 }
 
@@ -156,6 +157,7 @@
     font-size: 3vw;
   }
   .font-awesome-square{
-    padding: 1px;
+    float: right;
+    padding-right:20px;
   }
 }
