@@ -1,12 +1,14 @@
 var allCountriesData = Object();
 
 var countries_to_compare = ["Bangladesh", "France", "Germany", "Greece", "India", "Italy", "Malaysia", "Mexico", "Pakistan", "Saudi Arabia", "Singapore", "Spain", "US",
-                            "Iran", "Turkey", "United Kingdom", "United Arab Emirates", "Sri Lanka", "Maldives", "Japan", "Iraq", "Indonesia",
+                            "Iran", "Turkey", "UK", "UAE", "Sri Lanka", "Maldives", "Japan", "Iraq", "Indonesia",
                             "Finland", "Sweden", "Norway", "Denmark", "Thailand", "Afghanistan", "South Korea", "Kuwait", "Oman", "Qatar",
                             "South Africa", "Egypt"];
 
 var country_name_map = {
-    'South Korea': 'Korea, South'
+    'South Korea': 'Korea, South', 
+    'UAE': 'United Arab Emirates',
+    'UK': 'United Kingdom'
 };
 
 var country_colors = ["#000000", "#FFFF00", "#1CE6FF", "#FF34FF", "#FF4A46", "#008941", "#006FA6", "#A30059",

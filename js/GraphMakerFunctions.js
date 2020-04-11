@@ -50,17 +50,17 @@ function csvJSON(csv){
     return false;
   }
 
-  function getCountryRow(country_name, content='cases') {
+  function getCountryRow(country_name_in, content='cases') {
     var country_rows;
     country_rows = allCountriesData[content];
 
     var country_data;
-    if (country_name == 'South Korea') {
-        country_data = country_rows.filter(function(x){
-            return x['Country/Region'] == country_name_map[country_name];
-        })[0];  
+    let country_name = country_name_in;
+    if (country_name in country_name_map) {
+        country_name = country_name_map[country_name]
     }
-    else if (country_name == 'France' || country_name == "United Kingdom" || country_name == "Denmark") {
+
+    if (country_name == 'France' || country_name == "United Kingdom" || country_name == "Denmark") {
         country_data = country_rows.filter(function(x) {
             return x['Country/Region'] == country_name && x['Province/State'] == '';
         })[0];
@@ -75,6 +75,9 @@ function csvJSON(csv){
         if (isPressBriefingDataUpdated(country_data)) {
             country_data[bd_press_briefing_data['Date']] = bd_press_briefing_data[content];
         }
+    }
+    if (country_data == undefined) {
+        console.log(country_name);
     }
     return country_data;
   }
