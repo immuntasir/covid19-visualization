@@ -145,11 +145,17 @@
   .country-name-text {
     font-size: 1.1vw;
   }
+  .font-awesome-square{
+    padding: 6px;
+  }
 }
 
 /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
 @media screen and (max-width: 600px) {
   .country-name-text {
     font-size: 3vw;
+  }
+  .font-awesome-square{
+    padding: 1px;
   }
 }

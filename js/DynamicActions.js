@@ -37,7 +37,7 @@ function rerenderCountryOptions(){
     else {
       string += '<input type="checkbox" class="custom-control-input"  id="country-name-'+i.toString()+'" name="'+i.toString()+'" value="'+i.toString()+'" style="vertical-align:middle;" checked>';
     }
-    string += '<label class="custom-control-label country-name-text"  for="country-name-'+i.toString()+'" ><span>'+countries[i]+'</span></label><i class="fa fa-square" style="display: inline: float: right;padding:10px;" aria-hidden="true" id="colorPicker-'+i.toString()+'"></i>';
+    string += '<label class="custom-control-label country-name-text"  for="country-name-'+i.toString()+'" ><span>'+countries[i]+'</span></label><i class="fa fa-square font-awesome-square" style="display: inline: float: right;" aria-hidden="true" id="colorPicker-'+i.toString()+'"></i>';
     string += '<div><div id="colorPalette-'+i.toString()+'"></div></div>';
     string += '</div>';
     string_pr_country += ('<a class="dropdown-item option-control-text" href="#">' +  countries[i] + '</a> ');
@@ -65,7 +65,7 @@ function showCountryOptions(){
       }
       string = string + '<div class="custom-control custom-checkbox" id="country-option-div-'+i.toString()+'">'; //form-check
       string += '<input type="checkbox" class="custom-control-input" id="country-name-'+i.toString()+'" name="'+i.toString()+'" value="'+i.toString()+'" style="vertical-align:middle;">'; //form-check-input
-      string += '<label class="custom-control-label country-name-text"  for="country-name-'+i.toString()+'" ><span>'+countries[i]+'</span></label><i class="fa fa-square" style="display: inline: float: right; padding:10px;" aria-hidden="true" id="colorPicker-'+i.toString()+'"></i>'; //form-check-label
+      string += '<label class="custom-control-label country-name-text"  for="country-name-'+i.toString()+'" ><span>'+countries[i]+'</span></label><i class="fa fa-square font-awesome-square" style="display: inline: float: right;" aria-hidden="true" id="colorPicker-'+i.toString()+'"></i>'; //form-check-label
         string += '<div><div id="colorPalette-'+i.toString()+'"></div></div>';
       string += '</div>';
       string_pr_country += ('<a class="dropdown-item option-control-text" href="#">' +  countries[i] + '</a> ')
