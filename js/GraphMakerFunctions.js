@@ -57,9 +57,6 @@ function csvJSON(csv){
     var country_data;
     if (country_name == 'South Korea') {
         country_data = country_rows.filter(function(x){
-            if (country_name == 'South Korea') {
-                console.log(x['Country/Region'], country_name_map[country_name])
-            }
             return x['Country/Region'] == country_name_map[country_name];
         })[0];  
     }
