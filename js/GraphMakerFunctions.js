@@ -310,12 +310,7 @@ function csvJSON(csv){
                     values: y_tick_values,
                     format: function (d) {
                         if (scale == 'logarithmic') {
-                            if (d!=0) {
-                                return formatNumber(Math.pow(10,d * Math.LN10).toFixed(0));
-                            }
-                            else {
-                                return d;
-                            }
+                            return formatNumber(Math.pow(10,d * Math.LN10).toFixed(0));
                         }
                         else {
                             return formatNumber(d);
