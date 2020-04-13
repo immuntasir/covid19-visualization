@@ -346,7 +346,7 @@ function showBangladeshDistrictWiseTable(){
   string += '<thead>';
   string += '<tr>';
   string += '<th scope="col">#</th>';
-  string += '<th scope="col">Division</th>';
+  //string += '<th scope="col">Division</th>';
   string += '<th scope="col">District</th>';
   string += '<th scope="col">Count</th>';
   string += '</tr>';
@@ -356,7 +356,7 @@ function showBangladeshDistrictWiseTable(){
     console.log(sorted_data[i]);
     string += '<tr>';
       string += '<th scope="row">'+(i+1).toString()+'</th>';
-      string += '<td>'+sorted_data[i][1]['Division']+'</td>';
+      //string += '<td>'+sorted_data[i][1]['Division']+'</td>';
       string += '<td>'+sorted_data[i][1]['District']+'</td>';
       string += '<td>'+sorted_data[i][1][last_update]+'</td>';
     string += '</tr>';
