@@ -1,5 +1,5 @@
 var bd_geojson;
-var mapLoaded = false; 
+var mapLoaded = false;
 var district_data = Object();
 var last_update;
 var last_update_values = [];
@@ -16,7 +16,7 @@ function makeDistrictObjects (data) {
         district_data[data[data_iter]['Alt_Name']] = Object();
         for (let key_iter in obj_keys) {
             district_data[data[data_iter]['Alt_Name']][obj_keys[key_iter]] = data[data_iter][obj_keys[key_iter]];
-        }   
+        }
         last_update_values.push(parseInt(data[data_iter][last_update]));
     }
 
@@ -39,8 +39,9 @@ function loadDataAndShowDistributionMap () {
                 data = csvJSON(data);
                 makeDistrictObjects(data);
                 showDistributionMap();
+                showLastUpdateDate();
             }
-        });   
+        });
 }
 
 function showDistributionMap () {
@@ -58,18 +59,18 @@ function showDistributionMap () {
         }).addTo(map);
         map.setMaxBounds(map.getBounds());
 
-        
+
         legend.onAdd = function (map) {
             var div = L.DomUtil.create('div', 'info legend'),
                 grades = col_slices,
                 labels = [];
-        
-            
-        
+
+
+
             // loop through our density intervals and generate a label with a colored square for each interval
-            
+
             div.innerHTML +=
-                    '<i style="background: grey"></i> No Cases <br>' + 
+                    '<i style="background: grey"></i> No Cases <br>' +
                     '<i style="background:' + getColorByValue(grades[0] + 1) + '"></i> ' +
                     grades[1]  + '<br>';
             for (var i = 1; i < grades.length; i++) {
@@ -77,13 +78,13 @@ function showDistributionMap () {
                     '<i style="background:' + getColorByValue(grades[i] + 1) + '"></i> ' +
                     (grades[i] + 1) + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
             }
-        
+
             return div;
         };
-        
+
         legend.addTo(map);
-        
-        
+
+
 
         info.onAdd = function (map) {
             this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
@@ -94,17 +95,17 @@ function showDistributionMap () {
         // method that we will use to update the control based on feature properties passed
         info.update = function (props) {
             this._div.innerHTML = '<h4>Number of COVID-19 Cases</h4>' +  (props ?
-                '<b>' + props['Alt_Name'] + '</b><br />' +'Total Cases: ' + props[last_update] 
+                '<b>' + props['Alt_Name'] + '</b><br />' +'Total Cases: ' + props[last_update]
                 : 'Hover over a district');
         };
 
         info.addTo(map);
 
-        
+
         mapLoaded = true;
     }
     //var map = L.map('mapid').setView([51.505, -0.09], 13);
-    
+
 }
 
 function getColorByValue (comp_val) {
@@ -159,7 +160,7 @@ function highlightFeature(e) {
         props['Alt_Name'] = layer.feature.properties['DISTNAME'];
         props[last_update] = 0;
         info.update(props);
-    }   
+    }
 }
 
 function zoomToFeature(e) {

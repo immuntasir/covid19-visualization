@@ -66,9 +66,9 @@ function fetchBangladeshLatestData(){
               bd_press_briefing_data['cases'] = parseInt(data[length-1][1]);
               bd_press_briefing_data['death'] =  parseInt(data[length-1][2]);
               bd_press_briefing_data['recovered'] =  parseInt(data[length-1][3]);
-                
+
               initializeVariables();
-            
+
               loadChart();
           }
       });
@@ -76,5 +76,5 @@ function fetchBangladeshLatestData(){
 
 function initialize(){
     fetchDataAndLoadChart();
-}
 
+}

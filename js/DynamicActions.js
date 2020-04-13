@@ -321,3 +321,9 @@ function MakeDescription(){
   }
   $('#aggregation-type-span').text(chart_aggregation_type_text);
 }
+
+//map maker section
+function showLastUpdateDate(){
+    console.log(last_update);
+    $('#distribution-last-updated-span').text(last_update);
+}
