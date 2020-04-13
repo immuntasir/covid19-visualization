@@ -324,6 +324,44 @@ function MakeDescription(){
 
 //map maker section
 function showLastUpdateDate(){
-    console.log(last_update);
     $('#distribution-last-updated-span').text(last_update);
+}
+
+function sortDictionaryOnKey(dict, index,key_name){
+  // Create items array
+  var items = Object.keys(dict).map(function(key) {
+    return [key, dict[key]];
+  });
+  //console.log(items);
+  // Sort the array based on the index
+  items.sort(function(first, second) {
+    return parseInt(second[index][key_name]) - parseInt(first[index][key_name]);
+  });
+  return items;
+}
+
+function showBangladeshDistrictWiseTable(){
+  let sorted_data = sortDictionaryOnKey(district_data,1,last_update);
+  let string = '<table class="table">';
+  string += '<thead>';
+  string += '<tr>';
+  string += '<th scope="col">#</th>';
+  string += '<th scope="col">Division</th>';
+  string += '<th scope="col">District</th>';
+  string += '<th scope="col">Count</th>';
+  string += '</tr>';
+  string += '</thead>';
+  string += '<tbody>';
+  for(let i=0;i<sorted_data.length;i++){
+    console.log(sorted_data[i]);
+    string += '<tr>';
+      string += '<th scope="row">'+(i+1).toString()+'</th>';
+      string += '<td>'+sorted_data[i][1]['Division']+'</td>';
+      string += '<td>'+sorted_data[i][1]['District']+'</td>';
+      string += '<td>'+sorted_data[i][1][last_update]+'</td>';
+    string += '</tr>';
+  }
+  string += '</tbody>';
+  string += '</table>';
+  $('#district-wise-table').html(string);
 }

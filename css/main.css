@@ -149,6 +149,9 @@
     float: right;
     padding-right:20px;
   }
+  #bangladesh-district-table{
+      font-size: 1.1vw;
+  }
 }
 
 /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
@@ -159,6 +162,9 @@
   .font-awesome-square{
     float: right;
     padding-right:20px;
+  }
+  #bangladesh-district-table{
+    font-size: 2.5vw;
   }
 }
 

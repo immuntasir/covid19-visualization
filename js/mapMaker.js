@@ -40,6 +40,7 @@ function loadDataAndShowDistributionMap () {
                 makeDistrictObjects(data);
                 showDistributionMap();
                 showLastUpdateDate();
+                showBangladeshDistrictWiseTable(); 
             }
         });
 }
