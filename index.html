@@ -17,7 +17,7 @@
     </script>
 
 
-    <meta property="og:image" content="https://i.imgur.com/D4aNfCB.png">
+    <meta property="og:image" content="https://i.imgur.com/foOMgE9.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1024">
     <meta property="og:image:height" content="1024">
@@ -57,6 +57,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin=""/>
+
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""></script>
+
     <script type="text/javascript">
         var random_number = 0;
         function randomNumberGenerator(){
@@ -65,9 +75,14 @@
         }
         randomNumberGenerator();
     </script>
+    
     <script src="./js/GlobalVariables.js?version=5"></script>
     <script src="./js/GraphMakerFunctions.js?version=5"></script>
+    <script src="./js/bd-districts.js?version=5"></script>
     <script src="./la-color-picker-master/custom_color_picker.js?version=5"></script>
+    
+
+    
 
 </head>
 
@@ -78,16 +93,15 @@
     </nav>
     <div style="margin-top:20px; padding-bottom:120px;">
       <div class="container">
-          <div class="row">
-              <!--
-                <div class=" justify-content-center my-4">
-                    <span class="option-title-sm">Days since first case</span>
-                    <form class="range-field w-75">
-                        <input id="slider11" class="border-0" type="range" min="0" max="200" value="0" />
-                    </form>
-                    <span class="font-weight-bold text-primary ml-2 mt-1 valueSpan"></span>
-                  </div>
-                -->
+        <nav>
+          <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-customizable_charts-tab" data-toggle="tab" href="#nav-customizable_charts" role="tab" aria-controls="nav-customizable_charts" aria-selected="true">Customizable Charts</a>
+            <a class="nav-item nav-link" id="nav-distribution-tab" data-toggle="tab" href="#nav-distribution" role="tab" aria-controls="nav-distribution" aria-selected="false">Distribution of Cases</a>
+          </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-customizable_charts" role="tabpanel" aria-labelledby="nav-customizable_charts">
+            <div class="row">
               <div class="col-md-9" style="border:1px;">
                 <div class="row option-control-row">
                     <div >
@@ -207,14 +221,34 @@
                 </div>
 
               </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-distribution" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <div class = "row">
+              <div class = "col-md-8">
+                  <div id="mapid">
+        
+                  </div>
+              </div>
+              <div class = "col-md-4">
+                <div class="row">
+                  <p>Last Updated: <span id="distribution-last-updated-span"></span></p>
+                </div>
+                <div class="row">
+                  
+                </div>  
+              </div>
+          </div>
           </div>
         </div>
+          
+      </div>
     </div>
 
     <div class = "footer" >
       <p class="footer-text col-md-12" >
-          <span>Developed by <a href="https://www.facebook.com/wahedmuntasir">Muntasir Wahed</a> and <a href="https://github.com/rizveeerprojects">Redwan Ahmed Rizvee.</a></span>
-          <span>To report any bug or request any feature, please email <a href = "mailto: immuntasir@gmail.com">immuntasir@gmail.com</a></span>
+          <span>Developed by <a href="https://www.facebook.com/wahedmuntasir">Muntasir Wahed</a> (<a href = "mailto: immuntasir@gmail.com">immuntasir@gmail.com</a>) and <a href="https://github.com/rizveeerprojects">Redwan Ahmed Rizvee.</a></span>
+          <span>Hosted by <a href="https://techabyte.xyz/">TechAByte Solutions</a></span>
       </p>
     </div>
   </div>
@@ -226,6 +260,8 @@
         }
         randomNumberGenerator();
     </script>
+    <script src="./js/mapMaker.js?version=5"></script>
+    
     <script src="./js/GlobalVariables.js?version=5"></script>
     <script src="./js/GraphMakerFunctions.js?version=5"></script>
     <script src="./js/DynamicActions.js?version=5"></script>

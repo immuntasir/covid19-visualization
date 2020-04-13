@@ -252,6 +252,11 @@ function addOnClickFunctions() {
     $('#selected_pr_country_chart_type').text($(this).text());
     initTheVariablesAndGenerateGraph();
   });
+
+  $("a[href='#nav-distribution']").on('shown.bs.tab', function(e) {
+    loadDataAndShowDistributionMap();
+    console.log('shown - after the tab has been shown');
+  });
 }
 
 
