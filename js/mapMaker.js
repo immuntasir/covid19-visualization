@@ -47,63 +47,61 @@ function showDistributionMap () {
     if (map == undefined){
         var map = L.map('mapid').setView([23.6850, 90.3563], 6);
         var Wikimedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png', {
-        attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>',
-        minZoom: 6,
-        maxZoom: 19
-    });
-    Wikimedia.addTo(map);
-    bd_geojson = L.geoJson(bd_districts, {
-        style: style,
-        onEachFeature: onEachFeature
-    }).addTo(map);
-    map.setMaxBounds(map.getBounds());
+            attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>',
+            minZoom: 6,
+            maxZoom: 19
+        });
+        Wikimedia.addTo(map);
+        bd_geojson = L.geoJson(bd_districts, {
+            style: style,
+            onEachFeature: onEachFeature
+        }).addTo(map);
+        map.setMaxBounds(map.getBounds());
 
-    
-    legend.onAdd = function (map) {
-        var div = L.DomUtil.create('div', 'info legend'),
-            grades = col_slices,
-            labels = [];
-    
         
-    
-        // loop through our density intervals and generate a label with a colored square for each interval
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'info legend'),
+                grades = col_slices,
+                labels = [];
         
-        div.innerHTML +=
-                '<i style="background: grey"></i> No Cases <br>' + 
-                '<i style="background:' + getColorByValue(grades[0] + 1) + '"></i> ' +
-                grades[1]  + '<br>';
-        for (var i = 1; i < grades.length; i++) {
+            
+        
+            // loop through our density intervals and generate a label with a colored square for each interval
+            
             div.innerHTML +=
-                '<i style="background:' + getColorByValue(grades[i] + 1) + '"></i> ' +
-                (grades[i] + 1) + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-        }
-    
-        return div;
-    };
-    
-    legend.addTo(map);
-    
-    
+                    '<i style="background: grey"></i> No Cases <br>' + 
+                    '<i style="background:' + getColorByValue(grades[0] + 1) + '"></i> ' +
+                    grades[1]  + '<br>';
+            for (var i = 1; i < grades.length; i++) {
+                div.innerHTML +=
+                    '<i style="background:' + getColorByValue(grades[i] + 1) + '"></i> ' +
+                    (grades[i] + 1) + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+            }
+        
+            return div;
+        };
+        
+        legend.addTo(map);
+        
+        
 
-    info.onAdd = function (map) {
-        this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
-        this.update();
-        return this._div;
-    };
+        info.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+            this.update();
+            return this._div;
+        };
 
-    // method that we will use to update the control based on feature properties passed
-    info.update = function (props) {
-        console.log(props);
-        this._div.innerHTML = '<h4>Number of COVID-19 Cases</h4>' +  (props ?
-            '<b>' + props['Alt_Name'] + '</b><br />' +'Total Cases: ' + props[last_update] 
-            : 'Hover over a district');
-    };
+        // method that we will use to update the control based on feature properties passed
+        info.update = function (props) {
+            this._div.innerHTML = '<h4>Number of COVID-19 Cases</h4>' +  (props ?
+                '<b>' + props['Alt_Name'] + '</b><br />' +'Total Cases: ' + props[last_update] 
+                : 'Hover over a district');
+        };
 
-    info.addTo(map);
+        info.addTo(map);
 
-    
-    console.log('Loaded');   
-    mapLoaded = true;
+        
+        mapLoaded = true;
     }
     //var map = L.map('mapid').setView([51.505, -0.09], 13);
     
@@ -141,7 +139,6 @@ function style(feature) {
 
 
 function highlightFeature(e) {
-    console.log(e);
     var layer = e.target;
 
     layer.setStyle({
