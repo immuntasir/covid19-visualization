@@ -1,4 +1,4 @@
-var bd_geojson;
+var bd_districts
 var mapLoaded = false;
 var district_data = Object();
 var last_update;
@@ -24,10 +24,7 @@ function makeDistrictObjects (data) {
     col_slices = [0, 1, 10, 100]
 }
 
-function loadDataAndShowDistributionMap () {
-    if (mapLoaded){
-        return;
-    }
+function proecessGeoJSONAndShowDistributionMap() {
     data_url ='https://raw.githubusercontent.com/rizveeerprojects/Corona-History/master/bangladesh-data/bd_cases.csv';
     $.ajax({
             type: "GET",
@@ -45,19 +42,34 @@ function loadDataAndShowDistributionMap () {
         });
 }
 
+function loadDataAndShowDistributionMap () {
+    if (mapLoaded){
+        return;
+    }
+    proecessGeoJSONAndShowDistributionMap();
+}
+
 function showDistributionMap () {
+    var northEast = L.latLng(92.6727209818, 26.4465255803),
+        southWest = L.latLng(88.0844222351, 20.670883287),
+        bounds = L.latLngBounds(southWest, northEast);
     if (map == undefined){
         var map = L.map('mapid').setView([23.6850, 90.3563], 6);
         var Wikimedia = L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png', {
             attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>',
+            maxBounds: bounds,
             minZoom: 6,
             maxZoom: 19
         });
         Wikimedia.addTo(map);
-        bd_geojson = L.geoJson(bd_districts, {
+        bd_districts = new L.GeoJSON.AJAX("./data/bd-districts.geojson", {
             style: style,
             onEachFeature: onEachFeature
-        }).addTo(map);
+        });
+        bd_districts.on('data:loaded', function(){
+            bd_districts.addTo(map);    
+        });
+        
         map.setMaxBounds(map.getBounds());
 
 
@@ -118,8 +130,8 @@ function getColorByValue (comp_val) {
 }
 
 function getColor(d) {
-    if (d['DISTNAME'] in district_data) {
-        let comp_val =  district_data[d['DISTNAME']][last_update];
+    if (d['ADM2_EN'] in district_data) {
+        let comp_val =  district_data[d['ADM2_EN']][last_update];
         return getColorByValue(comp_val);
     }
     else {
@@ -134,7 +146,7 @@ function style(feature) {
         opacity: 1,
         color: 'white',
         dashArray: '1',
-        fillOpacity: 0.7
+        fillOpacity: 1
     };
 }
 
@@ -144,21 +156,21 @@ function highlightFeature(e) {
     var layer = e.target;
 
     layer.setStyle({
-        weight: 5,
+        weight: 2,
         color: '#666',
         dashArray: '',
-        fillOpacity: 0.7
+        fillOpacity: 1
     });
 
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
         layer.bringToFront();
     }
-    if (district_data[layer.feature.properties['DISTNAME']] != undefined) {
-        info.update(district_data[layer.feature.properties['DISTNAME']]);
+    if (district_data[layer.feature.properties['ADM2_EN']] != undefined) {
+        info.update(district_data[layer.feature.properties['ADM2_EN']]);
     }
     else {
         let props = Object();
-        props['Alt_Name'] = layer.feature.properties['DISTNAME'];
+        props['Alt_Name'] = layer.feature.properties['ADM2_EN'];
         props[last_update] = 0;
         info.update(props);
     }
@@ -169,7 +181,7 @@ function zoomToFeature(e) {
 }
 
 function resetHighlight(e) {
-    bd_geojson.resetStyle(e.target);
+    bd_districts.resetStyle(e.target);
     info.update();
 }
 

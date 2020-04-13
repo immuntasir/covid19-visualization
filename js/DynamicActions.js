@@ -340,6 +340,23 @@ function sortDictionaryOnKey(dict, index,key_name){
   return items;
 }
 
+function loadjscssfile(filename, filetype){
+  console.log(filename, filetype);
+  if (filetype=="js"){ //if filename is a external JavaScript file
+      var fileref=document.createElement('script')
+      fileref.setAttribute("type","text/javascript")
+      fileref.setAttribute("src", filename)
+  }
+  else if (filetype=="css"){ //if filename is an external CSS file
+      var fileref=document.createElement("link")
+      fileref.setAttribute("rel", "stylesheet")
+      fileref.setAttribute("type", "text/css")
+      fileref.setAttribute("href", filename)
+  }
+  if (typeof fileref!="undefined")
+      document.getElementsByTagName("head")[0].appendChild(fileref)
+}
+
 function showBangladeshDistrictWiseTable(){
   let sorted_data = sortDictionaryOnKey(district_data,1,last_update);
   let string = '<table class="table">';
@@ -353,7 +370,6 @@ function showBangladeshDistrictWiseTable(){
   string += '</thead>';
   string += '<tbody>';
   for(let i=0;i<sorted_data.length;i++){
-    console.log(sorted_data[i]);
     string += '<tr>';
       string += '<th scope="row">'+(i+1).toString()+'</th>';
       //string += '<td>'+sorted_data[i][1]['Division']+'</td>';
