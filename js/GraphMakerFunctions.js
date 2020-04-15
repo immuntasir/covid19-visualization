@@ -26,6 +26,9 @@ function csvJSON(csv){
   function returnDateObject(string){
     string = string.toString();
     let str = string.split('/');
+    if(str.length<2){
+      str.length = "20"+str.length;
+    }
     let year = parseInt(str[2]);
     if(year<2020){
       year = 2020;
@@ -185,12 +188,12 @@ function csvJSON(csv){
         for (let j=0; j<y_tick_scales.length; j++) {
             if (Math.pow(10, i)*y_tick_scales[j] < min_y_val && Math.pow(10, i)*y_tick_scales[j] < max_y_val) {
                 continue;
-            } 
+            }
             y_tick_values.push(Math.log10(Math.pow(10, i)*y_tick_scales[j]) / Math.LN10);
             if (Math.pow(10, i)*y_tick_scales[j] > max_y_val) {
                 loop_break = true;
                 break;
-            } 
+            }
         }
     }
     return y_tick_values;
@@ -219,7 +222,7 @@ function csvJSON(csv){
         else {
             break;
         }
-    }    
+    }
     return ret_values;
   }
 
@@ -236,10 +239,10 @@ function csvJSON(csv){
     let color_list = Object();
     let y_tick_values;
     let y_axis_min_value;
-    
+
     for (let i=0; i<data_columns.length; i++) {
         color_list[data_columns[i][0]] = country_objects[data_columns[i][0]]['color'];
-    } 
+    }
 
     let max_y_val = 0;
     let min_y_val=min_case_count;
@@ -271,7 +274,7 @@ function csvJSON(csv){
         color_list[data_columns.slice(-1)[0][0]] = '#000000';
         hidden_list.push(data_columns.slice(-1)[0][0])
         y_tick_values = getYTickValues(min_y_val, max_y_val);
-        y_axis_min_value = y_tick_values[0];       
+        y_axis_min_value = y_tick_values[0];
     }
     if (chart != undefined) {
         chart = chart.destroy();

@@ -6,7 +6,7 @@ var countries_to_compare = ["Bangladesh", "France", "Germany", "Greece", "India"
                             "South Africa", "Egypt"];
 
 var country_name_map = {
-    'South Korea': 'Korea, South', 
+    'South Korea': 'Korea, South',
     'UAE': 'United Arab Emirates',
     'UK': 'United Kingdom'
 };
@@ -51,7 +51,7 @@ var country_colors = ["#000000", "#FFFF00", "#1CE6FF", "#FF34FF", "#FF4A46", "#0
                         "#252F99", "#00CCFF", "#674E60", "#FC009C", "#92896B", "#FEFFE6", "#DDEFFF", "#004D43",
                         "#FFDBE5", "#006a4e"]
 
-var country_objects = Object(); 
+var country_objects = Object();
 
 var content_list=['Cases',"Death","Recovered"];
 var content_actual_name=['cases','death','recovered'];
@@ -60,7 +60,7 @@ var content_actual_name_ids=['content-cases','content-death','content-recovery']
 var graph_content='cases';
 var chart_aggregation_over = 'cumulative';
 var chart_aggregation_type = 'none';
-var aggregation_over_options = ['cumulative', 'new_cases']; 
+var aggregation_over_options = ['cumulative', 'new_cases'];
 
 var chart_aggregation_over_variables = Object()
 var chart_aggregation_type_variables = Object()
@@ -80,9 +80,10 @@ var chart_type_comparing_countries = 'line';
 
 var bd_press_briefing_data = Object()
 bd_press_briefing_data['Date'] = ""
-bd_press_briefing_data['cases'] = ""
-bd_press_briefing_data['death'] = ""
-bd_press_briefing_data['recovered'] = ""
+bd_press_briefing_data['num_test'] = ""
+bd_press_briefing_data['num_cases'] = ""
+bd_press_briefing_data['num_death'] = ""
+bd_press_briefing_data['num_recovered'] = ""
 
 var country_current_init_dates = Object();
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

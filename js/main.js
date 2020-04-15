@@ -51,7 +51,7 @@ function initializeVariables() {
     var url = document.location.toString();
     if (url.match('#')) {
         $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
-    } 
+    }
 
     // Change hash for page-reload
     $('.nav-tabs a').on('shown.bs.tab', function (e) {
@@ -72,11 +72,11 @@ function fetchBangladeshLatestData(){
 
               data = $.csv.toArrays(response);
               let length = data.length;
-
-              bd_press_briefing_data['Date'] = data[length-1][0]
-              bd_press_briefing_data['cases'] = parseInt(data[length-1][1]);
-              bd_press_briefing_data['death'] =  parseInt(data[length-1][2]);
-              bd_press_briefing_data['recovered'] =  parseInt(data[length-1][3]);
+              bd_press_briefing_data['Date'] = data[length-1][0];
+              bd_press_briefing_data['num_cases'] = parseInt(data[length-1][1]);
+              bd_press_briefing_data['num_death'] =  parseInt(data[length-1][2]);
+              bd_press_briefing_data['num_recovered'] =  parseInt(data[length-1][3]);
+              bd_press_briefing_data['num_test'] = data[length-1][4];
 
               initializeVariables();
 
