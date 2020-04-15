@@ -255,7 +255,6 @@ function addOnClickFunctions() {
 
   $("a[href='#nav-distribution']").on('shown.bs.tab', function(e) {
     loadDataAndShowDistributionMap();
-    console.log('shown - after the tab has been shown');
   });
 }
 

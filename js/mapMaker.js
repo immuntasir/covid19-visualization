@@ -24,7 +24,10 @@ function makeDistrictObjects (data) {
     col_slices = [0, 1, 10, 100]
 }
 
-function proecessGeoJSONAndShowDistributionMap() {
+function loadDataAndShowDistributionMap () {
+    if (mapLoaded){
+        return;
+    }
     data_url ='https://raw.githubusercontent.com/rizveeerprojects/Corona-History/master/bangladesh-data/bd_cases.csv';
     $.ajax({
             type: "GET",
@@ -42,13 +45,6 @@ function proecessGeoJSONAndShowDistributionMap() {
         });
 }
 
-function loadDataAndShowDistributionMap () {
-    if (mapLoaded){
-        return;
-    }
-    proecessGeoJSONAndShowDistributionMap();
-}
-
 function showDistributionMap () {
     var northEast = L.latLng(92.6727209818, 26.4465255803),
         southWest = L.latLng(88.0844222351, 20.670883287),
@@ -62,14 +58,11 @@ function showDistributionMap () {
             maxZoom: 19
         });
         Wikimedia.addTo(map);
-        bd_districts = new L.GeoJSON.AJAX("./data/bd-districts.geojson", {
+        bd_districts = new L.GeoJSON(bd_district_geojson, {
             style: style,
             onEachFeature: onEachFeature
-        });
-        bd_districts.on('data:loaded', function(){
-            bd_districts.addTo(map);    
-        });
-        
+            });
+        bd_districts.addTo(map);    
         map.setMaxBounds(map.getBounds());
 
 
@@ -189,6 +182,6 @@ function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
-        click: zoomToFeature
+        click: highlightFeature
     });
 }
