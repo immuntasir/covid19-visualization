@@ -95,7 +95,8 @@
         <nav>
           <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <a class="nav-item nav-link active" id="nav-customizable_charts-tab" data-toggle="tab" href="#nav-customizable_charts" role="tab" aria-controls="nav-customizable_charts" aria-selected="true">Customizable Charts</a>
-            <a class="nav-item nav-link" id="nav-distribution-tab" data-toggle="tab" href="#nav-distribution" role="tab" aria-controls="nav-distribution" aria-selected="false">Distribution of Cases</a>
+            <a class="nav-item nav-link" id="nav-preset-tab" data-toggle="tab" href="#nav-preset" role="tab" aria-controls="nav-preset" aria-selected="false">Preset Charts</a>
+            <a class="nav-item nav-link" id="nav-distribution-tab" data-toggle="tab" href="#nav-distribution" role="tab" aria-controls="nav-distribution" aria-selected="false">Bangladesh</a>
           </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
@@ -222,7 +223,7 @@
               </div>
             </div>
           </div>
-          <div class="tab-pane fade" id="nav-distribution" role="tabpanel" aria-labelledby="nav-profile-tab">
+          <div class="tab-pane fade" id="nav-distribution" role="tabpanel" aria-labelledby="nav-distribution">
             <div class = "row">
               <div class = "col-md-8">
                   <div id="mapid">
@@ -236,7 +237,31 @@
                 <div class="row" id="district-wise-table" style="height:450px; overflow-y: auto;">
                 </div>
               </div>
+            </div>
           </div>
+          <div class="tab-pane fade" id="nav-preset" role="tabpanel" aria-labelledby="nav-preset">
+            <div class = "row">
+              <div class = "col-md-8">
+                  <div class="row">
+                    <div class="option-control">
+                      <div class="dropdown" id='chart-preset-dropdown'>
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-toggle-second="tooltip" data-placement="right" title="Tooltip on right">
+                          <span id='chart-preset-dropdown-text'>Total Cases, Death and Recovered</span>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id='chart_preset_options'>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="preset_chart">
+                    <svg  height="100%" width="100%"></svg>
+                  </div>
+              </div>
+              <div class = "col-md-4">
+                
+              </div>
+            </div>
           </div>
         </div>
 
@@ -261,6 +286,7 @@
     <script src="./js/mapMaker.js?version=7"></script>
 
     <script src="./js/GlobalVariables.js?version=7"></script>
+    <script src="./js/PresetCharts.js??version=7"></script>
     <script src="./js/GraphMakerFunctions.js?version=7"></script>
     <script src="./js/DynamicActions.js?version=7"></script>
     <script src="./js/main.js?version=7"></script>

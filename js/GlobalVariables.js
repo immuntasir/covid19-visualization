@@ -96,4 +96,15 @@ var content_name_map = {
 
 
 var chart;
+var preset_chart;
 var y_tick_scales = [1, 2, 5, 10];
+
+var chart_preset_current_option = 'area_chart_all';
+var chart_preset_options = {
+    'Total Cases, Death, and Recovered': 'area_chart_all',
+    'New Cases vs Total Cases': 'new_vs_total'
+};
+
+var preset_chart_country_name = 'Bangladesh';
+var preset_chart_scale = 'linear';
+var preset_chart_countries = [];

@@ -255,15 +255,36 @@ function addOnClickFunctions() {
 
   $("a[href='#nav-distribution']").on('shown.bs.tab', function(e) {
     loadDataAndShowDistributionMap();
-  });
+  });  
+
+  $("a[href='#nav-preset']").on('shown.bs.tab', function(e) {
+    showChartPresetOptions();
+    addOnClickFunctionsPresetChart();
+    showPresetChart(preset_chart_country_name, chart_preset_current_option, preset_chart_scale, preset_chart_countries);
+  });  
+
+  
 }
 
+function addOnClickFunctionsPresetChart () {
+  $('#chart-preset-dropdown a').click(function(){
+    console.log('here');
+    let cur_text = $(this).text()
+    if (chart_preset_current_option == chart_preset_options[cur_text]) {
+      return;
+    }
+    chart_preset_current_option = chart_preset_options[cur_text];
+    $('#chart-preset-dropdown-text').text(cur_text);
+    showPresetChart(preset_chart_country_name, chart_preset_current_option, preset_chart_scale, preset_chart_countries);
+  });
+}
 
 function changeCountryColor (country_name, color_code) {
   country_objects[country_name]['color'] = color_code;
 }
 
 function enablingToolip(){
+  $('[data-toggle-second="tooltip"]').tooltip();
    $("body").tooltip({
     trigger : 'hover',
     selector: '[data-toggle=tooltip]' });
@@ -379,4 +400,13 @@ function showBangladeshDistrictWiseTable(){
   string += '</tbody>';
   string += '</table>';
   $('#district-wise-table').html(string);
+}
+
+function showChartPresetOptions () {
+  console.log(chart_preset_options);
+  string_opt = ''
+  for (opt_iter in Object.keys(chart_preset_options)) {
+    string_opt += '<a class="dropdown-item" href="#">' +  Object.keys(chart_preset_options)[opt_iter] + '</a>';
+  }
+  $("#chart_preset_options").html(string_opt);
 }

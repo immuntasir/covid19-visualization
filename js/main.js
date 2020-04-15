@@ -1,3 +1,4 @@
+var latest_data;
 function fetchDataAndLoadChart(){
     var data;
     urls = ["https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv",
@@ -35,6 +36,10 @@ function initializeVariables() {
         country_objects[countries_to_compare[i]]['start_date'] = getStartDate(countries_to_compare[i], 1, 0, 30);
         if (countries_to_compare[i] == 'Bangladesh') {
             country_objects[countries_to_compare[i]]['color'] = "#006a4e";
+            country_objects[countries_to_compare[i]]['num_tests'] = Object();
+            country_objects[countries_to_compare[i]]['num_cases'] = Object();
+            country_objects[countries_to_compare[i]]['num_death'] = Object();
+            country_objects[countries_to_compare[i]]['num_recovered'] = Object();
         }
         else {
             country_objects[countries_to_compare[i]]['color'] = country_colors[i];
@@ -47,6 +52,8 @@ function initializeVariables() {
     countrySelector();
     addOnClickFunctions();
     enablingToolip();
+
+    initializeCountryData('Bangladesh');
     // Javascript to enable link to tab
     var url = document.location.toString();
     if (url.match('#')) {
@@ -60,6 +67,21 @@ function initializeVariables() {
     })
 }
 
+function initializeCountryData (country_name='Bangladesh') {
+    for (let i=0; i<content_actual_name.length; i++) {
+        cur_country_data = getCountryRow(country_name, content_actual_name[i]);
+        let keys = Object.keys(cur_country_data).slice(4);
+        for (let j=0; j<keys.length; j++) {
+            country_objects[country_name]['num_' + content_actual_name[i]][keys[j]] = cur_country_data[keys[j]];
+        }
+    }
+    if (country_name == 'Bangladesh') {
+        for (let i=0; i<latest_data.length; i++) {
+            country_objects[country_name]['num_tests'][latest_data[i][0]] = latest_data[i][4]
+        }
+    }
+}
+
 function fetchBangladeshLatestData(){
   var data;
   data_url ='https://raw.githubusercontent.com/rizveeerprojects/Corona-History/master/bangladesh-data/time_series.csv';
@@ -71,15 +93,16 @@ function fetchBangladeshLatestData(){
           {
 
               data = $.csv.toArrays(response);
+              latest_data = data;
               let length = data.length;
               bd_press_briefing_data['Date'] = data[length-1][0];
               bd_press_briefing_data['num_cases'] = parseInt(data[length-1][1]);
               bd_press_briefing_data['num_death'] =  parseInt(data[length-1][2]);
-              bd_press_briefing_data['num_recovered'] =  parseInt(data[length-1][3]);
-              bd_press_briefing_data['num_test'] = data[length-1][4];
-
+              bd_press_briefing_data['num_recovered'] = parseInt(data[length-1][3]);
+              bd_press_briefing_data['num_test'] = parseInt(data[length-1][4]);
+            
               initializeVariables();
-
+            
               loadChart();
           }
       });
