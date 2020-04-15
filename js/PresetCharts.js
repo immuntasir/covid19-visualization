@@ -17,6 +17,7 @@ function getAreaChartData (pr_country_name) {
         }
         ret_columns.push(cur_col);
     }
+    console.log(ret_columns);
     return ret_columns;
 }
 
@@ -50,12 +51,12 @@ function showAreaChart (pr_country_name = 'Bangladesh', scale='linear') {
         y_tick_values = getYTickValues(min_y_val, max_y_val);
         y_axis_min_value = y_tick_values[0];
     }
-    if (preset_chart != undefined) {
-        preset_chart = preset_chart.destroy();
+    if (bd_stat_chart != undefined) {
+        bd_stat_chart = bd_stat_chart.destroy();
     }
     
-    preset_chart = c3.generate({
-        bindto: '#preset_chart',
+    bd_stat_chart = c3.generate({
+        bindto: '#total_test_stat',
         data: {
             columns: data_columns,
             colors: color_list,
@@ -104,8 +105,47 @@ function showAreaChart (pr_country_name = 'Bangladesh', scale='linear') {
     });
 }
 
+function getNewVsTotalChartData (pr_country_name) {
+    cur_country_data = getCountryData(pr_country_name);
+    ret_values = {
+        x: [],
+        y: [],
+        type: 'scatter'
+    }
+    for (let i=1; i<cur_country_data.length; i++) {
+        ret_values['x'].push(cur_country_data[i-1]);
+        ret_values['y'].push(cur_country_data[i] - cur_country_data[i-1]);
+    }
+
+    return ret_values;
+}
+
+function showNewVsTotalChart (pr_country_name, countries) {
+    var trace1 = getNewVsTotalChartData('Bangladesh');
+      
+    var trace2 = getNewVsTotalChartData('US');
+      
+    var data = [trace1, trace2];
+    
+    var layout = {
+    xaxis: {
+        type: 'log',
+        autorange: true
+    },
+    yaxis: {
+        type: 'log',
+        autorange: true
+    }
+    };
+    
+    Plotly.newPlot('preset_chart_new_vs_total', data, layout);
+}
+
 function showPresetChart(pr_country_name='Bangladesh', chart_type = 'area_chart_all', scale='linear', countries=[]) {
     if (chart_type == 'area_chart_all') {
         showAreaChart(pr_country_name, 'linear');
-    }   
+    } 
+    else if (chart_type == 'new_vs_total') {
+        showNewVsTotalChart(pr_country_name, countries);
+    }  
 }

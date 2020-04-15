@@ -255,6 +255,7 @@ function addOnClickFunctions() {
 
   $("a[href='#nav-distribution']").on('shown.bs.tab', function(e) {
     loadDataAndShowDistributionMap();
+    showAreaChart (pr_country_name = 'Bangladesh', scale=bd_stat_scale);
   });  
 
   $("a[href='#nav-preset']").on('shown.bs.tab', function(e) {

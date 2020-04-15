@@ -77,6 +77,7 @@
         randomNumberGenerator();
     </script>
 
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="./js/GlobalVariables.js?version=7"></script>
     <script src="./js/GraphMakerFunctions.js?version=7"></script>
     <script src="./la-color-picker-master/custom_color_picker.js?version=7"></script>
@@ -168,6 +169,7 @@
                         <svg  height="100%" width="100%"></svg>
                     </div>
                 </div>
+                
 
 
                 <div class = "row">
@@ -225,17 +227,27 @@
           </div>
           <div class="tab-pane fade" id="nav-distribution" role="tabpanel" aria-labelledby="nav-distribution">
             <div class = "row">
-              <div class = "col-md-8">
+              <div class = "col-md-6">
                   <div id="mapid">
 
                   </div>
               </div>
-              <div class = "col-md-4" id="bangladesh-district-table">
+              <div class = "col-md-6" id="bangladesh-district-table">
+                <div id="total_test_stat">
+                  <svg  height="100%" width="100%"></svg>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
                 <div class="row">
                   <p>Last Updated: <span id="distribution-last-updated-span"></span></p>
                 </div>
                 <div class="row" id="district-wise-table" style="height:450px; overflow-y: auto;">
-                </div>
+                </div>  
+              </div>
+              <div class="col-md-6">
+
               </div>
             </div>
           </div>
@@ -254,8 +266,7 @@
                       </div>
                     </div>
                   </div>
-                  <div id="preset_chart">
-                    <svg  height="100%" width="100%"></svg>
+                  <div id='preset_chart_new_vs_total'><!-- Plotly chart will be drawn inside this DIV -->
                   </div>
               </div>
               <div class = "col-md-4">
