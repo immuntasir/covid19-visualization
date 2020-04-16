@@ -68,7 +68,7 @@ function initializeVariables() {
 
 
     /***************Preset graph options *****************/
-    showCountryChartPreset(); 
+    showCountryChartPreset();
 }
 
 function initializeCountryData (country_name='Bangladesh') {
@@ -111,6 +111,7 @@ function fetchBangladeshLatestData(){
           }
       });
 }
+
 
 function initialize(){
     fetchDataAndLoadChart();

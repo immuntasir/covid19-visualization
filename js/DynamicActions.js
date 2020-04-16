@@ -283,6 +283,16 @@ function addOnClickFunctions() {
       initiatePresetGraph();
   });
 
+  $('.none-button-hide').click(function(){
+      let id = $(this).attr('id');
+      if(id=='aggregation_over_cumulative'){
+          document.getElementById('dropdownMenuButton').style.display='none';
+      }
+      else if(id=='aggregation_over_new_cases'){
+        document.getElementById('dropdownMenuButton').style.display='block';
+      }
+  });
+
 }
 
 function addOnClickFunctionsPresetChart () {
@@ -360,6 +370,8 @@ function MakeDescription(){
   }
   $('#aggregation-type-span').text(chart_aggregation_type_text);
 }
+
+
 
 //map maker section
 function showLastUpdateDate(){
