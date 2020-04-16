@@ -298,7 +298,6 @@ function addOnClickFunctions() {
 
 function addOnClickFunctionsPresetChart () {
   $('#chart-preset-dropdown a').click(function(){
-    console.log('here');
     let cur_text = $(this).text()
     if (chart_preset_current_option == chart_preset_options[cur_text]) {
       return;
@@ -393,7 +392,6 @@ function sortDictionaryOnKey(dict, index,key_name){
 }
 
 function loadjscssfile(filename, filetype){
-  console.log(filename, filetype);
   if (filetype=="js"){ //if filename is a external JavaScript file
       var fileref=document.createElement('script')
       fileref.setAttribute("type","text/javascript")
@@ -437,7 +435,6 @@ function showBangladeshDistrictWiseTable(){
 /******************************* Preset portion ********************/
 
 function showChartPresetOptions () {
-  console.log(chart_preset_options);
   string_opt = ''
   for (opt_iter in Object.keys(chart_preset_options)) {
     string_opt += '<a class="dropdown-item" href="#">' +  Object.keys(chart_preset_options)[opt_iter] + '</a>';

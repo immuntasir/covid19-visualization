@@ -53,11 +53,14 @@ function initializeVariables() {
     addOnClickFunctions();
     enablingToolip();
 
-    initializeCountryData('Bangladesh');
+    
     // Javascript to enable link to tab
     var url = document.location.toString();
     if (url.match('#')) {
-        $('.nav-tabs a[href="#' + url.split('#')[1] + '"]').tab('show');
+        let tab_name = url.split('#')[1];
+        if (tab_name != 'nav-list') {
+            $('.nav-tabs a[href="#' + tab_name + '"]').tab('show');
+        }
     }
 
     // Change hash for page-reload
@@ -106,7 +109,7 @@ function fetchBangladeshLatestData(){
               bd_press_briefing_data['num_test'] = parseInt(data[length-1][4]);
 
               initializeVariables();
-
+              initializeCountryData('Bangladesh');
               loadChart();
           }
       });

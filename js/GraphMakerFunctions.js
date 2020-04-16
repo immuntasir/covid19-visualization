@@ -104,7 +104,7 @@ function csvJSON(csv){
       return date_object[1].toString() + ' ' + months[date_object[0] - 1] + ', 2020';
   }
 
-  function getCountryData (country_name, min_case_count = 100, init_day = 0, max_day = 80, content='cases', aggregation_over='cumulative', aggregation_type='none', data_label='none') {
+  function getCountryData (country_name, min_case_count = 20, init_day = 0, max_day = 80, content='cases', aggregation_over='cumulative', aggregation_type='none', data_label='none') {
 
     init_day = getStartDate(country_name, min_case_count, init_day, max_day);
     if (init_day == -1) {

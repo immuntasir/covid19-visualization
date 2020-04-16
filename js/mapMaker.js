@@ -46,6 +46,9 @@ function loadDataAndShowDistributionMap () {
 }
 
 function showDistributionMap () {
+    if (mapLoaded == true) {
+        return;
+    }
     var northEast = L.latLng(92.6727209818, 26.4465255803),
         southWest = L.latLng(88.0844222351, 20.670883287),
         bounds = L.latLngBounds(southWest, northEast);

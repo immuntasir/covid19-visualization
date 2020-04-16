@@ -17,7 +17,6 @@ function getAreaChartData (pr_country_name) {
         }
         ret_columns.push(cur_col);
     }
-    console.log(ret_columns);
     return ret_columns;
 }
 
@@ -105,37 +104,51 @@ function showAreaChart (pr_country_name = 'Bangladesh', scale='linear') {
     });
 }
 
-function getNewVsTotalChartData (pr_country_name) {
-    cur_country_data = getCountryData(pr_country_name);
+function getNewVsTotalChartData (pr_country_name, num_days=1) {
+    cur_country_data = getCountryData(pr_country_name, min_case_count = 1);
     ret_values = {
         x: [],
         y: [],
-        type: 'scatter'
+        type: 'scatter',
+        name: pr_country_name,
+        line: {
+            color:  country_objects[pr_country_name]['color'],
+          },hoverinfo: 'none',
+        hovertemplate: '<br><b>Total Cases</b>: %{x}<br>' +
+                        '<b>New Cases in the past week</b>: %{y}',
+        showlegend: false
     }
-    for (let i=1; i<cur_country_data.length; i++) {
-        ret_values['x'].push(cur_country_data[i-1]);
-        ret_values['y'].push(cur_country_data[i] - cur_country_data[i-1]);
+    for (let i=num_days+1; i<cur_country_data.length; i++) {
+        if (cur_country_data[i] < 50) {
+            continue;
+        }
+        ret_values['x'].push(cur_country_data[i]);
+        ret_values['y'].push(cur_country_data[i] - cur_country_data[i-num_days]);
     }
 
     return ret_values;
 }
 
 function showNewVsTotalChart (pr_country_name, countries) {
-    var trace1 = getNewVsTotalChartData('Bangladesh');
-      
-    var trace2 = getNewVsTotalChartData('US');
-      
-    var data = [trace1, trace2];
+    var Bangladesh = getNewVsTotalChartData(pr_country_name, 7);
+    var data = [Bangladesh];  
+    for (let i=0; i<countries.length; i++) {
+        data.push(getNewVsTotalChartData(countries[i], 7));
+    }
     
     var layout = {
-    xaxis: {
-        type: 'log',
-        autorange: true
-    },
-    yaxis: {
-        type: 'log',
-        autorange: true
-    }
+        height: 500,
+        title: 'New Cases in the Past Week vs Total Number of Confirmed Cases',
+        xaxis: {
+            type: 'log',
+            autorange: true,
+            title:'Total Cases'
+        },
+        yaxis: {
+            type: 'log',
+            autorange: true,
+            title: 'New Cases in the past Week'
+        },
     };
     
     Plotly.newPlot('preset_chart_new_vs_total', data, layout);
