@@ -224,7 +224,9 @@ function countrySelector(){
   $('input[type="checkbox"]').click(function(){
     let id = $(this).attr('id');
     let sp=id.split('-');
+    //console.log("dhuke");
     if(sp[0] == 'preset'){
+        //console.log(id);
         let list = getCheckedPresetCountries();
         preset_chart_countries = list;
         initiatePresetGraph();
@@ -488,7 +490,7 @@ function updateBdStatChartButtonColor(scale){
   let primary='',secondary='';
   if(scale=='linear') {
     primary='linear';
-    secondary='linear';
+    secondary='logarithmic';
   }
   else {
     primary='logarithmic';
