@@ -68,7 +68,7 @@ function showCountryOptions(){
       string += '<label class="custom-control-label country-name-text"  for="country-name-'+i.toString()+'" ><span>'+countries[i]+'</span></label><i class="fa fa-square font-awesome-square" style="display: inline: float: right;" aria-hidden="true" id="colorPicker-'+i.toString()+'"></i>'; //form-check-label
         string += '<div><div style="display:none;" id="colorPalette-'+i.toString()+'"></div></div>';
       string += '</div>';
-      string_pr_country += ('<a class="dropdown-item option-control-text" href="#">' +  countries[i] + '</a> ')
+      string_pr_country += ('<a class="dropdown-item option-control-text" href="#">' +  countries[i] + '</a> ');
   }
   $("#dropdown_menu_pr_country").html(string_pr_country);
   $("#checkBoxContainer").html(string);
@@ -273,6 +273,13 @@ function addOnClickFunctions() {
     showPresetChart(preset_chart_country_name, chart_preset_current_option, preset_chart_scale, preset_chart_countries);
   });
 
+  $('#preset-dropdown_menu_pr_country a').click(function(){
+      if (preset_chart_country_name == $(this).text()) {
+        return;
+      }
+      preset_chart_country_name = $(this).text();
+      $('#preset-selected_pr_country').text($(this).text());
+  });
 
 }
 
@@ -439,7 +446,7 @@ function getCheckedPresetCountries(){
 function showCountryChartPreset(){
   var countries=countries_to_compare;
   let string='',value='';
-  let string_pr_country = '';
+  let string_pr_country_preset = '';
   for(let i=0;i<countries.length;i++){
       value = countries[i];
       value = value.split(' ').join("_");
@@ -450,7 +457,10 @@ function showCountryChartPreset(){
       string += '<input type="checkbox" class="custom-control-input" id="preset-country-name-'+i.toString()+'" name="'+i.toString()+'" value="'+i.toString()+'" style="vertical-align:middle;">'; //form-check-input
       string += '<label class="custom-control-label country-name-text"  for="preset-country-name-'+i.toString()+'" ><span>'+countries[i]+'</span></label>'; //form-check-label
       string += '</div>';
+      string_pr_country_preset += ('<a class="dropdown-item option-control-text" href="#">' +  countries[i] + '</a> ');
   }
   $("#preset-country-name").html(string);
+  $('#preset-dropdown_menu_pr_country').html(string_pr_country_preset);
   countrySelector();
+  addOnClickFunctions();
 }
