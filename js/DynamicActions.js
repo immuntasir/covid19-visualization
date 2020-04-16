@@ -256,15 +256,15 @@ function addOnClickFunctions() {
   $("a[href='#nav-distribution']").on('shown.bs.tab', function(e) {
     loadDataAndShowDistributionMap();
     showAreaChart (pr_country_name = 'Bangladesh', scale=bd_stat_scale);
-  });  
+  });
 
   $("a[href='#nav-preset']").on('shown.bs.tab', function(e) {
     showChartPresetOptions();
     addOnClickFunctionsPresetChart();
     showPresetChart(preset_chart_country_name, chart_preset_current_option, preset_chart_scale, preset_chart_countries);
-  });  
+  });
 
-  
+
 }
 
 function addOnClickFunctionsPresetChart () {
@@ -410,4 +410,20 @@ function showChartPresetOptions () {
     string_opt += '<a class="dropdown-item" href="#">' +  Object.keys(chart_preset_options)[opt_iter] + '</a>';
   }
   $("#chart_preset_options").html(string_opt);
+}
+
+
+function showCountryChartPreset(){
+  var countries=countries_to_compare;
+  let string='',value='';
+  let string_pr_country = '';
+  for(let i=0;i<countries.length;i++){
+      value = countries[i];
+      value = value.split(' ').join("_");
+      string = string + '<div class="custom-control custom-checkbox" id="preset-country-option-div-'+i.toString()+'">'; //form-check
+      string += '<input type="checkbox" class="custom-control-input" id="preset-country-name-'+i.toString()+'" name="'+i.toString()+'" value="'+i.toString()+'" style="vertical-align:middle;">'; //form-check-input
+      string += '<label class="custom-control-label country-name-text"  for="preset-country-name-'+i.toString()+'" ><span>'+countries[i]+'</span></label>'; //form-check-label
+      string += '</div>';
+  }
+  $("#present-country-name").html(string); 
 }

@@ -65,6 +65,10 @@ function initializeVariables() {
         window.location.hash = e.target.hash;
         window.scrollTo(0, 0);
     })
+
+
+    /***************Preset graph options *****************/
+    showCountryChartPreset(); 
 }
 
 function initializeCountryData (country_name='Bangladesh') {
@@ -100,9 +104,9 @@ function fetchBangladeshLatestData(){
               bd_press_briefing_data['num_death'] =  parseInt(data[length-1][2]);
               bd_press_briefing_data['num_recovered'] = parseInt(data[length-1][3]);
               bd_press_briefing_data['num_test'] = parseInt(data[length-1][4]);
-            
+
               initializeVariables();
-            
+
               loadChart();
           }
       });
