@@ -218,10 +218,19 @@ function getTheCheckedCountries(){
   return list;
 }
 
+
 function countrySelector(){
   let list=[];
   $('input[type="checkbox"]').click(function(){
-    initTheVariablesAndGenerateGraph();
+    let id = $(this).attr('id');
+    let sp=id.split('-');
+    if(sp[0] == 'preset'){
+        let list = getCheckedPresetCountries();
+        preset_chart_countries = list;
+    }
+    else{
+      initTheVariablesAndGenerateGraph();
+    }
   });
 }
 
@@ -403,6 +412,8 @@ function showBangladeshDistrictWiseTable(){
   $('#district-wise-table').html(string);
 }
 
+/******************************* Preset portion ********************/
+
 function showChartPresetOptions () {
   console.log(chart_preset_options);
   string_opt = ''
@@ -410,6 +421,18 @@ function showChartPresetOptions () {
     string_opt += '<a class="dropdown-item" href="#">' +  Object.keys(chart_preset_options)[opt_iter] + '</a>';
   }
   $("#chart_preset_options").html(string_opt);
+}
+
+function getCheckedPresetCountries(){
+  let list=[],id="";
+  for(let i=0;i<countries_to_compare.length;i++){
+    let value = countries_to_compare[i].split(' ').join("_");
+    id='preset-country-name-'+i.toString();
+    if($('#'+id).prop('checked') == true){
+      list.push(countries_to_compare[i]);
+    }
+  }
+  return list;
 }
 
 
@@ -420,10 +443,14 @@ function showCountryChartPreset(){
   for(let i=0;i<countries.length;i++){
       value = countries[i];
       value = value.split(' ').join("_");
+      if(countries[i] == preset_chart_country_name){
+        continue;
+      }
       string = string + '<div class="custom-control custom-checkbox" id="preset-country-option-div-'+i.toString()+'">'; //form-check
       string += '<input type="checkbox" class="custom-control-input" id="preset-country-name-'+i.toString()+'" name="'+i.toString()+'" value="'+i.toString()+'" style="vertical-align:middle;">'; //form-check-input
       string += '<label class="custom-control-label country-name-text"  for="preset-country-name-'+i.toString()+'" ><span>'+countries[i]+'</span></label>'; //form-check-label
       string += '</div>';
   }
-  $("#present-country-name").html(string); 
+  $("#preset-country-name").html(string);
+  countrySelector();
 }
