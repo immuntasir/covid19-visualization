@@ -227,7 +227,7 @@ function countrySelector(){
     if(sp[0] == 'preset'){
         let list = getCheckedPresetCountries();
         preset_chart_countries = list;
-        initiatePresetGraph(); 
+        initiatePresetGraph();
     }
     else{
       initTheVariablesAndGenerateGraph();
@@ -449,7 +449,6 @@ function getCheckedPresetCountries(){
   return list;
 }
 
-
 function showCountryChartPreset(){
   var countries=countries_to_compare;
   let string='',value='';
@@ -470,4 +469,38 @@ function showCountryChartPreset(){
   $('#preset-dropdown_menu_pr_country').html(string_pr_country_preset);
   countrySelector();
   addOnClickFunctions();
+}
+
+/******************* Bangladesh Map Page ********************/
+
+function updateBdStatChartButtonColor(scale){
+  let primary='',secondary='';
+  if(scale=='linear') {
+    primary='linear';
+    secondary='linear';
+  }
+  else {
+    primary='logarithmic';
+    secondary='linear';
+  }
+  if($('#preset-scale-'+primary).hasClass('btn-secondary')){
+
+  }
+  else{
+    $('#preset-scale-'+primary).toggleClass('btn-light');
+    $('#preset-scale-'+primary).toggleClass('btn-secondary');
+  }
+  if($('#preset-scale-'+secondary).hasClass('btn-light')){
+
+  }
+  else{
+    $('#preset-scale-'+secondary).toggleClass('btn-secondary');
+    $('#preset-scale-'+secondary).toggleClass('btn-light');
+  }
+}
+
+function bdStatChartChage(scale){
+  bd_stat_scale = scale;
+  showAreaChart (pr_country_name, bd_stat_scale);
+  updateBdStatChartButtonColor(scale);
 }

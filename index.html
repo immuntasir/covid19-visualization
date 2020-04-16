@@ -251,8 +251,17 @@
 
               </div>
               <div class = "col-md-6" id="bangladesh-district-table">
+                <div class="option-control">
+                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        <button type="button" id="preset-scale-linear" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Select Linear Scale on Y-Axis" onclick="bdStatChartChage('linear')">Linear</button>
+                        <button type="button" id="preset-scale-logarithmic" class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Select Log Scale on Y-Axis" onclick="bdStatChartChage('logarithmic')">Logarithmic</button>
+                      </div>
+                </div>
                 <div style="height: 42px;">
                   <span>Total Number of Tests, Cases, Deaths and Recovery</span>
+                </div>
+                <div id="test-case-death-recovery-merge-div">
+
                 </div>
                 <div id="total_test_stat">
                   <svg  height="100%" width="100%"></svg>
