@@ -227,6 +227,7 @@ function countrySelector(){
     if(sp[0] == 'preset'){
         let list = getCheckedPresetCountries();
         preset_chart_countries = list;
+        initiatePresetGraph(); 
     }
     else{
       initTheVariablesAndGenerateGraph();
@@ -279,6 +280,7 @@ function addOnClickFunctions() {
       }
       preset_chart_country_name = $(this).text();
       $('#preset-selected_pr_country').text($(this).text());
+      initiatePresetGraph();
   });
 
 }
@@ -428,6 +430,11 @@ function showChartPresetOptions () {
     string_opt += '<a class="dropdown-item" href="#">' +  Object.keys(chart_preset_options)[opt_iter] + '</a>';
   }
   $("#chart_preset_options").html(string_opt);
+}
+
+function initiatePresetGraph(){
+  //console.log(preset_chart_country_name, chart_preset_current_option, preset_chart_scale, preset_chart_countries);
+  showPresetChart(preset_chart_country_name, chart_preset_current_option, preset_chart_scale, preset_chart_countries);
 }
 
 function getCheckedPresetCountries(){
