@@ -25,7 +25,7 @@ function showAreaChart (pr_country_name = 'Bangladesh', scale='linear') {
     data_columns = getAreaChartData(pr_country_name);
     date_keys = getAreaChartDateKeys(pr_country_name);
 
-    let color_list = ['blue', 'orange', 'red', 'green'];
+    let color_list = ['blue', 'orange', 'green', 'red'];
     let y_tick_values;
     let y_axis_min_value;
 
