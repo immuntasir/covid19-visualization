@@ -283,6 +283,7 @@ function addOnClickFunctions() {
       preset_chart_country_name = $(this).text();
       $('#preset-selected_pr_country').text($(this).text());
       initiatePresetGraph();
+      showCountryChartPreset();
   });
 
   $('.none-button-hide').click(function(){
@@ -459,10 +460,27 @@ function getCheckedPresetCountries(){
   return list;
 }
 
+function updateCountryListWithPrimayCountryChangePreset(){
+  let countries=countries_to_compare;
+  let list = getCheckedPresetCountries();
+  for(let i=0;i<countries.length;i++){
+      if(countries[i] == chart_primary_country) continue;
+      let idx=list.indexOf(countries[i]);
+      if(idx != -1){
+        $('#preset-country-name-'+i.toString()).checked=true;
+      }
+  }
+}
+
 function showCountryChartPreset(){
   var countries=countries_to_compare;
   let string='',value='';
   let string_pr_country_preset = '';
+  let list = getCheckedPresetCountries();
+  let idx = list.indexOf(preset_chart_country_name);
+  if(idx != -1) {
+    list.splice(idx,1);
+  }
   for(let i=0;i<countries.length;i++){
       value = countries[i];
       value = value.split(' ').join("_");
@@ -470,10 +488,17 @@ function showCountryChartPreset(){
         continue;
       }
       string = string + '<div class="custom-control custom-checkbox" id="preset-country-option-div-'+i.toString()+'">'; //form-check
-      string += '<input type="checkbox" class="custom-control-input" id="preset-country-name-'+i.toString()+'" name="'+i.toString()+'" value="'+i.toString()+'" style="vertical-align:middle;">'; //form-check-input
+      idx = list.indexOf(countries[i]);
+      if(idx != -1) {
+          string += '<input type="checkbox" class="custom-control-input" id="preset-country-name-'+i.toString()+'" name="'+i.toString()+'" value="'+i.toString()+'" style="vertical-align:middle;" checked>'; //form-check-input
+      }
+      else {
+          string += '<input type="checkbox" class="custom-control-input" id="preset-country-name-'+i.toString()+'" name="'+i.toString()+'" value="'+i.toString()+'" style="vertical-align:middle;">'; //form-check-input
+          string_pr_country_preset += ('<a class="dropdown-item option-control-text" href="#">' +  countries[i] + '</a> ');
+      }
       string += '<label class="custom-control-label country-name-text"  for="preset-country-name-'+i.toString()+'" ><span>'+countries[i]+'</span></label>'; //form-check-label
       string += '</div>';
-      string_pr_country_preset += ('<a class="dropdown-item option-control-text" href="#">' +  countries[i] + '</a> ');
+
   }
   $("#preset-country-name").html(string);
   $('#preset-dropdown_menu_pr_country').html(string_pr_country_preset);
