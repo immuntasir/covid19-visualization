@@ -112,8 +112,13 @@ function fetchBangladeshLatestData(){
       });
 }
 
+function hideButtons(){
+  if(chart_aggregation_over=='cumulative'){
+    document.getElementById('dropdownMenuButton').style.display='none';
+  }
+}
 
 function initialize(){
     fetchDataAndLoadChart();
-
+    hideButtons();
 }

@@ -292,7 +292,6 @@ function addOnClickFunctions() {
         document.getElementById('dropdownMenuButton').style.display='block';
       }
   });
-
 }
 
 function addOnClickFunctionsPresetChart () {
