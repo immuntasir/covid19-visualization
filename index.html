@@ -104,7 +104,8 @@
           <div class="tab-pane fade show active" id="nav-customizable_charts" role="tabpanel" aria-labelledby="nav-customizable_charts">
             <div class="row">
               <div class="col-md-9" style="border:1px;">
-                <div class="row option-control-row">
+                <div>
+                  <div class="row option-control-row">
                     <div >
                         <div class="option-control">
                             <div id="content-button" class="btn-group btn-group-sm " role="group" aria-label="Basic example">
@@ -130,22 +131,9 @@
                             </div>
                       </div>
                     </div>
-                    <div >
-                      <div class="option-control">
-                          <div class="dropdown">
-                              <button class="btn btn-secondary btn-sm dropdown-toggle my-tooltip" type="button" id="dropdownMenuButton" data-toggle="dropdown" rel="tooltip" data-placement="top" title="Select a method of smoothing the data points" aria-haspopup="true" aria-expanded="false">
-                                  <span id="selected-aggregation-type">None</span><span class="caret"></span>
-                              </button>
-                              <div class="dropdown-menu" id="dropdown-menu-aggregation-type" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item option-control-text" href="#">None</a>
-                                <a class="dropdown-item option-control-text" href="#">3-day Moving Average</a>
-                                <a class="dropdown-item option-control-text" href="#">7-day Moving Average</a>
-                              </div>
-                          </div>
-                      </div>
                   </div>
-
                 </div>
+                
                 <div class="row option-control-row">
                     <div class="option-control">
                       <div class="option-control justify-content-center my slider-hover" >
@@ -163,6 +151,20 @@
                         </form>
                       </div>
                     </div>
+                    <div style="padding-top: 5px;padding-left: 5px;" id="smoothing-option-container">
+                      <div class="option-control">
+                          <div class="dropdown">
+                              <button class="btn btn-secondary btn-sm dropdown-toggle my-tooltip" type="button" id="dropdownMenuButton" data-toggle="dropdown" rel="tooltip" data-placement="top" title="Select a method of smoothing the data points" aria-haspopup="true" aria-expanded="false">
+                                  <span id="selected-aggregation-type">None</span><span class="caret"></span>
+                              </button>
+                              <div class="dropdown-menu" id="dropdown-menu-aggregation-type" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item option-control-text" href="#">None</a>
+                                <a class="dropdown-item option-control-text" href="#">3-day Moving Average</a>
+                                <a class="dropdown-item option-control-text" href="#">7-day Moving Average</a>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
                 </div>
                 <div class="row">
                     <div id="chart">
@@ -228,27 +230,36 @@
           <div class="tab-pane fade" id="nav-distribution" role="tabpanel" aria-labelledby="nav-distribution">
             <div class = "row">
               <div class = "col-md-6">
-                  <div id="mapid">
-
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                      <a class="nav-item nav-link active" id="nav-map-tab" data-toggle="tab" href="#nav-map" role="tab" aria-controls="nav-map" aria-selected="true">Map</a>
+                      <a class="nav-item nav-link" id="nav-list-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="false">List</a>
+                      <span class="map-updated-text">Last Updated: <span id="distribution-last-updated-span"></span></span>
+                    </div>
+                  </nav>
+                  <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-map" role="tabpanel" aria-labelledby="nav-map-tab">
+                      <div id="mapid">
+    
+                      </div>
+                    </div>
+                    <div class="tab-pane fade" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
+                      <div class="row" id="district-wise-table" style="height:450px; overflow-y: auto;">
+                      </div>
+                    </div>
                   </div>
+                
               </div>
               <div class = "col-md-6" id="bangladesh-district-table">
+                <div style="height: 42px;">
+                  <span>Total Number of Tests, Cases, Deaths and Recovery</span>
+                </div>
                 <div id="total_test_stat">
                   <svg  height="100%" width="100%"></svg>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="row">
-                  <p>Last Updated: <span id="distribution-last-updated-span"></span></p>
-                </div>
-                <div class="row" id="district-wise-table" style="height:450px; overflow-y: auto;">
-                </div>  
-              </div>
-              <div class="col-md-6">
-
-              </div>
+              
+              
             </div>
           </div>
           <div class="tab-pane fade" id="nav-preset" role="tabpanel" aria-labelledby="nav-preset">
