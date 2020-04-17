@@ -3,94 +3,64 @@ function getAreaChartDateKeys(pr_country_name) {
     return date_keys;
 }
 
-function getAreaChartData (pr_country_name) {
-    let data_labels = ['Total Tests', 'Total Case', 'Reported Deaths', 'Total Recovered'];
-    let data_keys = ['num_tests', 'num_cases', 'num_death', 'num_recovered'];
+function getAreaChartData (pr_country_name, type='test_statistics') {
+    let data_labels;
+    let data_keys;
     let ret_columns = [];
-
     date_keys = Object.keys(country_objects['Bangladesh']['num_tests']).slice(1, );
-
-    for (let i=0; i<data_labels.length; i++) {
-        let cur_col = [data_labels[i]];
-        for (let j=0; j<date_keys.length; j++) {
-            cur_col.push(country_objects[pr_country_name][data_keys[i]][date_keys[j]]);
+    if (type == 'test_statistics')  {
+        ret_columns = [['Negative'], ['Positive']];    
+        for (let j=1; j<date_keys.length; j++) {
+            let new_tests = country_objects[pr_country_name]['num_tests'][date_keys[j]] - country_objects[pr_country_name]['num_tests'][date_keys[j-1]];
+            let new_cases = country_objects[pr_country_name]['num_cases'][date_keys[j]] - country_objects[pr_country_name]['num_cases'][date_keys[j-1]];
+            ret_columns[0].push(new_tests);
+            ret_columns[1].push(new_cases);
         }
-        ret_columns.push(cur_col);
+    }
+    else if (type == 'case_statistics') {
+        ret_columns = [['Active Cases'], ['Recovered'], ['Death']];
+        for (let j=0; j<date_keys.length; j++) {
+            let num_recovered = country_objects[pr_country_name]['num_recovered'][date_keys[j]];
+            let num_death = country_objects[pr_country_name]['num_death'][date_keys[j]];
+            let active_cases = country_objects[pr_country_name]['num_tests'][date_keys[j]] - num_death - num_recovered;
+            ret_columns[0].push(active_cases);
+            ret_columns[1].push(num_recovered);
+            ret_columns[2].push(num_death);
+
+        }
     }
     return ret_columns;
 }
 
-
-function showAreaChart (pr_country_name = 'Bangladesh', scale='linear') {
-    data_columns = getAreaChartData(pr_country_name);
-    date_keys = getAreaChartDateKeys(pr_country_name);
-
-    let color_list = ['blue', 'orange', 'green', 'red'];
-    let y_tick_values;
-    let y_axis_min_value;
-
-    let max_y_val = 0;
-    let min_y_val=min_case_count;
-    
-    if (scale == 'logarithmic') {
-        y_axis_min_value = 0;
-        for (let i=0; i<data_columns.length; i++) {
-            for (let j=1; j<data_columns[i].length; j++) {
-                if (data_columns[i][j] > max_y_val) {
-                    max_y_val = data_columns[i][j];
-                }
-                if (data_columns[i][j] < min_y_val) {
-                    min_y_val = data_columns[i][j];
-                }
-                if (data_columns[i][j] != 0) {
-                    data_columns[i][j] = yAxisNumToLog (data_columns[i][j]);
-                }
-            }
-        }
-        y_tick_values = getYTickValues(min_y_val, max_y_val);
-        y_axis_min_value = y_tick_values[0];
-    }
-    if (bd_stat_chart != undefined) {
-        bd_stat_chart = bd_stat_chart.destroy();
-    }
-    
-    bd_stat_chart = c3.generate({
-        bindto: '#total_test_stat',
+function generateC3Chart(chart_div_id, data_columns, date_keys, color_list, data_groups, original_values) {
+    return c3.generate({
+        bindto: chart_div_id,
         data: {
             columns: data_columns,
             colors: color_list,
-            type: 'area'
+            type: 'area',
+            groups: [data_groups]
         },
         size: {
             height: 500,
         },
         tooltip: {
             format: {
-                name: function (name, ratio, id, index) {
-                    return name;
-                }
-            }
-        },
-        tooltip: {
-            format: {
-                title: function (name, index) {
+                title: function (name) {
                     return dateConverter(date_keys[name]);
+                },
+                name: function (name, ratio, id, index) {
+                    return name + ' (' + original_values[index+1][name] +')';
                 }
             }
         },
         axis : {
             y : {
                 show:true,
-                min: y_axis_min_value,
                 tick: {
-                    values: y_tick_values,
-                    format: function (d) {
-                        if (scale == 'logarithmic') {
-                            return formatNumber(Math.pow(10,d * Math.LN10).toFixed(0));
-                        }
-                        else {
-                            return formatNumber(d);
-                        }
+                    values: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                    format: function (d, index) {
+                        return d + '%';
                     }
                 }
             },
@@ -100,8 +70,70 @@ function showAreaChart (pr_country_name = 'Bangladesh', scale='linear') {
                    format: function (d) { return date_keys[d]; }
                 }
             }
-        },
+        }
     });
+}
+
+
+function showAreaChart (pr_country_name = 'Bangladesh', type='test_statistics') {
+    let data_columns = getAreaChartData(pr_country_name, type);
+    let date_keys = getAreaChartDateKeys(pr_country_name);
+    let colors, chart_title, chart_div_id;
+    if (type == 'test_statistics') {
+        colors = ['blue', 'orange'];
+        chart_title = 'Test Statistics';
+        chart_div_id = '#total_test_stat';
+    }
+    else if (type == 'case_statistics') {
+        colors = ['orange', 'green', 'red'];
+        chart_title = 'Case Statistics';
+        chart_div_id = '#total_case_stat';
+    }
+    let data_groups = []
+    let color_list = Object();
+    for (let i=0; i<data_columns.length; i++) {
+        color_list[data_columns[i][0]] = colors[i];
+        data_groups.push(data_columns[i][0]);
+    }
+    
+    let y_tick_values;
+    let y_axis_min_value;
+
+    let max_y_val = 0;
+    let min_y_val=2;
+    divisor = []
+    let original_values = Object();
+    for (let i=0; i<data_columns[0].length; i++) {
+        divisor.push(0);
+    }
+    for (let j=1; j<data_columns[0].length; j++) {
+        original_values[j] = Object();
+        for (let i=0; i<data_columns.length; i++) {
+            divisor[j] += parseInt(data_columns[i][j]);
+        }
+    }
+
+    for (let i=0; i<data_columns.length; i++) {
+        let tot = 0;
+        for (let j=1; j<data_columns[i].length; j++) {
+            original_values[j][data_columns[i][0]] = data_columns[i][j];
+            data_columns[i][j] /= divisor[j];
+            data_columns[i][j] = (data_columns[i][j] * 100).toFixed(2);
+        }
+    }
+    if (type == 'test_statistics') {
+        if (test_stat_chart != undefined) {
+            test_stat_chart = test_stat_chart.destroy();
+        }
+        test_stat_chart = generateC3Chart(chart_div_id, data_columns, date_keys, color_list, data_groups, original_values);    
+    }
+    else if (type == 'case_statistics') {
+        if (case_stat_chart != undefined) {
+            case_stat_chart = case_stat_chart.destroy();
+        }
+        case_stat_chart = generateC3Chart(chart_div_id, data_columns, date_keys, color_list, data_groups, original_values);
+    }
+    
 }
 
 function getNewVsTotalChartData (pr_country_name, num_days=1) {

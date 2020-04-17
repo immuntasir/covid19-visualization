@@ -267,7 +267,8 @@ function addOnClickFunctions() {
 
   $("a[href='#nav-distribution']").on('shown.bs.tab', function(e) {
     loadDataAndShowDistributionMap();
-    showAreaChart (pr_country_name = 'Bangladesh', scale=bd_stat_scale);
+    showAreaChart (pr_country_name = 'Bangladesh', type = 'test_statistics');
+    showAreaChart (pr_country_name = 'Bangladesh', type='case_statistics');
   });
 
   $("a[href='#nav-preset']").on('shown.bs.tab', function(e) {
@@ -536,6 +537,6 @@ function updateBdStatChartButtonColor(scale){
 
 function bdStatChartChage(scale){
   bd_stat_scale = scale;
-  showAreaChart (pr_country_name, bd_stat_scale);
+  showAreaChart (pr_country_name, bd_stat_type);
   updateBdStatChartButtonColor(scale);
 }

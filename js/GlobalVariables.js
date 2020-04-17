@@ -96,7 +96,8 @@ var content_name_map = {
 
 
 var chart;
-var bd_stat_chart;
+var test_stat_chart;
+var case_stat_chart;
 var y_tick_scales = [1, 2, 5, 10];
 
 var chart_preset_current_option = 'new_vs_total';
@@ -108,4 +109,4 @@ var preset_chart_country_name = 'Bangladesh';
 var preset_chart_scale = 'linear';
 var preset_chart_countries = [];
 
-var bd_stat_scale = 'linear';
+bd_stat_type = 'test_statistics';

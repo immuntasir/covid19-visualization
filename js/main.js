@@ -15,7 +15,7 @@ function fetchDataAndLoadChart(){
             {
                 data = $.csv.toArrays(response);
                 allCountriesData[content_actual_name[i]] = csvJSON(data);
-                if (i==0) {
+                if (i==2) {
                     fetchBangladeshLatestData();
                 }
                 }
@@ -24,7 +24,7 @@ function fetchDataAndLoadChart(){
 }
 
 function loadChart() {
-    showGraph(pr_country_name=chart_primary_country, countries=[], min_case_count = 10, init_day = 0, max_day = 30, content='cases',
+    showGraph(pr_country_name=chart_primary_country, countries=[], min_case_count = 10, init_day = 0, max_day = 90, content='cases',
                     aggregation_over = chart_aggregation_over, aggregation_type=chart_aggregation_type, normalization='none', scale='linear');
     MakeDescription();
 }
@@ -79,12 +79,12 @@ function initializeCountryData (country_name='Bangladesh') {
         cur_country_data = getCountryRow(country_name, content_actual_name[i]);
         let keys = Object.keys(cur_country_data).slice(4);
         for (let j=0; j<keys.length; j++) {
-            country_objects[country_name]['num_' + content_actual_name[i]][keys[j]] = cur_country_data[keys[j]];
+            country_objects[country_name]['num_' + content_actual_name[i]][keys[j]] = parseInt(cur_country_data[keys[j]]);
         }
     }
     if (country_name == 'Bangladesh') {
         for (let i=0; i<latest_data.length; i++) {
-            country_objects[country_name]['num_tests'][latest_data[i][0]] = latest_data[i][4]
+            country_objects[country_name]['num_tests'][latest_data[i][0]] = parseInt(latest_data[i][4])
         }
     }
 }
