@@ -310,6 +310,10 @@ function csvJSON(csv){
         axis : {
             y : {
                 show:true,
+                label: {
+                    text: '# ' + content_name_map[content],
+                    position: 'outer-middle',
+                },
                 min: y_axis_min_value,
                 tick: {
                     values: y_tick_values,

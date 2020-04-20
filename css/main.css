@@ -223,3 +223,7 @@
   left: 240px;
   z-index: 100;
 }
+
+stat-title {
+  font-size: 20px;
+}

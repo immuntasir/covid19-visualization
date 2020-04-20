@@ -21,7 +21,7 @@ function makeDistrictObjects (data) {
     }
 
     last_update_values = last_update_values.sort(function(a, b) {return a-b;})
-    col_slices = [0, 1, 10, 100]
+    col_slices = [0, 1, 10, 100, 1000];
 }
 
 function loadDataAndShowDistributionMap () {
@@ -117,11 +117,15 @@ function showDistributionMap () {
 
 }
 
+//#E97451, #D95D41, #C94631, #B92E20, #A91710,#990000
+//#E31A1C, FF0000
+
 function getColorByValue (comp_val) {
-    return comp_val > col_slices[3] ? '#800026' :
-            comp_val > col_slices[2]  ? '#E31A1C' :
-            comp_val > col_slices[1]   ? '#FD8D3C' :
-            comp_val > col_slices[0]   ? '#FED976' :
+    return comp_val > col_slices[4] ? '#800026' :
+           comp_val > col_slices[3] ? '#FF0000' :
+            comp_val > col_slices[2]  ? '#FF9650' :
+            comp_val > col_slices[1]   ? '#FFBA6A' :
+            comp_val > col_slices[0]   ? '#FFD785' :
                         '#FFEDA0';
 }
 

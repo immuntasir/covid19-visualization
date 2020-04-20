@@ -18,14 +18,12 @@ function getAreaChartData (pr_country_name, type='test_statistics') {
         }
     }
     else if (type == 'case_statistics') {
-        ret_columns = [['Active Cases'], ['Recovered'], ['Death']];
+        ret_columns = [['Recovered'], ['Death']];
         for (let j=0; j<date_keys.length; j++) {
             let num_recovered = country_objects[pr_country_name]['num_recovered'][date_keys[j]];
             let num_death = country_objects[pr_country_name]['num_death'][date_keys[j]];
-            let active_cases = country_objects[pr_country_name]['num_tests'][date_keys[j]] - num_death - num_recovered;
-            ret_columns[0].push(active_cases);
-            ret_columns[1].push(num_recovered);
-            ret_columns[2].push(num_death);
+            ret_columns[0].push(num_recovered);
+            ret_columns[1].push(num_death);
 
         }
     }
@@ -83,9 +81,10 @@ function showAreaChart (pr_country_name = 'Bangladesh', type='test_statistics') 
         colors = ['blue', 'orange'];
         chart_title = 'Test Statistics';
         chart_div_id = '#total_test_stat';
+        date_keys = date_keys.slice(1, );
     }
     else if (type == 'case_statistics') {
-        colors = ['orange', 'green', 'red'];
+        colors = ['green', 'red'];
         chart_title = 'Case Statistics';
         chart_div_id = '#total_case_stat';
     }

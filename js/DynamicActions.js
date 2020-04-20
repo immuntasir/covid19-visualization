@@ -247,7 +247,8 @@ $('#dropdown-menu-aggregation-type a').click(function(){
   });
 
 function addOnClickFunctions() {
-  $('#dropdown_menu_pr_country a').click(function(){
+  $('#dropdown_menu_pr_country a').click(function(event){
+    event.preventDefault();
     if (chart_primary_country == $(this).text()) {
       return;
     }
