@@ -53,7 +53,7 @@ function initializeVariables() {
     addOnClickFunctions();
     enablingToolip();
 
-    
+
     // Javascript to enable link to tab
     var url = document.location.toString();
     if (url.match('#')) {
@@ -121,7 +121,26 @@ function hideButtons(){
   }
 }
 
+function dynamicContentNameGen(){
+  let keys = Object.keys(content_name_map);
+  let key,string='<div class="option-control">';
+  string += '<div class="dropdown">';
+  string += '<button class="btn btn-secondary btn-sm dropdown-toggle my-tooltip" type="button" id="dropdownMenuButton-content-name-map" data-toggle="dropdown" rel="tooltip" data-placement="top" title="Select an option" aria-haspopup="true" aria-expanded="false">';
+  string += '<span id="selected-aggregation-type-content-name-map">'+content_name_map[keys[0]]+'</span><span class="caret"></span>';
+  string += '</button>';
+  string += '<div class="dropdown-menu" id="dropdown-menu-aggregation-type-content-name-map" aria-labelledby="dropdownMenuButton-content-name-map">';
+  for(let i=0;i<keys.length;i++){
+    key='<a class="dropdown-item option-control-text" href="#" id="'+keys[i]+'">'+content_name_map[keys[i]]+'</a>'
+    string+=key;
+  }
+  string += '</div>';
+  string += '</div>';
+  string += '</div>';
+  $('#content-name-map-container').html(string);
+}
+
 function initialize(){
+    dynamicContentNameGen();
     fetchDataAndLoadChart();
     hideButtons();
 }

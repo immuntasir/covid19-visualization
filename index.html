@@ -1,95 +1,95 @@
 <!DOCTYPE html>
 <head>
-    <title>COVID-19 Data Visualization</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-    <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
+  <title>COVID-19 Data Visualization</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+  <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-20989950-4"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-20989950-4"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-      gtag('config', 'UA-20989950-4');
-    </script>
-
-
-    <meta property="og:image" content="https://i.imgur.com/foOMgE9.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1024">
-    <meta property="og:image:height" content="1024">
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.shoshikkha.com/covid19"/>
-    <meta property="og:title" content="COVID-19 Data Visualization" />
-    <meta property="og:description" content="This website lets you visualize COVID-19 data and compare among different countries with a range of options. Disclaimer: We collect the data from the CSSE COVID-19 Dataset provided by Johns Hopkins University. We do not verify or modify the data in any form." />
-
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
-    <link rel="stylesheet" href="./la-color-picker-master/la_color_picker.css?version=104">
+  gtag('config', 'UA-20989950-4');
+  </script>
 
 
-    <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <meta property="og:image" content="https://i.imgur.com/foOMgE9.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1024">
+  <meta property="og:image:height" content="1024">
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.shoshikkha.com/covid19"/>
+  <meta property="og:title" content="COVID-19 Data Visualization" />
+  <meta property="og:description" content="This website lets you visualize COVID-19 data and compare among different countries with a range of options. Disclaimer: We collect the data from the CSSE COVID-19 Dataset provided by Johns Hopkins University. We do not verify or modify the data in any form." />
 
-    <!-- Popper JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
+  <link rel="stylesheet" href="./la-color-picker-master/la_color_picker.css?version=104">
 
 
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js" integrity="sha384-3ziFidFTgxJXHMDttyPJKDuTlmxJlwbSkojudK/CkRqKDOmeSbN6KLrGdrBQnT2n" crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="./css/main.css?version=104">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js" integrity="sha384-3ziFidFTgxJXHMDttyPJKDuTlmxJlwbSkojudK/CkRqKDOmeSbN6KLrGdrBQnT2n" crossorigin="anonymous"></script>
+  <link rel="stylesheet" type="text/css" href="./css/main.css?version=104">
 
 
 
 
-    <!-- Include d3.js first -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+  <!-- Include d3.js first -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.10/c3.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.6/nv.d3.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-    crossorigin=""/>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+  integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+  crossorigin=""/>
 
-     <!-- Make sure you put this AFTER Leaflet's CSS -->
-    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-      crossorigin=""></script>
+  <!-- Make sure you put this AFTER Leaflet's CSS -->
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+  integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+  crossorigin=""></script>
 
-    <script type="text/javascript">
-        var random_number = 0;
-        function randomNumberGenerator(){
-            random_number = Math.floor(Math.random() * 10000);
-            console.log(random_number);
-        }
-        randomNumberGenerator();
-    </script>
+  <script type="text/javascript">
+  var random_number = 0;
+  function randomNumberGenerator(){
+    random_number = Math.floor(Math.random() * 10000);
+    console.log(random_number);
+  }
+  randomNumberGenerator();
+  </script>
 
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="./js/GlobalVariables.js?version=104"></script>
-    <script src="./js/GraphMakerFunctions.js?version=104"></script>
-    <script src="./la-color-picker-master/custom_color_picker.js?version=104"></script>
-    <script src="./js/bd-districts.js?version=104"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="./js/GlobalVariables.js?version=104"></script>
+  <script src="./js/GraphMakerFunctions.js?version=104"></script>
+  <script src="./la-color-picker-master/custom_color_picker.js?version=104"></script>
+  <script src="./js/bd-districts.js?version=104"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
 
 </head>
 
 <body onload="initialize()">
   <div>
     <nav class="navbar navbar-light bg-light" style="color:white;  background-color: lightblue;">
-        <a class="navbar-brand" href="#">COVID-19 Data Visualization</a>
+      <a class="navbar-brand" href="#">COVID-19 Data Visualization</a>
     </nav>
     <div style="margin-top:20px; padding-bottom:120px;">
       <div class="container">
@@ -103,136 +103,131 @@
         <div class="tab-content" id="nav-tabContent">
           <div class="tab-pane fade show active" id="nav-customizable_charts" role="tabpanel" aria-labelledby="nav-customizable_charts">
             <div class="row">
-              <div class="col-md-9" style="border:1px;">
+              <div class="col-md-9" style="border:1px;"> <!--first column starts -->
                 <div>
                   <div class="row option-control-row">
-                    <div >
-                        <div class="option-control">
-                            <div id="content-button" class="btn-group btn-group-sm " role="group" aria-label="Basic example">
-                                <button type="button" id="content-cases" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Visualize Confirmed Cases" onClick="graphContentOptionSelection('0','content-cases')" >Cases</button>
-                                <button type="button" id="content-death" class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Visualize Reported Deaths" onClick="graphContentOptionSelection('1','content-death')"  >Death</button>
-                                <button type="button" id="content-recovery" class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Visualize Recovered Cases" onClick="graphContentOptionSelection('2','content-recovery')" >Recovered</button>
-                              </div>
-                        </div>
-                    </div>
-                    <div>
-                      <div class="option-control">
-                          <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                              <button type="button" id="scale-linear" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Select Linear Scale on Y-Axis" onclick="selectChartType('0','linear')">Linear</button>
-                              <button type="button" id="scale-logarithmic" class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Select Log Scale on Y-Axis" onclick="selectChartType('1','logarithmic')">Logarithmic</button>
-                            </div>
-                      </div>
-                    </div>
-                    <div>
-                      <div class="option-control">
-                          <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                              <button type="button" id="aggregation_over_cumulative" class="btn btn-secondary none-button-hide" data-toggle="tooltip" data-placement="top" title="Visualize Total Number" onclick="selectAggregationOver('cumulative')">Total</button>
-                              <button type="button" id="aggregation_over_new_cases" class="btn btn-light none-button-hide" data-toggle="tooltip" data-placement="top" title="Visualize Daily Increase" onclick="selectAggregationOver('new_cases')">Daily</button>
-                            </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
 
-                <div class="row option-control-row">
+                        <div id="content-name-map-container">
+                        </div>
+                      <div>
+                        <div class="option-control">
+                          <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            <button type="button" id="scale-linear" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Select Linear Scale on Y-Axis" onclick="selectChartType('0','linear')">Linear</button>
+                            <button type="button" id="scale-logarithmic" class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Select Log Scale on Y-Axis" onclick="selectChartType('1','logarithmic')">Logarithmic</button>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <div class="option-control">
+                          <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                            <button type="button" id="aggregation_over_cumulative" class="btn btn-secondary none-button-hide" data-toggle="tooltip" data-placement="top" title="Visualize Total Number" onclick="selectAggregationOver('cumulative')">Total</button>
+                            <button type="button" id="aggregation_over_new_cases" class="btn btn-light none-button-hide" data-toggle="tooltip" data-placement="top" title="Visualize Daily Increase" onclick="selectAggregationOver('new_cases')">Daily</button>
+                          </div>
+                        </div>
+                      </div>
+
+                  </div>
+
+                  <div class="row option-control-row">
                     <div class="option-control">
                       <div class="option-control justify-content-center my slider-hover" >
                         <span class="option-title-sm" style="font-size:14px;">Minimum cases:</span><span class="font-weight-bold text-primary ml-2 mt-1 valueSpan2" style="font-size:14px;" id="min_case_count_value"></span><i data-toggle="tooltip" data-placement="top" title="Select the number of minimum total cases, from which day the visualization begins" style="margin-left:10px;" class="fa fa-question-circle"></i>
 
                         <form class="range-field w-75">
-                            <input id="slider12" class="border-0"  type="range" min="1" max="101"  step="5" value="10"/>
+                          <input id="slider12" class="border-0"  type="range" min="1" max="101"  step="5" value="10"/>
                         </form>
                       </div>
                     </div><div class="option-control">
                       <div class="option-control justify-content-center my slider-hover"  >
                         <span class="option-title-sm" style="font-size:14px;">Maximum days:</span><span class="font-weight-bold text-primary ml-2 mt-1 valueSpan3" id="maximum_days_span" style="font-size:14px;"></span><i  data-toggle="tooltip" data-placement="top" title="Select the maximum number of days to show on the X-Axis" style="margin-left:10px;" class="fa fa-question-circle"></i>
                         <form class="range-field w-75">
-                            <input id="slider13" class="border-0" type="range" min="10" max="150" value="90" step="5" />
+                          <input id="slider13" class="border-0" type="range" min="10" max="150" value="90" step="5" />
                         </form>
                       </div>
                     </div>
                     <div style="padding-top: 5px;padding-left: 5px;" id="smoothing-option-container">
                       <div class="option-control">
-                          <div class="dropdown">
-                              <button class="btn btn-secondary btn-sm dropdown-toggle my-tooltip" type="button" id="dropdownMenuButton" data-toggle="dropdown" rel="tooltip" data-placement="top" title="Select a method of smoothing the data points" aria-haspopup="true" aria-expanded="false">
-                                  <span id="selected-aggregation-type">None</span><span class="caret"></span>
-                              </button>
-                              <div class="dropdown-menu" id="dropdown-menu-aggregation-type" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item option-control-text" href="#">None</a>
-                                <a class="dropdown-item option-control-text" href="#">3-day Moving Average</a>
-                                <a class="dropdown-item option-control-text" href="#">7-day Moving Average</a>
-                              </div>
+                        <div class="dropdown">
+                          <button class="btn btn-secondary btn-sm dropdown-toggle my-tooltip" type="button" id="dropdownMenuButton" data-toggle="dropdown" rel="tooltip" data-placement="top" title="Select a method of smoothing the data points" aria-haspopup="true" aria-expanded="false">
+                            <span id="selected-aggregation-type">None</span><span class="caret"></span>
+                          </button>
+                          <div class="dropdown-menu" id="dropdown-menu-aggregation-type" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item option-control-text" href="#">None</a>
+                            <a class="dropdown-item option-control-text" href="#">3-day Moving Average</a>
+                            <a class="dropdown-item option-control-text" href="#">7-day Moving Average</a>
                           </div>
+                        </div>
                       </div>
+                    </div>
                   </div>
-                </div>
-                <div class="row">
+                  <div class="row">
                     <div id="chart">
-                        <svg  height="100%" width="100%">
-                          <image src="./image/giphy.gif"/>
-                        </svg>
+                      <svg  height="100%" width="100%">
+                        <image src="./image/giphy.gif"/>
+                      </svg>
                     </div>
+                  </div>
+
+
+
+                  <div class = "row">
+                    <p class="chart-description">
+                      <span style="font-weight: normal;">You can hover over the name of the countries in order to highlight the corresponding line. You can also hide/show country lines by clicking on the name of the country.</span>
+                      <br>
+                      This chart visualizes the <span id="content-list-span"></span> using the <span id="chart-type-span"></span> scale.
+                      Each day refers to the day in since at least <span id="minimum-case-span"></span> detected in each country. The corresponding date in each country can be seen by hovering over the data points in the chart.
+                      The data points in each day refer to <span id="aggregation-over-span"></span>in each country.
+                      <span id="aggregation-type-div" style="font-weight:normal;">This chart uses a <span id="aggregation-type-span" style="font-weight:bold;"></span> to smooth the data points.</span>
+                      <br>
+                      <span><strong>Disclaimer</strong>: We collect the data from the <a href="https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data">CSSE COVID-19 Dataset</a> provided by Johns Hopkins University. We do not verify or modify the data in any form. </span>
+                    </p>
+
+                  </div>
+
                 </div>
-
-
-
-                <div class = "row">
-                  <p class="chart-description">
-                    <span style="font-weight: normal;">You can hover over the name of the countries in order to highlight the corresponding line. You can also hide/show country lines by clicking on the name of the country.</span>
-                    <br>
-                    This chart visualizes the <span id="content-list-span"></span> using the <span id="chart-type-span"></span> scale.
-                    Each day refers to the day in since at least <span id="minimum-case-span"></span> detected in each country. The corresponding date in each country can be seen by hovering over the data points in the chart.
-                    The data points in each day refer to <span id="aggregation-over-span"></span>in each country.
-                    <span id="aggregation-type-div" style="font-weight:normal;">This chart uses a <span id="aggregation-type-span" style="font-weight:bold;"></span> to smooth the data points.</span>
-                    <br>
-                    <span><strong>Disclaimer</strong>: We collect the data from the <a href="https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data">CSSE COVID-19 Dataset</a> provided by Johns Hopkins University. We do not verify or modify the data in any form. </span>
-                  </p>
-
-                </div>
-
-              </div>
-              <div class="col-md-3">
-                <div class="option-title">Primary Country</div>
-                <div class="option-control">
-                  <div class="dropdown">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle my-tooltip" type="button" id="dropdownMenuButton" data-toggle="dropdown" data-placement="top" title="Select Primary Country" aria-haspopup="true" aria-expanded="false">
+              </div> <!-- first column ends -->
+                <div class="col-md-3"> <!-- second column starts -->
+                  <div class="option-title">Primary Country</div>
+                  <div class="option-control">
+                    <div class="dropdown">
+                      <button class="btn btn-secondary btn-sm dropdown-toggle my-tooltip" type="button" id="dropdownMenuButton" data-toggle="dropdown" data-placement="top" title="Select Primary Country" aria-haspopup="true" aria-expanded="false">
                         <span id="selected_pr_country">Bangladesh</span><span class="caret"></span>
-                    </button>
-                    <div class="dropdown-menu" id="dropdown_menu_pr_country" aria-labelledby="dropdownMenuButton" style="overflow-y: auto; height:400px;">
+                      </button>
+                      <div class="dropdown-menu" id="dropdown_menu_pr_country" aria-labelledby="dropdownMenuButton" style="overflow-y: auto; height:400px;">
 
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div class="option-control">
-                  <div class="dropdown">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" data-placement="right" title="Select Primary Country Chart Type"  aria-haspopup="true" aria-expanded="false">
+                  <div class="option-control">
+                    <div class="dropdown">
+                      <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" data-placement="right" title="Select Primary Country Chart Type"  aria-haspopup="true" aria-expanded="false">
                         <span id="selected_pr_country_chart_type">Bar</span><span class="caret"></span>
-                    </button>
-                    <div class="dropdown-menu" id="dropdown_menu_pr_country_chart_type" aria-labelledby="dropdownMenuButton">
-                      <a class="dropdown-item option-control-text" href="#">Bar</a>
-                      <a class="dropdown-item option-control-text" href="#">Line</a>
+                      </button>
+                      <div class="dropdown-menu" id="dropdown_menu_pr_country_chart_type" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item option-control-text" href="#">Bar</a>
+                        <a class="dropdown-item option-control-text" href="#">Line</a>
+                      </div>
                     </div>
                   </div>
-                </div>
 
 
 
-                <div class="option-title">Countries to Compare</div>
-                <div class="option-control-div">
+                  <div class="option-title">Countries to Compare</div>
+                  <div class="option-control-div">
                     <form >
                       <div id="checkBoxContainer" class="country-checkbox" style="overflow-y: auto; height:400px;">
                       </div>
-                      </form>
-                </div>
+                    </form>
+                  </div>
 
+                </div> <!-- second column ends-->
               </div>
             </div>
-          </div>
-          <div class="tab-pane fade" id="nav-distribution" role="tabpanel" aria-labelledby="nav-distribution">
-            <div class = "row">
-              <div class = "col-md-6">
-                <nav>
+            <div class="tab-pane fade" id="nav-distribution" role="tabpanel" aria-labelledby="nav-distribution">
+              <div class = "row">
+                <div class = "col-md-6">
+                  <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                       <a class="nav-item nav-link active" id="nav-map-tab" data-toggle="tab" href="#nav-map" role="tab" aria-controls="nav-map" aria-selected="true">Map</a>
                       <a class="nav-item nav-link" id="nav-list-tab" data-toggle="tab" href="#nav-list" role="tab" aria-controls="nav-list" aria-selected="false">List</a>
@@ -251,33 +246,33 @@
                     </div>
                   </div>
 
-              </div>
-              <div class = "col-md-6">
-                <div style="height: 42px;padding-top: 5px;">
-                  <span class = "stat-title">Daily Test Statistics (Positive vs Negative)</span>
                 </div>
-                <div id="total_test_stat">
-                  <svg  height="100%" width="100%"></svg>
+                <div class = "col-md-6">
+                  <div style="height: 42px;padding-top: 5px;">
+                    <span class = "stat-title">Daily Test Statistics (Positive vs Negative)</span>
+                  </div>
+                  <div id="total_test_stat">
+                    <svg  height="100%" width="100%"></svg>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div style="height: 42px;padding-top: 5px;">
+                    <span class = "stat-title">Case Stasitics (Death vs Recovery)</span>
+                  </div>
+                  <div id="total_case_stat">
+                    <svg  height="100%" width="100%"></svg>
+                  </div>
+                </div>
+                <div class="col-md-6">
+
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div style="height: 42px;padding-top: 5px;">
-                  <span class = "stat-title">Case Stasitics (Death vs Recovery)</span>
-                </div>
-                <div id="total_case_stat">
-                  <svg  height="100%" width="100%"></svg>
-                </div>
-              </div>
-              <div class="col-md-6">
-                
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane fade" id="nav-preset" role="tabpanel" aria-labelledby="nav-preset">
-            <div class = "row">
-              <div class = "col-md-9">
+            <div class="tab-pane fade" id="nav-preset" role="tabpanel" aria-labelledby="nav-preset">
+              <div class = "row">
+                <div class = "col-md-9">
                   <div class="row">
                     <div class="option-control">
                       <div class="dropdown" id='chart-preset-dropdown' hidden>
@@ -292,43 +287,43 @@
                   </div>
                   <div id='preset_chart_new_vs_total'><!-- Plotly chart will be drawn inside this DIV -->
                   </div>
-              </div>
-              <div class = "col-md-3">
-                <div class="option-title">Primary Country</div>
-                <div class="option-control">
-                  <div class="dropdown">
-                    <button class="btn btn-secondary btn-sm dropdown-toggle my-tooltip" type="button" id="dropdownMenuButton" data-toggle="dropdown" data-placement="top" title="Select Primary Country" aria-haspopup="true" aria-expanded="false">
+                </div>
+                <div class = "col-md-3">
+                  <div class="option-title">Primary Country</div>
+                  <div class="option-control">
+                    <div class="dropdown">
+                      <button class="btn btn-secondary btn-sm dropdown-toggle my-tooltip" type="button" id="dropdownMenuButton" data-toggle="dropdown" data-placement="top" title="Select Primary Country" aria-haspopup="true" aria-expanded="false">
                         <span id="preset-selected_pr_country">Bangladesh</span><span class="caret"></span>
-                    </button>
-                    <div class="dropdown-menu" id="preset-dropdown_menu_pr_country" aria-labelledby="dropdownMenuButton" style="overflow-y: auto; height:400px;">
+                      </button>
+                      <div class="dropdown-menu" id="preset-dropdown_menu_pr_country" aria-labelledby="dropdownMenuButton" style="overflow-y: auto; height:400px;">
 
+                      </div>
                     </div>
                   </div>
+                  <div class="option-title">Countries to Compare</div>
+                  <div id="preset-country-name" style="overflow-y: auto; height:400px;"></div>
                 </div>
-                <div class="option-title">Countries to Compare</div>
-                <div id="preset-country-name" style="overflow-y: auto; height:400px;"></div>
               </div>
             </div>
           </div>
+
         </div>
-
       </div>
-    </div>
 
-    <div class = "footer" >
-      <p class="footer-text col-md-12" >
+      <div class = "footer" >
+        <p class="footer-text col-md-12" >
           <span>Developed by <a href="https://www.facebook.com/wahedmuntasir">Muntasir Wahed</a> (<a href = "mailto: immuntasir@gmail.com">immuntasir@gmail.com</a>) and <a href="https://github.com/rizveeerprojects">Redwan Ahmed Rizvee.</a></span>
           <span>Hosted by <a href="https://techabyte.xyz/">TechAByte Solutions</a></span>
-      </p>
+        </p>
+      </div>
     </div>
-  </div>
     <script type="text/javascript">
-        var random_number = 0;
-        function randomNumberGenerator(){
-            random_number = Math.floor(Math.random() * 10000);
-            console.log(random_number);
-        }
-        randomNumberGenerator();
+    var random_number = 0;
+    function randomNumberGenerator(){
+      random_number = Math.floor(Math.random() * 10000);
+      console.log(random_number);
+    }
+    randomNumberGenerator();
     </script>
     <script src="./js/mapMaker.js?version=104"></script>
 
@@ -337,4 +332,4 @@
     <script src="./js/GraphMakerFunctions.js?version=104"></script>
     <script src="./js/DynamicActions.js?version=104"></script>
     <script src="./js/main.js?version=104"></script>
-</body>
+  </body>

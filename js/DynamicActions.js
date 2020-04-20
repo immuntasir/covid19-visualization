@@ -76,34 +76,6 @@ function showCountryOptions(){
   initiateColorPickerPortion();
 }
 
-function colorChanger(idx){
-  for(let i=0;i<content_actual_name_ids.length;i++){
-    let element = document.getElementById(content_actual_name_ids[i]);
-    if(i==idx){
-        if($('#'+content_actual_name_ids[i]).hasClass('btn-secondary') ==false){
-            $('#'+content_actual_name_ids[i]).toggleClass('btn-light');
-            $('#'+content_actual_name_ids[i]).toggleClass('btn-secondary');
-        }
-    }
-    else{
-      if($('#'+content_actual_name_ids[i]).hasClass('btn-secondary') ==true){
-          $('#'+content_actual_name_ids[i]).toggleClass('btn-light');
-          $('#'+content_actual_name_ids[i]).toggleClass('btn-secondary');
-      }
-    }
-  }
-}
-
-function graphContentOptionSelection(idx,id){
-  if (content_actual_name[idx] == graph_content) {
-    return;
-  }
-  idx=parseInt(idx);
-  graph_content =  content_actual_name[idx];
-  colorChanger(idx);
-  initTheVariablesAndGenerateGraph();
-}
-
 function changeColorChartTypeButton(id){
   for(let i=0;i<chart_type_ids.length;i++){
     if(chart_type_ids[i] == id){
@@ -297,6 +269,15 @@ function addOnClickFunctions() {
         document.getElementById('dropdownMenuButton').style.display='block';
       }
   });
+
+  $('#dropdown-menu-aggregation-type-content-name-map a').click(function(){
+      let id = $(this).attr('id');
+      $('#selected-aggregation-type-content-name-map').text(content_name_map[id]);
+      if(graph_content == id) return;
+      graph_content = id;
+      initTheVariablesAndGenerateGraph();
+  });
+
 }
 
 function addOnClickFunctionsPresetChart () {
