@@ -91,7 +91,9 @@ var months = ["January", "February", "March", "April", "May", "June", "July", "A
 var content_name_map = {
     'cases': 'Confirmed Cases',
     'death': 'Reported Deaths',
-    'recovered': 'Recovered Cases'
+    'recovered': 'Recovered Cases',
+    'cfr': 'Preliminary Case Fatality Rate (%)',
+    'death_by_closed_cases': 'Death/Closed Cases (%)'
 }
 
 

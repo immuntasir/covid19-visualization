@@ -85,6 +85,79 @@ function csvJSON(csv){
     return country_data;
   }
 
+  function getCountryRowCombination (country_name_in, content='cfr') {
+    let country_row = {}
+    if (content == 'cfr') {
+        let num_cases = getCountryRow(country_name_in, 'cases');
+        let num_death = getCountryRow(country_name_in, 'death');
+        let data_keys = Object.keys(num_cases)
+        for (let i=0; i<data_keys.length; i++ ) {
+            if (i<4) {
+                country_row[data_keys[i]] = num_cases[data_keys[i]];
+                continue;
+            }
+            if (num_cases[data_keys[i]] != 0) {
+                country_row[data_keys[i]] = ((num_death[data_keys[i]] / num_cases[data_keys[i]]) * 100).toFixed(2);
+            }
+            else {
+                country_row[data_keys[i]] = 0;
+            }
+        }
+    }
+    else if (content == 'death_by_closed_cases') {
+        let num_recovered = getCountryRow(country_name_in, 'recovered');
+        let num_death = getCountryRow(country_name_in, 'death');
+        let data_keys = Object.keys(num_death)
+        for (let i=0; i<data_keys.length; i++ ) {
+            if (i<4) {
+                country_row[data_keys[i]] = num_death[data_keys[i]];
+                continue;
+            }
+            let tot = parseInt(num_death[data_keys[i]])  + parseInt(num_recovered[data_keys[i]]);
+            if (tot != 0) {
+                country_row[data_keys[i]] = ((parseInt(num_death[data_keys[i]]) / tot) * 100).toFixed(2);
+            }
+            else {
+                country_row[data_keys[i]] = 0;
+            }
+        }
+    }
+    return country_row;
+  }
+
+  function getCountryDataCombination (country_name_in, content='cfr', min_case_count = 20, init_day = 0, max_day = 80) {
+    
+    init_day = getStartDate(country_name_in, min_case_count, init_day, max_day);
+    if (init_day == -1) {
+        return [];
+    }
+
+    let country_data = getCountryRowCombination(country_name_in, content);
+    let country_data_keys = Object.keys(country_data);
+    let data_by_date_keys = country_data_keys.slice(4, );
+    is_relevant = false;
+
+    let ret_values = [];
+
+
+    country_current_init_dates[country_name_in] = [];
+
+    for (let i=init_day; i<data_by_date_keys.length; i++) {
+        if (i > init_day + max_day) {
+            break;
+        }
+        country_current_init_dates[country_name_in].push(dateConverter(data_by_date_keys[i]));
+
+        value = parseFloat(country_data[data_by_date_keys[i]]);
+        
+        ret_values.push(value);
+    }
+
+    data_label = country_name_in;
+    ret_values = [data_label].concat(ret_values);
+    return ret_values;
+  }
+
   function getStartDate(country_name, min_case_count = 10, init_day = 0, max_day = 20) {
     let country_data = getCountryRow(country_name, 'cases');
     let country_data_keys = Object.keys(country_data);
@@ -229,10 +302,21 @@ function csvJSON(csv){
   }
 
   function showGraph(pr_country_name='Bangladesh', countries=[], min_case_count = 10, init_day = 0, max_day = 30, content='cases', aggregation_over='cumulative', aggregation_type='none', normalization='none', scale='linear') {
-    pr_data = getCountryData(pr_country_name, min_case_count, init_day, max_day, content, aggregation_over, aggregation_type);
+    let pr_data;
+    if (content == 'cfr' || content == 'death_by_closed_cases') {
+        pr_data = getCountryDataCombination(pr_country_name, content);
+    }
+    else {
+        pr_data = getCountryData(pr_country_name, min_case_count, init_day, max_day, content, aggregation_over, aggregation_type);
+    }
     data_columns = [pr_data];
     for (let i=0; i<countries.length; i++)  {
-        cur_data = getCountryData(countries[i], min_case_count, init_day, max_day, content, aggregation_over, aggregation_type);
+        if (content == 'cfr' || content == 'death_by_closed_cases') {
+            cur_data = getCountryDataCombination(countries[i], content);
+        }
+        else {
+            cur_data = getCountryData(countries[i], min_case_count, init_day, max_day, content, aggregation_over, aggregation_type);
+        }
         if (cur_data.length > 1) {
             data_columns.push(cur_data);
         }

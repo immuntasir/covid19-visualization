@@ -147,7 +147,6 @@ function getNewVsTotalChartData (pr_country_name, num_days=1) {
           },hoverinfo: 'none',
         hovertemplate: '<br><b>Total Cases</b>: %{x}<br>' +
                         '<b>New Cases in the past week</b>: %{y}',
-        showlegend: false
     }
     for (let i=num_days+1; i<cur_country_data.length; i++) {
         if (cur_country_data[i] < 50) {
