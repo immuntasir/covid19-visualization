@@ -113,4 +113,13 @@ var preset_chart_countries = [];
 
 bd_stat_type = 'test_statistics';
 
+
 var bd_map_render_date;
+
+var lowest_date="";
+var maximum_date="";
+var saved_dates=[];
+var auto_play_stop=true;
+var current_bd_map_show_index=0;
+var time_out_function_control_var="";
+var animation_flag=0;

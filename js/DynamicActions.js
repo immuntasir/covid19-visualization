@@ -540,3 +540,84 @@ function bdStatChartChage(scale){
   showAreaChart (pr_country_name, bd_stat_type);
   updateBdStatChartButtonColor(scale);
 }
+
+function makeDateFromString(string){
+    let date_string =string.split("/");
+    if(date_string[2].length<4){
+      date_string[2]="20"+date_string[2];
+    }
+    let d = new Date(parseInt(date_string[2]),parseInt(date_string[0])-1,parseInt(date_string[1]));
+    return d;
+}
+
+function autoPlayBDMap(){
+  if(auto_play_stop==true){
+      animation_flag=0;
+      return;
+  }
+  if(current_bd_map_show_index<saved_dates.length){
+    $('#bd-map-current-date-span').html(saved_dates[current_bd_map_show_index]);
+    $('#bd-map-slider-input').val(current_bd_map_show_index);
+    //console.log(current_bd_map_show_index);
+    reRenderBdMap(saved_dates[current_bd_map_show_index]);
+    current_bd_map_show_index++;
+    if(auto_play_stop==false && current_bd_map_show_index<saved_dates.length){
+      setTimeout(autoPlayBDMap,1500);
+    }
+    else {
+      current_bd_map_show_index=0;
+      animation_flag=0;
+    }
+  }
+}
+
+function bdMapSliderInitiate(data){
+    let keys = Object.keys(data);
+    animation_flag=0;
+    lowest_date=keys[3],maximum_date=keys[keys.length-1];
+    saved_dates=[];
+    for(let i=3;i<keys.length;i++){
+      saved_dates.push(keys[i]);
+    }
+    let value_span_id = 'bd-map-current-date-span';
+    let slider_id = 'bd-map-slider-input';
+
+    let date_object_lowest_date = makeDateFromString(lowest_date);
+    let date_object_maximum_date = makeDateFromString(maximum_date);
+    let gap = (date_object_maximum_date - date_object_lowest_date)/86400000;
+
+    $('#'+slider_id).prop("min",0);
+    $('#'+slider_id).prop("max",gap);
+    $('#'+slider_id).prop("step",1);
+    $('#'+slider_id).val(gap);
+
+
+    const $valueSpan = $('#'+value_span_id);
+    const $value = $('#'+slider_id);
+    $valueSpan.html(maximum_date);
+    $value.on('input change', () => {
+    let res = parseInt($value.val());
+      $valueSpan.html(saved_dates[res]);
+      reRenderBdMap(saved_dates[res]);
+    });
+
+    let last_click="";
+    $('#bd-map-play-button-on').unbind('click');
+    $('#bd-map-play-button-on').on('click',function(){
+      current_bd_map_show_index=0;
+      auto_play_stop=false;
+      $('#bd-map-current-date-span').html(saved_dates[current_bd_map_show_index]);
+      $('#bd-map-slider-input').val(current_bd_map_show_index);
+      reRenderBdMap(saved_dates[0]);
+      document.getElementById('bd-map-play-button-on').style.display='none';
+      document.getElementById('bd-map-play-button-off').style.display='block';
+      time_out_function_control_var = setTimeout(autoPlayBDMap,1500);
+    });
+    $('#bd-map-play-button-off').unbind('click');
+    $('#bd-map-play-button-off').on('click',function(){
+      clearTimeout(time_out_function_control_var);
+      auto_play_stop=true;
+      document.getElementById('bd-map-play-button-on').style.display='block';
+      document.getElementById('bd-map-play-button-off').style.display='none';
+    });
+}

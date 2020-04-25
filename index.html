@@ -30,7 +30,7 @@
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"  type='text/css'>
-  <link rel="stylesheet" href="./la-color-picker-master/la_color_picker.css?version=105">
+  <link rel="stylesheet" href="./la-color-picker-master/la_color_picker.css?version=104">
 
 
   <!-- jQuery library -->
@@ -44,7 +44,7 @@
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js" integrity="sha384-3ziFidFTgxJXHMDttyPJKDuTlmxJlwbSkojudK/CkRqKDOmeSbN6KLrGdrBQnT2n" crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="./css/main.css?version=105">
+  <link rel="stylesheet" type="text/css" href="./css/main.css?version=104">
 
 
 
@@ -78,10 +78,10 @@
   </script>
 
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <script src="./js/GlobalVariables.js?version=105"></script>
-  <script src="./js/GraphMakerFunctions.js?version=105"></script>
-  <script src="./la-color-picker-master/custom_color_picker.js?version=105"></script>
-  <script src="./js/bd-districts.js?version=105"></script>
+  <script src="./js/GlobalVariables.js?version=104"></script>
+  <script src="./js/GraphMakerFunctions.js?version=104"></script>
+  <script src="./la-color-picker-master/custom_color_picker.js?version=104"></script>
+  <script src="./js/bd-districts.js?version=104"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
 
 </head>
@@ -245,6 +245,26 @@
                       <div id="mapid">
 
                       </div>
+                      <div id="map-slider" style="margin-bottom:10px;">
+
+                          <div class="option-control">
+                              <div class="option-control justify-content-center my slider-hover"  >
+                                <span class="option-title-sm" style="font-size:14px;">Current Date:</span><span class="font-weight-bold text-primary ml-2 mt-1 valueSpan3" id="bd-map-current-date-span" style="font-size:14px;"></span><i  data-toggle="tooltip" data-placement="top" title="Select the date" style="margin-left:10px;" class="fa fa-question-circle"></i>
+                                <div class=" option-control row">
+                                    <div class="col-md-1" id="bd-map-play-button-on">
+                                        <i class="fa fa-play-circle play-button-design"></i>
+                                    </div>
+                                    <div class="col-md-1" style="display:none;" id="bd-map-play-button-off">
+                                        <i class="fa fa-play-circle play-button-design" style="color:red;" ></i>
+                                    </div>
+                                    <div class="col-md-11">
+                                        <input id="bd-map-slider-input" class="border-0" type="range" min="10" max="150" value="90" step="5" style="width: 100%;"/>
+                                    </div>
+                                </div>
+                              </div>
+                          </div>
+
+                      </div>
                     </div>
                     <div class="tab-pane fade" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
                       <div class="row" id="district-wise-table" style="height:450px; overflow-y: auto;">
@@ -331,11 +351,11 @@
     }
     randomNumberGenerator();
     </script>
-    <script src="./js/mapMaker.js?version=105"></script>
+    <script src="./js/mapMaker.js?version=104"></script>
 
-    <script src="./js/GlobalVariables.js?version=105"></script>
-    <script src="./js/PresetCharts.js??version=105"></script>
-    <script src="./js/GraphMakerFunctions.js?version=105"></script>
-    <script src="./js/DynamicActions.js?version=105"></script>
-    <script src="./js/main.js?version=105"></script>
+    <script src="./js/GlobalVariables.js?version=104"></script>
+    <script src="./js/PresetCharts.js??version=104"></script>
+    <script src="./js/GraphMakerFunctions.js?version=104"></script>
+    <script src="./js/DynamicActions.js?version=104"></script>
+    <script src="./js/main.js?version=104"></script>
   </body>

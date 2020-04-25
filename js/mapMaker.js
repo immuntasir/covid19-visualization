@@ -41,12 +41,17 @@ function loadDataAndShowDistributionMap () {
                 makeDistrictObjects(data);
                 showDistributionMap();
                 showLastUpdateDate();
-                showBangladeshDistrictWiseTable(); 
+
+                showBangladeshDistrictWiseTable();
                 //bd_dates = Object.keys(district_data['Dhaka']).slice(3, );
                 //for (let i=0; i<bd_dates.length; i++) {
                   //      reRenderBdMap(bd_dates[i]);
                     //    sleep(100);
                 //}
+
+                showBangladeshDistrictWiseTable();
+                bdMapSliderInitiate(data[0]);
+
             }
         });
 }
@@ -71,7 +76,7 @@ function showDistributionMap () {
             style: style,
             onEachFeature: onEachFeature
             });
-        bd_districts.addTo(map);    
+        bd_districts.addTo(map);
         map.setMaxBounds(map.getBounds());
 
 
@@ -80,7 +85,7 @@ function showDistributionMap () {
                 grades = col_slices,
                 labels = [];
 
-            
+
             for (var i = 0; i < grades.length; i++) {
               span = document.createElement("span");
               span.classList.add("legendItem");
@@ -88,9 +93,9 @@ function showDistributionMap () {
               to = grades[i+1]
               span.dataset.from = from;
               span.dataset.to = to;
-          
+
               color = document.createElement("i");
-              
+
               if (i > 0) {
                 text = document.createTextNode(from + (to ? '-' + to : '+'));
                 color.style.background = getColorByValue(from + 1);
@@ -99,22 +104,22 @@ function showDistributionMap () {
                   text = document.createTextNode('No Cases');
                   color.style.background = 'grey';
                }
-          
+
               span.appendChild(color);
               span.appendChild(text);
-          
+
               span.addEventListener("mouseover", function (event) {
                 highlightMultipleFeatures(event);
               });
-              
+
               span.addEventListener("mouseout", function () {
                 bd_districts.eachLayer(resetHighlight);
               });
-          
+
               div.appendChild(span);
               div.appendChild(document.createElement("br"));
             }
-          
+
             return div;
           };
 
