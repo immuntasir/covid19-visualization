@@ -112,3 +112,5 @@ var preset_chart_scale = 'linear';
 var preset_chart_countries = [];
 
 bd_stat_type = 'test_statistics';
+
+var bd_map_render_date;

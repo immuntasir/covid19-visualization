@@ -12,6 +12,7 @@ var info = L.control();
 function makeDistrictObjects (data) {
     obj_keys = Object.keys(data[0]);
     last_update = obj_keys.slice(-1, )
+    bd_map_render_date = last_update;
     for (let data_iter in data) {
         district_data[data[data_iter]['Alt_Name']] = Object();
         for (let key_iter in obj_keys) {
@@ -41,6 +42,11 @@ function loadDataAndShowDistributionMap () {
                 showDistributionMap();
                 showLastUpdateDate();
                 showBangladeshDistrictWiseTable(); 
+                //bd_dates = Object.keys(district_data['Dhaka']).slice(3, );
+                //for (let i=0; i<bd_dates.length; i++) {
+                  //      reRenderBdMap(bd_dates[i]);
+                    //    sleep(100);
+                //}
             }
         });
 }
@@ -125,7 +131,7 @@ function showDistributionMap () {
         // method that we will use to update the control based on feature properties passed
         info.update = function (props) {
             this._div.innerHTML = '<h4>Number of COVID-19 Cases</h4>' +  (props ?
-                '<b>' + props['Alt_Name'] + '</b><br />' +'Total Cases: ' + props[last_update]
+                '<b>' + props['Alt_Name'] + '</b><br />' +'Total Cases: ' + props[bd_map_render_date]
                 : 'Hover over a district');
         };
 
@@ -136,6 +142,20 @@ function showDistributionMap () {
     }
     //var map = L.map('mapid').setView([51.505, -0.09], 13);
 
+}
+
+function reRenderBdMap (date) {
+    bd_map_render_date = date;
+    bd_districts.eachLayer(function (layer) {
+        layer.setStyle({
+            fillColor: getColor(layer.feature.properties),
+            weight: 2,
+            opacity: 1,
+            color: 'white',
+            dashArray: '1',
+            fillOpacity: 1
+        });
+    });
 }
 
 function highlightMultipleFeatures (event) {
@@ -161,7 +181,7 @@ function highlightMultipleFeatures (event) {
         }
         }
         else if (district_data[layer.feature.properties['ADM2_EN']]) {
-        var cases = district_data[layer.feature.properties['ADM2_EN']][last_update];
+        var cases = district_data[layer.feature.properties['ADM2_EN']][bd_map_render_date];
         if (cases >= parseInt(from) && (above || cases < parseInt(to))) {
             layer.setStyle({
                 weight: 2,
@@ -198,7 +218,7 @@ function getColorByValue (comp_val) {
 
 function getColor(d) {
     if (d['ADM2_EN'] in district_data) {
-        let comp_val =  district_data[d['ADM2_EN']][last_update];
+        let comp_val =  district_data[d['ADM2_EN']][bd_map_render_date];
         return getColorByValue(comp_val);
     }
     else {
@@ -239,7 +259,7 @@ function highlightFeature(e) {
     else {
         let props = Object();
         props['Alt_Name'] = layer.feature.properties['ADM2_EN'];
-        props[last_update] = 0;
+        props[bd_map_render_date] = 0;
         info.update(props);
     }
 }
@@ -264,7 +284,7 @@ function highlightFeatureMultiple(e) {
     else {
         let props = Object();
         props['Alt_Name'] = layer.feature.properties['ADM2_EN'];
-        props[last_update] = 0;
+        props[bd_map_render_date] = 0;
         info.update(props);
     }
 }
