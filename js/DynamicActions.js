@@ -540,3 +540,58 @@ function bdStatChartChage(scale){
   showAreaChart (pr_country_name, bd_stat_type);
   updateBdStatChartButtonColor(scale);
 }
+
+function makeDateFromString(string){
+    let date_string =string.split("/");
+    if(date_string[2].length<4){
+      date_string[2]="20"+date_string[2];
+    }
+    let d = new Date(parseInt(date_string[2]),parseInt(date_string[0])-1,parseInt(date_string[1]));
+    return d;
+}
+
+function reloadBangladeshMap(date){
+
+}
+
+function bdMapSliderInitiate(data){
+    let keys = Object.keys(data);
+    let flag=0;
+    lowest_date=keys[3],maximum_date=keys[keys.length-1];
+    saved_dates=[];
+    for(let i=3;i<keys.length;i++){
+      saved_dates.push(keys[i]);
+    }
+    let value_span_id = 'bd-map-current-date-span';
+    let slider_id = 'bd-map-slider-input';
+
+    let date_object_lowest_date = makeDateFromString(lowest_date);
+    let date_object_maximum_date = makeDateFromString(maximum_date);
+    let gap = (date_object_maximum_date - date_object_lowest_date)/86400000;
+
+    $('#'+slider_id).prop("min",0);
+    $('#'+slider_id).prop("max",gap);
+    $('#'+slider_id).prop("step",1);
+    $('#'+slider_id).val(gap);
+
+
+    const $valueSpan = $('#'+value_span_id);
+    const $value = $('#'+slider_id);
+    $valueSpan.html(maximum_date);
+    $value.on('input change', () => {
+    let res = parseInt($value.val());
+      $valueSpan.html(saved_dates[res]);
+    });
+
+    $('#bd-map-play-button').on('click',function(){
+      flag=(flag+1)%2;
+      console.log(flag);
+      if(flag==1){
+          for(let i=0;i<saved_dates.length;i++){
+              $('#'+slider_id).val(i);
+              $('#'+value_span_id).html(saved_dates[i]);
+              //reRenderBdMap(saved_dates[i]);
+            }
+      }
+    });
+}

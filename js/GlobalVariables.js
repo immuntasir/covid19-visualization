@@ -112,3 +112,7 @@ var preset_chart_scale = 'linear';
 var preset_chart_countries = [];
 
 bd_stat_type = 'test_statistics';
+
+var lowest_date="";
+var maximum_date="";
+var saved_dates=[];

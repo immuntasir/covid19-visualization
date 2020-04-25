@@ -111,6 +111,7 @@ function fetchBangladeshLatestData(){
               initializeVariables();
               initializeCountryData('Bangladesh');
               loadChart();
+              
           }
       });
 }
