@@ -590,7 +590,7 @@ function bdMapSliderInitiate(data){
           for(let i=0;i<saved_dates.length;i++){
               $('#'+slider_id).val(i);
               $('#'+value_span_id).html(saved_dates[i]);
-              //reRenderBdMap(saved_dates[i]);
+              reRenderBdMap(saved_dates[i]);
             }
       }
     });
