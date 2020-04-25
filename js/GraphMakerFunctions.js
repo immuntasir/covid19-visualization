@@ -253,6 +253,16 @@ function csvJSON(csv){
     return ret_values;
   }
 
+  function yAxisNumToLog (in_number) {
+    if (in_number == 0) return -1;
+    return Math.log10(in_number) / Math.LN10;
+  }
+
+  function yAxisLogToNum (in_number) {
+    if (in_number == -1) return 0;
+    return Math.pow(10, in_number * Math.LN10);
+  }
+
   function getYTickValues (min_y_val, max_y_val) {
     let y_tick_values = [];
     loop_break = false;
@@ -274,9 +284,7 @@ function csvJSON(csv){
     return y_tick_values;
   }
 
-  function yAxisNumToLog (in_number) {
-    return Math.log10(in_number) / Math.LN10;
-  }
+  
 
   function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
@@ -360,7 +368,7 @@ function csvJSON(csv){
         color_list[data_columns.slice(-1)[0][0]] = '#000000';
         hidden_list.push(data_columns.slice(-1)[0][0])
         y_tick_values = getYTickValues(min_y_val, max_y_val);
-        y_axis_min_value = y_tick_values[0];
+        y_axis_min_value = Math.max(yAxisNumToLog(2), y_tick_values[0]);
     }
     if (chart != undefined) {
         chart = chart.destroy();
@@ -403,7 +411,7 @@ function csvJSON(csv){
                     values: y_tick_values,
                     format: function (d) {
                         if (scale == 'logarithmic') {
-                            return formatNumber(Math.pow(10,d * Math.LN10).toFixed(0));
+                            return formatNumber(yAxisLogToNum(d).toFixed(0));
                         }
                         else {
                             return formatNumber(d);

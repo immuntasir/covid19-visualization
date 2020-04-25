@@ -106,9 +106,15 @@
               <div class="col-md-9" style="border:1px;"> <!--first column starts -->
                 <div>
                   <div class="row option-control-row">
-
-                        <div id="content-name-map-container">
+                      <div >
+                        <div class="option-control">
+                            <div id="content-button" class="btn-group btn-group-sm " role="group" aria-label="Basic example">
+                                <button type="button" id="content-cases" class="btn btn-secondary" data-toggle="tooltip" data-placement="top" title="Visualize Confirmed Cases" onClick="graphContentOptionSelection('0','content-cases')" >Cases</button>
+                                <button type="button" id="content-death" class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Visualize Reported Deaths" onClick="graphContentOptionSelection('1','content-death')"  >Death</button>
+                                <button type="button" id="content-recovery" class="btn btn-light" data-toggle="tooltip" data-placement="top" title="Visualize Recovered Cases" onClick="graphContentOptionSelection('2','content-recovery')" >Recovered</button>
+                              </div>
                         </div>
+                      </div>
                       <div>
                         <div class="option-control">
                           <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
