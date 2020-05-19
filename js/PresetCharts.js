@@ -48,6 +48,9 @@ function generateC3Chart(chart_div_id, data_columns, date_keys, color_list, data
                     return dateConverter(date_keys[name]);
                 },
                 name: function (name, ratio, id, index) {
+                    if (name == 'Negative') {
+                        return  name + ' (' + (original_values[index+1][name] - original_values[index+1]['Positive']) +')'; 
+                    }
                     return name + ' (' + original_values[index+1][name] +')';
                 }
             }
