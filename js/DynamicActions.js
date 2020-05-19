@@ -562,7 +562,7 @@ function autoPlayBDMap(){
     reRenderBdMap(saved_dates[current_bd_map_show_index]);
     current_bd_map_show_index++;
     if(auto_play_stop==false && current_bd_map_show_index<saved_dates.length){
-      setTimeout(autoPlayBDMap,1500);
+      setTimeout(autoPlayBDMap,500);
     }
     else {
       current_bd_map_show_index=0;
